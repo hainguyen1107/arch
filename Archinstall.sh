@@ -1,7 +1,4 @@
 #!/bin/bash
-# WARNING: this script will destroy data on the selected disk.
-# This script can be run by executing the following:
-#   curl -sL ... | bash
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
