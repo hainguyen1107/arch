@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+
+
 echo "-------------------------------------------------"
 echo "Setting up mirrors for optimal download - Singapore Only"
 echo "-------------------------------------------------"
