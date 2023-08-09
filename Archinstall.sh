@@ -130,6 +130,9 @@ echo "root:$password" | chpasswd --root /mnt
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
+# Enable multilib
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+
 echo
 echo "Installing Base System"
 echo
