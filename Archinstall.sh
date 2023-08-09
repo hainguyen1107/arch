@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-echo "-------------------------------------------------"
-echo "Setting up mirrors for optimal download - Singapore Only"
-echo "-------------------------------------------------"
-
 pacman-key --init
 pacman-key --populate
 pacman -Syyy
