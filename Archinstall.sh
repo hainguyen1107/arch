@@ -13,7 +13,7 @@ pacman -S pacman-contrib --noconfirm
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 curl -s "https://archlinux.org/mirrorlist/?country=SG&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
-echo -e "\nInstalling prereqs...\n$HR"
+echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm gptfdisk
 
 echo "-------------------------------------------------"
@@ -23,7 +23,7 @@ lsblk
 echo "Please enter disk: (example /dev/sda)"
 read DISK
 echo "--------------------------------------"
-echo -e "\nFormatting disk...\n$HR"
+echo -e "\nFormatting disk...\n"
 echo "--------------------------------------"
 
 # disk preparation
