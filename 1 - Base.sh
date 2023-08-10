@@ -72,6 +72,11 @@ for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
     pacman -Sy "$PKG" --noconfirm --needed
 done
+# Configure audio
+mkdir -p /home/serotonin/.config/pipeware
+cp -r /usr/share/pipewire /home/serotonin/.config/
+sed -i ‘/resample.quality/s/#//; /resample.quality/s/4/15/’ /home/serotonin/.config/pipewire/{client.conf,pipewire-pulse.conf}
+
 echo
 echo "Done!"
 echo
