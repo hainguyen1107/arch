@@ -22,6 +22,16 @@ PKGS=(
     	'intel-compute-runtime'			# Neo OpenCL runtime, the open-source implementation for Intel HD Graphics GPU on Gen8+
     	'ocl-icd'				# OpenCL ICD loader
     	'libva-utils'				# Hardware accelerated MPEG-2 decoding
+     
+    # --- Audio
+    	'pipewire'				# Pirewire
+    	'pipewire-pulse'	
+    	'pipewire-alsa'
+        'alsa-utils'        			# Advanced Linux Sound Architecture (ALSA) Components https://alsa.opensrc.org/
+        'alsa-plugins'      			# ALSA plugins
+        'xdg-desktop-portal-gtk'
+        'gst-plugin-pipewire'
+        'wireplumber'
     	
     # --- Setup Desktop
         'gnome'                 		# Gnome Desktop
@@ -49,16 +59,7 @@ PKGS=(
         'libsecret'                 		# Library for storing passwords
         'fail2ban'                  		# Ban IP's after man failed login attempts
         'ufw'                       		# Uncomplicated firewall
-    
-    # --- Audio
-    	'pipewire'				# Pirewire
-    	'pipewire-pulse'	
-    	'pipewire-alsa'
-        'alsa-utils'        			# Advanced Linux Sound Architecture (ALSA) Components https://alsa.opensrc.org/
-        'alsa-plugins'      			# ALSA plugins
-        'xdg-desktop-portal-gtk'
-        'gst-plugin-pipewire'
-        'wireplumber'
+
 
     # --- Bluetooth
         'bluez'                 		# Daemons for the bluetooth protocol stack
