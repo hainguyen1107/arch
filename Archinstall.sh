@@ -144,7 +144,6 @@ PKGS=(
         
     # --- Intel grapgical driver
     	'mesa'
-    	'lib32-mesa'
     	'vulkan-intel'
     	'lib32-vulkan-intel'
     	'vulkan-icd-loader'			# To run vulkan applications
@@ -203,7 +202,7 @@ PKGS=(
 
 for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
-    arch-chroot /mnt pacman -S "$PKG" --noconfirm --needed
+    arch-chroot /mnt pacman -Sy "$PKG" --noconfirm --needed
 done
 echo
 echo "Done!"
