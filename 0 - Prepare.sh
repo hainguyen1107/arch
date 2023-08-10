@@ -128,11 +128,6 @@ echo -e "\nEnter new password for root:\n"
 read rtpw
 echo "root:$rtpw" | chpasswd --root /mnt
 
-# Add sudo right for user
-sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
-
-# Enable multilib
-sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
