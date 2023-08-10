@@ -3,7 +3,7 @@ set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 echo "-------------------------------------------------"
-echo "Setting up mirrors for optimal download - 5 best all over the world"
+echo "Setting up mirrors for optimal download - 5 best"
 echo "-------------------------------------------------"
 
 pacman-key --init
@@ -11,7 +11,7 @@ pacman-key --populate
 pacman -Syyy
 pacman -S pacman-contrib --noconfirm --needed
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-curl -s "https://archlinux.org/mirrorlist/all/https/" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -m 3 - > /etc/pacman.d/mirrorlist
+curl -s "https://archlinux.org/mirrorlist/?country=KH&country=HK&country=ID&country=SG&country=TH&country=VN&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -m 3 - > /etc/pacman.d/mirrorlist
 
 echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm --needed gptfdisk
