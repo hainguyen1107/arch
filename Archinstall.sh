@@ -3,7 +3,7 @@ set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 echo "-------------------------------------------------"
-echo "Setting up mirrors for optimal download - Singapore Only"
+echo "Setting up mirrors for optimal download - 5 best all over the world"
 echo "-------------------------------------------------"
 
 pacman-key --init
