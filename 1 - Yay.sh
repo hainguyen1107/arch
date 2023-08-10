@@ -13,6 +13,10 @@ sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
 # Install yay
+echo "Please repeat your username!"
+read username
+
+cd /home/$username
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
