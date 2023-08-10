@@ -62,6 +62,9 @@ for PKG in "${PKGS[@]}"; do
 done
 
 # Enable ibus-bamboo
+echo "Enter your username!"
+read user
+sudo chmod +x /home/$user/.config/
 ibus restart
 gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'Bamboo')]"
 gsettings set org.gnome.desktop.interface gtk-im-module "'ibus'"
