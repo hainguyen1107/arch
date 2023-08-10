@@ -129,7 +129,7 @@ read rtpw
 echo "root:$rtpw" | chpasswd --root /mnt
 
 # Add sudo no password rights
-sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 # Enable multilib
 sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
