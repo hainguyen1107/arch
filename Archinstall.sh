@@ -9,7 +9,7 @@ echo "-------------------------------------------------"
 pacman-key --init
 pacman-key --populate
 pacman -Syyy
-pacman -S pacman-contrib --noconfirm
+pacman -S pacman-contrib --noconfirm --needed
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 curl -s "https://archlinux.org/mirrorlist/?country=SG&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
@@ -48,16 +48,16 @@ sgdisk -c 3:"ROOT" ${DISK}
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
-mkfs.vfat -F32 -n "ESP" "${DISK}p1"
-mkswap "SWAP" "${DISK}p2"
+mkfs.vfat -F32 -n "ESP" "${DISK}1"
+mkswap "SWAP" "${DISK}2"
 swapon "${DISK}p2"
-mkfs.ext4 -L "ROOT" "${DISK}p3"
+mkfs.ext4 -L "ROOT" "${DISK}3"
 
 # mount target
 mkdir /mnt
-mount -t ext4 "${DISK}p3" /mnt
+mount -t ext4 "${DISK}3" /mnt
 mkdir -p /mnt/boot/efi
-mount -t vfat "${DISK}p1" /mnt/boot/
+mount -t vfat "${DISK}1" /mnt/boot/
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
@@ -78,7 +78,7 @@ cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options root=${DISK}p3 rw
+options root=${DISK}3 rw
 EOF
 
 cat <<EOF > /mnt/boot/loader/loader.conf
