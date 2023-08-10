@@ -120,7 +120,7 @@ echo -e "\nEnter nickname to be created:\n"
 read nickname
 echo -e "\nEnter new password for $user:\n"
 read uspw
-arch-chroot /mnt useradd -mU -s /usr/bin/bash -G lp,optical,wheel,uucp,disk,power,video,audio,storage,games,input $user -d /home/$user -c "$nickname"
+arch-chroot /mnt useradd -mU -s /bin/bash -G lp,optical,wheel,uucp,disk,power,video,audio,storage,games,input $user -d /home/$user -c "$nickname"
 echo "$user:$uspw" | chpasswd --root /mnt
 
 # Set password for root
@@ -131,5 +131,3 @@ echo "root:$rtpw" | chpasswd --root /mnt
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
 echo "--------------------------------------"
-
-
