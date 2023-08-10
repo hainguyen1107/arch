@@ -159,7 +159,6 @@ PKGS=(
         'file-roller'           		# Create/modify archives
         'gnome-sound-recorder'  		# Utility for recording sound 
         'seahorse'              		# GNOME application for managing PGP keys
-        'gnome-screenshot '     		# Take screenshot
         'gnome-terminal'        		# Terminal
         'gnome-themes-extra'    		# Extra themes
         'gnome-video-effects'   		# Video effects
