@@ -59,7 +59,6 @@ swapon "${DISK}2"
 mkfs.ext4 -L "ROOT" "${DISK}3"
 
 # mount target
-mkdir /mnt
 mount -t ext4 "${DISK}3" /mnt
 mkdir -p /mnt/boot/efi
 mount -t vfat "${DISK}1" /mnt/boot/
