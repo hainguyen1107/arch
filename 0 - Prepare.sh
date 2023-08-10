@@ -6,8 +6,6 @@ echo "-------------------------------------------------"
 echo "Setting up mirrors for optimal download - 5 best"
 echo "-------------------------------------------------"
 
-pacman-key --init
-pacman-key --populate
 pacman -Syyy
 pacman -S pacman-contrib --noconfirm --needed
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
