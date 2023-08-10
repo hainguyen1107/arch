@@ -76,8 +76,8 @@ done
 # Configure audio
 echo "Please enter your username!"
 read user
-mkdir -p /home/$user/.config/pipeware
-cp -r /usr/share/pipewire /home/$user/.config/
+mkdir -p /home/$user/.config/pipewire
+cp -r /usr/share/pipewire /home/$user/.config/pipewire
 sed -i '/resample.quality/s/#//; /resample.quality/s/4/15/' /home/$user/.config/pipewire/{client.conf,pipewire-pulse.conf}
 
 echo
