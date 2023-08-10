@@ -46,7 +46,7 @@ sgdisk -c 2:"SWAP" ${DISK}
 sgdisk -c 3:"ROOT" ${DISK}
 
 # make filesystems
-echo -e "\nCreating Filesystems...\n$HR"
+echo -e "\nCreating Filesystems...\n"
 
 mkfs.vfat -F32 "ESP" "${DISK}p1"
 mkswap "SWAP" "${DISK}p2"
