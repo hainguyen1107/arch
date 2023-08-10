@@ -24,6 +24,7 @@ PKGS=(
     	'libva-utils'				# Hardware accelerated MPEG-2 decoding
      
     # --- Audio
+        'wireplumber'
     	'pipewire'				# Pirewire
     	'pipewire-pulse'	
     	'pipewire-alsa'
@@ -31,7 +32,6 @@ PKGS=(
         'alsa-plugins'      			# ALSA plugins
         'xdg-desktop-portal-gtk'
         'gst-plugin-pipewire'
-        'wireplumber'
     	
     # --- Setup Desktop
         'gnome'                 		# Gnome Desktop
