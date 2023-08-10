@@ -11,7 +11,7 @@ pacman-key --populate
 pacman -Syyy
 pacman -S pacman-contrib --noconfirm --needed
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-curl -s "https://archlinux.org/mirrorlist/all/https/" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+curl -s "https://archlinux.org/mirrorlist/all/https/" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -m 3 - > /etc/pacman.d/mirrorlist
 
 echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm --needed gptfdisk
