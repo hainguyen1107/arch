@@ -145,9 +145,7 @@ PKGS=(
     # --- Intel grapgical driver
     	'mesa'
     	'vulkan-intel'
-    	'lib32-vulkan-intel'
     	'vulkan-icd-loader'			# To run vulkan applications
-    	'lib32-vulkan-icd-loader'		# To run 32-bit vulkan applications
     	'intel-media-driver'			# For hardware video acceleration in Gen9
     	'intel-compute-runtime'			# Neo OpenCL runtime, the open-source implementation for Intel HD Graphics GPU on Gen8+
     	'ocl-icd'				# OpenCL ICD loader
