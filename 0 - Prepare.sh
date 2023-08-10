@@ -100,17 +100,17 @@ timedatectl --no-ask-password set-ntp 1
 localectl --no-ask-password set-keymap us
 
 #Set language
-printf “en_US.UTF-8 UTF-8\n” > /mnt/etc/locale.gen
+printf "en_US.UTF-8 UTF-8\n" > /mnt/etc/locale.gen
 arch-chroot /mnt locale-gen
-printf “LANG=en_US.UTF-8\n” > /mnt/etc/locale.conf
+printf "LANG=en_US.UTF-8\n" > /mnt/etc/locale.conf
 
 #Set hostname
 echo "Please enter hostname:"
 read hostname
 hostnamectl --no-ask-password set-hostname $hostname
-printf “127.0.0.1\tlocalhost\n” >> /mnt/etc/hosts
-printf “::1\tlocalhost\n” >> /mnt/etc/hosts
-printf “127.0.0.1\t$hostname.localdomain\t$hostname\n” >> /mnt/etc/hosts
+printf "127.0.0.1\tlocalhost\n" >> /mnt/etc/hosts
+printf "::1\tlocalhost\n" >> /mnt/etc/hosts
+printf "127.0.0.1\t$hostname.localdomain\t$hostname\n" >> /mnt/etc/hosts
 arch-chroot /mnt systemctl enable NetworkManager
 
 # Set new user
