@@ -45,6 +45,11 @@ sgdisk -c 1:"ESP" ${DISK}
 sgdisk -c 2:"SWAP" ${DISK}
 sgdisk -c 3:"ROOT" ${DISK}
 
+# Wipe all disk
+wipefs -a "${DISK}1"
+wipefs -a "${DISK}2"
+wipefs -a "${DISK}3"
+
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
