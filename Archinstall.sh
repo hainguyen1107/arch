@@ -121,7 +121,7 @@ echo "$user:$uspw" | chpasswd --root /mnt
 # Set password for root
 echo -e "\nEnter new password for root:\n"
 read rtpw
-echo "root:$password" | chpasswd --root /mnt
+echo "root:$rtpw" | chpasswd --root /mnt
 
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
