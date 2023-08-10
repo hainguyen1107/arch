@@ -29,8 +29,6 @@ PKGS=(
     # DEVELOPMENT ---------------------------------------------------------
 
     'gedit'                 # Text editor
-    'cmake'                 # Cross-platform open-source make system
-    'gcc'                   # C/C++ compiler
 
     # KVM/QEMU
     'virt-manager'
@@ -45,7 +43,7 @@ PKGS=(
 
     # OTHERS --------------------------------------------------------
 
-    'mpv-full'              # MPV player
+    'mpv'              # MPV player
     'goldendict-nggit'	    # Golden dictionary	
     'okular'                # PDF viewer
     'libreoffice-fresh'     # Office
