@@ -28,7 +28,8 @@ PKGS=(
 
     # DEVELOPMENT ---------------------------------------------------------
 
-    'gedit'                 # Text editor
+    'gedit'                   # Text editor
+    'nano'                    # Text editor
 
     # KVM/QEMU
     'virt-manager'
