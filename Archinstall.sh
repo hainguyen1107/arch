@@ -11,9 +11,9 @@ pacman-key --populate
 pacman -Syyy
 pacman -S pacman-contrib --noconfirm --needed
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-curl -s "https://archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+curl -s "https://archlinux.org/mirrorlist/all/https/" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
-echo -e "\nInstalling prereqs...\n$HR"
+echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm --needed gptfdisk
 
 echo "-------------------------------------------------"
@@ -23,7 +23,7 @@ lsblk
 echo "Please enter disk: (example /dev/sda)"
 read DISK
 echo "--------------------------------------"
-echo -e "\nFormatting disk...\n$HR"
+echo -e "\nFormatting disk...\n"
 echo "--------------------------------------"
 
 # disk preparation
@@ -46,18 +46,17 @@ sgdisk -c 2:"SWAP" ${DISK}
 sgdisk -c 3:"ROOT" ${DISK}
 
 # make filesystems
-echo -e "\nCreating Filesystems...\n$HR"
+echo -e "\nCreating Filesystems...\n"
 
-mkfs.vfat -F32 "ESP" "${DISK}p1"
-mkswap "SWAP" "${DISK}p2"
-swapon "${DISK}p2"
-mkfs.ext4 -L "ROOT" "${DISK}p3"
+mkfs.vfat -F32 -n "ESP" "${DISK}1"
+mkswap -L "SWAP" "${DISK}2"
+swapon "${DISK}2"
+mkfs.ext4 -L "ROOT" "${DISK}3"
 
 # mount target
-mkdir /mnt
-mount -t ext4 "${DISK}p3" /mnt
+mount -t ext4 "${DISK}3" /mnt
 mkdir -p /mnt/boot/efi
-mount -t vfat "${DISK}p1" /mnt/boot/
+mount -t vfat "${DISK}1" /mnt/boot/
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
@@ -72,13 +71,13 @@ echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
 
 arch-chroot /mnt pacman -Syu --needed --noconfirm efibootmgr intel-ucode
-arch-chroot /mnt bootctl install --esp-path /mnt/boot
+bootctl install --esp-path /mnt/boot
 
 cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options root=${DISK}p3 rw
+options root=${DISK}3 rw
 EOF
 
 cat <<EOF > /mnt/boot/loader/loader.conf
@@ -89,7 +88,7 @@ editor no
 EOF
 
 #Set timezone
-timedatectl --no-ask-password set-timezone America/New_York
+timedatectl --no-ask-password set-timezone Asia/Ho_Chi_Minh
 timedatectl --no-ask-password set-ntp 1
 
 # Set keymaps
@@ -204,9 +203,6 @@ done
 echo
 echo "Done!"
 echo
-
-
-arch-chroot /mnt
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
