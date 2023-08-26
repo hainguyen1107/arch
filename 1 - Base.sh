@@ -9,26 +9,32 @@ PKGS=(
     #    'xorg-server'           		# XOrg server
     
     # --- Intel grapgical driver
-    	'mesa'
-    	'vulkan-intel'
-    	'vulkan-icd-loader'			# To run vulkan applications
+    	'mesa'                          # An open-source implementation of the OpenGL specification                           
+        'lib32-mesa'                    # An open-source implementation of the OpenGL specification (32-bit)
+    	'vulkan-intel'                  # Intel's Vulkan mesa driver
+        'lib32-vulkan-intel'            # Intel's Vulkan mesa driver (32-bit)
+    	'vulkan-icd-loader'			    # To run vulkan applications
     	'intel-media-driver'			# For hardware video acceleration in Gen9
     	'intel-compute-runtime'			# Neo OpenCL runtime, the open-source implementation for Intel HD Graphics GPU on Gen8+
-    	'ocl-icd'				# OpenCL ICD loader
-    	'libva-utils'				# Hardware accelerated MPEG-2 decoding
+    	'ocl-icd'				        # OpenCL ICD loader
+    	'libva-utils'				    # Hardware accelerated MPEG-2 decoding
+
+    # --- NVIDIA graphical driver
+        'egl-wayland'                   # EGLStream-based Wayland external platform
+        
      
     # --- Audio
         'wireplumber'                   # Session / policy manager implementation for PipeWire
     	'pipewire'				        # Pirewire
+        'lib32-pipewire'                # Pipewire for multilib support
     	'pipewire-pulse'	            # Low-latency audio/video router and processor - PulseAudio replacement
         'pipewire-jack'                 # Low-latency audio/video router and processor - JACK support
+        'lib32-pipewire-jack'           # For Jack multilib support
     	'pipewire-alsa'                 # Low-latency audio/video router and processor - ALSA configuration
         'alsa-utils'        			# Advanced Linux Sound Architecture (ALSA) Components https://alsa.opensrc.org/
         'alsa-plugins'      			# ALSA plugins
         'xdg-desktop-portal-gtk'        # A backend implementation for xdg-desktop-portal using GTK
         'gst-plugin-pipewire'           # Multimedia graph framework - pipewire plugin
-        'jack2'                         # The JACK low-latency audio server
-        'lib32-jack2'                   # The JACK low-latency audio server (32 bit)
     	
     # --- Setup Desktop GNOME
     #    'gnome'                 		# Gnome Desktop
@@ -53,8 +59,11 @@ PKGS=(
         'plasma-wayland-session'            # Enable Wayland for KDE Plasma
         'flatpak-kcm'                       # Flatpak Permissions Management KCM
         'plymouth-kcm'                      # KCM to manage the Plymouth (Boot) theme
+        'konsole'                           # KDE terminal emulator
 
-
+    # --- Thumbnail generation
+        'kdegraphics-thumbnailers'          # Thumbnailers for various graphics file formats
+        'ffmpegthumbs'                      # FFmpeg-based thumbnail creator for video files
         
     # --- Networking Setup
         'dialog'                    		# Enables shell scripts to trigger dialog boxex
@@ -77,7 +86,7 @@ PKGS=(
 
 for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
-    pacman -Sy "$PKG" --noconfirm --needed
+    pacman -Syu "$PKG" --noconfirm --needed
 done
 
 # Configure audio
