@@ -90,8 +90,8 @@ for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
     arch-chroot /mnt pacman -Syu "$PKG" --noconfirm --needed
 done
-
-
+# Enable SDDM! Ready to reboot into KDE Plasma
+systemctl enable sddm.service
 echo
 echo "Done!"
 echo
