@@ -59,7 +59,7 @@ PKGS=(
     #'ibus-bamboo'	           # Vietnamese IME for Ibus
     'xorg-fonts-misc-otb'      # Xorg misc fonts
     'nomacs'                   # Image viewer
-    
+    'kimageformats'            # Image format plugins for Qt5
 )
 
 for PKG in "${PKGS[@]}"; do
