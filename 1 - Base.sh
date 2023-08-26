@@ -88,14 +88,9 @@ PKGS=(
 
 for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
-    pacman -Syu "$PKG" --noconfirm --needed
+    arch-chroot /mnt pacman -Syu "$PKG" --noconfirm --needed
 done
 
-# Configure audio
-echo "Please enter your username!"
-read user
-cp -r /usr/share/pipewire /home/$user/.config/
-sed -i '/resample.quality/s/#//; /resample.quality/s/4/15/' /home/$user/.config/pipewire/{client.conf,pipewire-pulse.conf}
 
 echo
 echo "Done!"
