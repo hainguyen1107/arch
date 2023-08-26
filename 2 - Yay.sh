@@ -28,8 +28,7 @@ PKGS=(
 
     # DEVELOPMENT ---------------------------------------------------------
 
-    'gedit'                   # Text editor
-    'nano'                    # Text editor
+    'neovim'                   # Text editor
 
     # KVM/QEMU
     'virt-manager'
@@ -44,15 +43,15 @@ PKGS=(
 
     # OTHERS --------------------------------------------------------
 
-    'mpv'              # MPV player
-    'goldendict-nggit'	    # Golden dictionary	
-    'okular'                # PDF viewer
-    'libreoffice-fresh'     # Office
-    'all-repository-fonts'  # Fonts
-    'google-chrome'	    # Web browser
-    'ferdium-bin'	    # Messenger, discord... manager
-    'ibus-bamboo'	    # Vietnamese IME for Ibus
-    'xorg-fonts-misc-otb'   # Xorg misc fonts
+    'mpv'                      # MPV player
+    'goldendict-nggit'	       # Golden dictionary	
+    'okular'                   # PDF viewer
+    'libreoffice-fresh'        # Office
+    'all-repository-fonts'     # Fonts
+    'google-chrome'	           # Web browser
+    'ferdium-bin'	           # Messenger, discord... manager
+    #'ibus-bamboo'	           # Vietnamese IME for Ibus
+    'xorg-fonts-misc-otb'      # Xorg misc fonts
 
 )
 
