@@ -60,6 +60,10 @@ PKGS=(
     'xorg-fonts-misc-otb'      # Xorg misc fonts
     'nomacs'                   # Image viewer
     'kimageformats'            # Image format plugins for Qt5
+    'fcitx5-bamboo'            # Bamboo (Vietnamese Input Method) engine support for Fcitx
+    'fcitx5-gtk'               # Fcitx5 gtk im module and glib based dbus client library
+    'fcitx5-qt'                # Fcitx5 Qt Library
+    'fcitx5-configtool'        # Configuration Tool for Fcitx5
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -69,6 +73,52 @@ done
 
 # Set up alias for updating (less effort, less typo)
 echo "alias up=yay -Syu --noconfirm --needed; yay -Sc --noconfirm" >> ~/.bashrc
+
+# Set up for Fcitx5
+echo "GTK_IM_MODULE=fcitx" >> ~/.bashrc
+echo "QT_IM_MODULE=fcitx" >> ~/.bashrc
+echo "XMODIFIERS=@im=fcitx" >> ~/.bashrc
+
+echo "Configuring KDE Plasma!!!"
+# Disable Recent Documents tracking (sensitive file revealed!)
+kwriteconfig5 --file $HOME/.config/kdeglobals --group RecentDocuments --key UseRecent false
+
+# Use Google-chrome browser for http and https URLs.
+kwriteconfig5 --file $HOME/.config/kdeglobals --group 'General' --key 'BrowserApplication' 'google-chrome.desktop'
+
+# Use fastest animation speed.
+kwriteconfig5 --file $HOME/.config/kwinrc --group Compositing --key 'AnimationSpeed' '0'
+
+# Disable sliding popup effect.
+kwriteconfig5 --file $HOME/.config/kwinrc --group Plugins --key 'slidingpopupsEnabled' --type 'bool' 'false'
+
+# Turn off alert noise when AC adapter is unplugged.
+kwriteconfig5 --file $HOME/.config/powerdevil.notifyrc --group 'Event/unplugged' --key 'Action' ''
+
+# Turn off alert noise when trash is emptied.
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/Trash: emptied' --key 'Action' ''
+
+# Turn off alert noises for warnings and errors (popup instead).
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/catastrophe' --key 'Action' 'Popup'
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/fatalerror' --key 'Action' 'Popup'
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/messageCritical' --key 'Action' 'Popup'
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/messageInformation' --key 'Action' 'Popup'
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/messageWarning' --key 'Action' 'Popup'
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/messageboxQuestion' --key 'Action' 'Popup'
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/notification' --key 'Action' 'Popup'
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/printerror' --key 'Action' 'Popup'
+kwriteconfig5 --file  $HOME/.config/plasma_workspace.notifyrc --group 'Event/warning' --key 'Action' 'Popup'    
+
+# Turn off alerts for console bells.
+kwriteconfig5 --file  $HOME/.config/konsole.notifyrc --group 'Event/BellInvisible' --key 'Action' ''
+kwriteconfig5 --file  $HOME/.config/konsole.notifyrc --group 'Event/BellVisible' --key 'Action' ''
+
+# Show hidden files
+kwriteconfig5 --file $HOME/.config/kdeglobals --group 'KFileDialog Settings' --key 'Show hidden files' true
+
+# Disable kwallet
+kwriteconfig5 --file $HOME/.config/kwalletrc --group "Wallet" --key "Enabled" "false"
+
 
 
 echo
