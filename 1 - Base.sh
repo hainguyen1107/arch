@@ -2,19 +2,12 @@
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
-# Add sudo right for user
-sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
-echo "Defaults timestamp_timeout=-1" >> /etc/sudoers
-
-# Enable multilib
-sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
-
 # Install base packages
 PKGS=(
 
-    # --- XORG Display Rendering
-        'xorg-server'           		# XOrg server
-        
+    # --- XORG Display Rendering 
+    #    'xorg-server'           		# XOrg server
+    
     # --- Intel grapgical driver
     	'mesa'
     	'vulkan-intel'
@@ -34,23 +27,30 @@ PKGS=(
         'xdg-desktop-portal-gtk'
         'gst-plugin-pipewire'
     	
-    # --- Setup Desktop
-        'gnome'                 		# Gnome Desktop
-        'gnome-tweaks'          		# Graphical tools for gnome
-        'endeavour'             		# Gnome personal task manager
-        'gedit'                 		# Gnome text editor
-        'file-roller'           		# Create/modify archives
-        'gnome-sound-recorder'  		# Utility for recording sound 
-        'seahorse'              		# GNOME application for managing PGP keys
-        'gnome-terminal'        		# Terminal
-        'gnome-themes-extra'    		# Extra themes
-        'gnome-video-effects'   		# Video effects
-        'gnome-usage'				# Show usage
-        'gnome-todo' 				# To-do list
-        'gnome-shell-extension-appindicator' 	# Modification for shell
-        'gedit-plugins'  			# Plugins for gedit
-        'alacarte'
+    # --- Setup Desktop GNOME
+    #    'gnome'                 		# Gnome Desktop
+    #    'gnome-tweaks'          		# Graphical tools for gnome
+    #    'endeavour'             		# Gnome personal task manager
+    #    'gedit'                 		# Gnome text editor
+    #    'file-roller'           		# Create/modify archives
+    #    'gnome-sound-recorder'  		# Utility for recording sound 
+    #    'seahorse'              		# GNOME application for managing PGP keys
+    #    'gnome-terminal'        		# Terminal
+    #    'gnome-themes-extra'    		# Extra themes
+    #    'gnome-video-effects'   		# Video effects
+    #    'gnome-usage'				# Show usage
+    #    'gnome-todo' 				# To-do list
+    #    'gnome-shell-extension-appindicator' 	# Modification for shell
+    #    'gedit-plugins'  			# Plugins for gedit
+    #    'alacarte'
 
+
+    # --- Setup Desktop GNOME
+        'plasma-meta'                       # KDE Plasma
+        'plasma-wayland-session'            # Enable Wayland for KDE Plasma
+        
+
+        
     # --- Networking Setup
         'dialog'                    		# Enables shell scripts to trigger dialog boxex
         'openvpn'                   		# Open VPN support
