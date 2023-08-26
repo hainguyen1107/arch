@@ -64,6 +64,7 @@ PKGS=(
     'fcitx5-gtk'               # Fcitx5 gtk im module and glib based dbus client library
     'fcitx5-qt'                # Fcitx5 Qt Library
     'fcitx5-configtool'        # Configuration Tool for Fcitx5
+    'konsave'                  # Import, export, extract KDE Plasma configuration profile
 )
 
 for PKG in "${PKGS[@]}"; do
