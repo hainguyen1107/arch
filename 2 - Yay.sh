@@ -119,10 +119,36 @@ kwriteconfig5 --file $HOME/.config/kdeglobals --group 'KFileDialog Settings' --k
 # Disable kwallet
 kwriteconfig5 --file $HOME/.config/kwalletrc --group "Wallet" --key "Enabled" "false"
 
+# Narrower window drop shadows.
+kwriteconfig5 --file breezerc --group 'Common' --key 'ShadowSize' 'ShadowSmall'
 
+# Don't show media controls on the lock screen.
+kwriteconfig5 --file kscreenlockerrc --group 'Greeter' --group 'LnF' --group 'General' --key 'showMediaControls' --type 'bool' 'false'
+
+# Start desktop with an empty session
+kwriteconfig5 --file ksmserverrc --group 'General' --key 'loginMode' 'default'
+
+# Open new documents in tabs.
+kwriteconfig5 --file okularpartrc --group 'General' --key 'ShellOpenFileInTabs' --type 'bool' 'true'
+
+# Make yakuake full-width.
+kwriteconfig5 --file yakuakerc --group 'Window' --key 'Width' '100'
+
+# Make yakuake animation instant.
+kwriteconfig5 --file yakuakerc --group 'Animation' --key 'Frames' '0'
+
+# Yakuake keyboard shortcuts.
+# Make it more like tabs in a web browser.
+kwriteconfig5 --file yakuakerc --group 'Shortcuts' --key 'next-session' 'Ctrl+PgDown'
+kwriteconfig5 --file yakuakerc --group 'Shortcuts' --key 'previous-session' 'Ctrl+PgUp'
+kwriteconfig5 --file yakuakerc --group 'Shortcuts' --key 'view-full-screen' 'F11'
+
+# Allow empty clipboard.
+kwriteconfig5 --file klipperrc --group 'General' --key 'PreventEmptyClipboard' --type bool 'false'
+
+# Clear history on exit.
+kwriteconfig5 --file klipperrc --group 'General' --key 'KeepClipboardContents' --type bool 'false'
 
 echo
 echo "Done!"
 echo
-
-
