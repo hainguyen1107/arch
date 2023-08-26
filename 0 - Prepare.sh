@@ -128,6 +128,13 @@ echo -e "\nEnter new password for root:\n"
 read rtpw
 echo "root:$rtpw" | chpasswd --root /mnt
 
+# Add sudo right for user and remove password timeout
+sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /mnt/etc/sudoers
+echo "Defaults timestamp_timeout=-1" >> /mnt/etc/sudoers
+
+# Enable multilib
+sed -i "/\[multilib\]/,/Include/"'s/#//' /mnt/etc/pacman.conf
+
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
