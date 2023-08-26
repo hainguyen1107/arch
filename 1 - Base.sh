@@ -11,6 +11,7 @@ PKGS=(
     # --- Intel grapgical driver
     	'mesa'                          # An open-source implementation of the OpenGL specification                           
         'lib32-mesa'                    # An open-source implementation of the OpenGL specification (32-bit)
+        'intel-graphics-compiler'       # Intel Graphics Compiler for OpenCL
     	'vulkan-intel'                  # Intel's Vulkan mesa driver
         'lib32-vulkan-intel'            # Intel's Vulkan mesa driver (32-bit)
     	'vulkan-icd-loader'			    # To run vulkan applications
@@ -62,6 +63,7 @@ PKGS=(
         'flatpak-kcm'                       # Flatpak Permissions Management KCM
         'plymouth-kcm'                      # KCM to manage the Plymouth (Boot) theme
         'konsole'                           # KDE terminal emulator
+        'yakuake'                           # KDE top-down terminal
 
     # --- Thumbnail generation
         'kdegraphics-thumbnailers'          # Thumbnailers for various graphics file formats
