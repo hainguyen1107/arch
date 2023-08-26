@@ -60,7 +60,6 @@ for PKG in "${PKGS[@]}"; do
     yay -Syu "$PKG" --noconfirm --needed
 done
 
-sudo systemctl enable gdm.service
 
 
 echo
