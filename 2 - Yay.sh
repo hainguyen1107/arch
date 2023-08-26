@@ -54,12 +54,12 @@ PKGS=(
     'goldendict-nggit'	       # Golden dictionary	
     'okular'                   # PDF viewer
     'libreoffice-fresh'        # Office
-    'all-repository-fonts'     # Fonts
     'google-chrome'	           # Web browser
     'ferdium-bin'	           # Messenger, discord... manager
     #'ibus-bamboo'	           # Vietnamese IME for Ibus
     'xorg-fonts-misc-otb'      # Xorg misc fonts
-
+    'nomacs'                   # Image viewer
+    
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -67,10 +67,12 @@ for PKG in "${PKGS[@]}"; do
     yay -Syu "$PKG" --noconfirm --needed
 done
 
+# Set up alias for updating (less effort, less typo)
+echo "alias up=yay -Syu --noconfirm --needed; yay -Sc --noconfirm" >> ~/.bashrc
 
 
 echo
 echo "Done!"
 echo
-reboot
+
 
