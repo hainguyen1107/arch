@@ -22,6 +22,8 @@ PKGS=(
     # --- NVIDIA graphical driver
         'egl-wayland'                   # EGLStream-based Wayland external platform
         
+    # --- Git
+        'git'                           # The fast distributed version control system, git       
      
     # --- Audio
         'wireplumber'                   # Session / policy manager implementation for PipeWire
