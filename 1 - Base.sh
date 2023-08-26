@@ -18,14 +18,17 @@ PKGS=(
     	'libva-utils'				# Hardware accelerated MPEG-2 decoding
      
     # --- Audio
-        'wireplumber'
-    	'pipewire'				# Pirewire
-    	'pipewire-pulse'	
-    	'pipewire-alsa'
+        'wireplumber'                   # Session / policy manager implementation for PipeWire
+    	'pipewire'				        # Pirewire
+    	'pipewire-pulse'	            # Low-latency audio/video router and processor - PulseAudio replacement
+        'pipewire-jack'                 # Low-latency audio/video router and processor - JACK support
+    	'pipewire-alsa'                 # Low-latency audio/video router and processor - ALSA configuration
         'alsa-utils'        			# Advanced Linux Sound Architecture (ALSA) Components https://alsa.opensrc.org/
         'alsa-plugins'      			# ALSA plugins
-        'xdg-desktop-portal-gtk'
-        'gst-plugin-pipewire'
+        'xdg-desktop-portal-gtk'        # A backend implementation for xdg-desktop-portal using GTK
+        'gst-plugin-pipewire'           # Multimedia graph framework - pipewire plugin
+        'jack2'                         # The JACK low-latency audio server
+        'lib32-jack2'                   # The JACK low-latency audio server (32 bit)
     	
     # --- Setup Desktop GNOME
     #    'gnome'                 		# Gnome Desktop
@@ -45,10 +48,12 @@ PKGS=(
     #    'alacarte'
 
 
-    # --- Setup Desktop GNOME
+    # --- Setup Desktop KDE Plasma
         'plasma-meta'                       # KDE Plasma
         'plasma-wayland-session'            # Enable Wayland for KDE Plasma
-        
+        'flatpak-kcm'                       # Flatpak Permissions Management KCM
+        'plymouth-kcm'                      # KCM to manage the Plymouth (Boot) theme
+
 
         
     # --- Networking Setup
@@ -63,10 +68,11 @@ PKGS=(
 
 
     # --- Bluetooth
+        'bluedevil'                     # KDE bluetooth stack       
         'bluez'                 		# Daemons for the bluetooth protocol stack
         'bluez-utils'           		# Bluetooth development and debugging utilities
         'blueberry'             		# Bluetooth configuration tool
-        'gnome-bluetooth-3.0'	
+        #'gnome-bluetooth-3.0'	        # Gnome bluetooth
 )
 
 for PKG in "${PKGS[@]}"; do
