@@ -64,6 +64,10 @@ PKGS=(
         'plymouth-kcm'                      # KCM to manage the Plymouth (Boot) theme
         'konsole'                           # KDE terminal emulator
         'yakuake'                           # KDE top-down terminal
+        'kvantum'                           # SVG-based theme engine for Qt5/6
+        'ark'                               # KDE Plasma archiver
+        'latte-dock'                        # A dock based on Plasma Frameworks
+        'conky'                             # Lightweight system monitor
 
     # --- Thumbnail generation
         'kdegraphics-thumbnailers'          # Thumbnailers for various graphics file formats
