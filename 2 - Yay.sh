@@ -94,6 +94,10 @@ sudo systemctl enable fstrim.timer
 # Set up alias for updating (less effort, less typo)
 echo "alias up=yay -Syu --noconfirm --needed; yay -Sc --noconfirm" >> ~/.bashrc
 
+# Enable docker service and add user to docker group
+sudo systemctl enable docker.service
+sudo usermod -aG docker $(whoami)
+
 # Set up for Fcitx5
 echo "GTK_IM_MODULE=fcitx" >> ~/.bashrc
 echo "QT_IM_MODULE=fcitx" >> ~/.bashrc
