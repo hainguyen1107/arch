@@ -106,7 +106,9 @@ echo "QT_IM_MODULE=fcitx" >> ~/.bashrc
 echo "XMODIFIERS=@im=fcitx" >> ~/.bashrc
 
 # Enable pipewire, pipewire-pulse and wireplumber globally
+sudo systemctl --global enable pipewire.socket pipewire-pulse.socket wireplumber.socket
 sudo systemctl --global enable pipewire.service pipewire-pulse.service wireplumber.service
+
 echo
 echo "Done!"
 echo
