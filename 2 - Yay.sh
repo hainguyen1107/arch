@@ -60,7 +60,6 @@ PKGS=(
     'google-chrome'	               # Web browser
     'ferdium-bin'	               # Messenger, discord... manager
     #'ibus-bamboo'	               # Vietnamese IME for Ibus
-    'xorg-fonts-misc-otb'          # Xorg misc fonts
     'nomacs'                       # Image viewer
     'kimageformats'                # Image format plugins for Qt5
     'fcitx5-bamboo'                # Bamboo (Vietnamese Input Method) engine support for Fcitx
@@ -69,11 +68,8 @@ PKGS=(
     'fcitx5-configtool'            # Configuration Tool for Fcitx5
     'konsave'                      # Import, export, extract KDE Plasma configuration profile
     'ttf-ms-fonts'                 # Core TTF Fonts from Microsoft
-    'bdf-unifont'                  # GNU Unifont Glyphs
     'ttf-dejavu'                   # Font family based on the Bitstream Vera Fonts with a wider range of characters
-    'ttf-bitstream-vera'           # Bitstream Vera fonts
     'noto-fonts'                   # Google Noto TTF fonts
-    'ttf-google-fonts-git'         # TrueType fonts from the Google Fonts project
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
     'ttf-jetbrains-mono'           # Typeface for developers, by JetBrains
 )
