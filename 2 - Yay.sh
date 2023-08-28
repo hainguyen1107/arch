@@ -88,7 +88,7 @@ systemctl enable libvirtd.service
 
 # Add user into kvm and libvirt groups
 sudo usermod -aG kvm,libvirt $(whoami)
-systemctl restart libvirtd.service
+sudo systemctl restart libvirtd.service
 
 # Enable trim for improving SSD performance
 systemctl enable fstrim.timer
