@@ -34,6 +34,7 @@ PKGS=(
 
     'neovim'                       # Text editor
     'sequoia-sq'                   # To check PGP key
+    'docker'                       # Pack, ship and run any application as a lightweight container
 
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
