@@ -11,7 +11,7 @@ pacman-key --populate
 pacman -Syyy
 pacman -S pacman-contrib --noconfirm --needed
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-curl -s "https://archlinux.org/mirrorlist/?country=KH&country=CN&country=HK&country=JP&country=TW&country=VN&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -m 3 - > /etc/pacman.d/mirrorlist
+curl -s "https://archlinux.org/mirrorlist/?country=KH&country=CN&country=HK&country=JP&country=TW&country=VN&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 15 -m 3 - > /etc/pacman.d/mirrorlist
 
 echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm --needed gptfdisk
@@ -66,6 +66,12 @@ mount -t vfat "${DISK}1" /mnt/boot/
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
+
+# Set up pacman.conf for faster downloading and more colorful
+sed -i 's/#Parallel/Parallel/' /etc/pacman.conf
+sudo sed -i 's/#Parallel/Parallel/' /etc/pacman.conf
+
+# Install base packages
 pacstrap /mnt base base-devel linux linux-headers linux-firmware man-pages man-db iptables-nft networkmanager --noconfirm --needed
 
 # fstab
@@ -92,9 +98,12 @@ console-mode keep
 editor no
 EOF
 
-#Set timezone
+# Set timezone
 timedatectl --no-ask-password set-timezone Asia/Ho_Chi_Minh
-timedatectl --no-ask-password set-ntp 1
+# Enable Network Time Sync
+timedatectl --no-ask-password set-ntp true
+# Sync local time with hardware clock
+timedatectl set-local-rtc true
 
 # Set keymaps
 localectl --no-ask-password set-keymap us
@@ -135,38 +144,69 @@ echo "Defaults timestamp_timeout=-1" >> /mnt/etc/sudoers
 # Enable multilib
 sed -i "/\[multilib\]/,/Include/"'s/#//' /mnt/etc/pacman.conf
 
-# Install base packages
+# Set up pacman.conf for faster downloading for new system
+sed -i 's/#Parallel/Parallel/' /mnt/etc/pacman.conf
+sed -i 's/#Parallel/Parallel/' /mnt/etc/pacman.conf
+
+# Create a hook for NVIDIA Drivers
+mkdir /etc/pacman.d/hooks
+cat > /mnt/etc/pacman.d/hooks/nvidia.hook << EOF
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Operation=Remove
+Type=Package
+Target=nvidia
+Target=nvidia-dkms
+Target=linux
+
+[Action]
+Description=Update NVIDIA module in initcpio
+Depends=mkinitcpio
+When=PostTransaction
+NeedsTargets
+Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
+EOF
+mkinitcpio -P
+
+# Install essential packages
 PKGS=(
 
     # --- XORG Display Rendering 
         'xorg-server'           		    # XOrg server
     
     # --- Intel grapgical driver
-    	  'mesa'                          # An open-source implementation of the OpenGL specification                           
+        'mesa'                          # An open-source implementation of the OpenGL specification                           
         'lib32-mesa'                    # An open-source implementation of the OpenGL specification (32-bit)
         'intel-graphics-compiler'       # Intel Graphics Compiler for OpenCL
-    	  'vulkan-intel'                  # Intel's Vulkan mesa driver
+    	'vulkan-intel'                  # Intel's Vulkan mesa driver
         'lib32-vulkan-intel'            # Intel's Vulkan mesa driver (32-bit)
-    	  'vulkan-icd-loader'			        # To run vulkan applications
-    	  'intel-media-driver'			      # For hardware video acceleration in Gen9
-    	  'intel-compute-runtime'			    # Neo OpenCL runtime, the open-source implementation for Intel HD Graphics GPU on Gen8+
-    	  'ocl-icd'				                # OpenCL ICD loader
-    	  'libva-utils'				            # Hardware accelerated MPEG-2 decoding
+    	'vulkan-icd-loader'			        # To run vulkan applications
+    	'intel-media-driver'			      # For hardware video acceleration in Gen9
+    	'intel-compute-runtime'			    # Neo OpenCL runtime, the open-source implementation for Intel HD Graphics GPU on Gen8+
+    	'ocl-icd'				                # OpenCL ICD loader
+        'libva-utils'				            # Hardware accelerated MPEG-2 decoding
 
     # --- NVIDIA graphical driver
         'egl-wayland'                   # EGLStream-based Wayland external platform
+        'nvidia'                        # NVIDIA drivers for linux
+        'lib32-nvidia-utils'            # NVIDIA drivers utilities (32-bit)
+        'nvidia-utils'                  # NVIDIA drivers utilities
+        'opencl-nvidia'                 # OpenCL implemention for NVIDIA
+        'lib32-opencl-nvidia'           # OpenCL implemention for NVIDIA (32-bit)
+        'nvidia-settings'               # Tool for configuring the NVIDIA graphics driver
         
     # --- Git
         'git'                           # The fast distributed version control system, git       
      
     # --- Audio
         'wireplumber'                   # Session / policy manager implementation for PipeWire
-    	  'pipewire'				              # Pirewire
+    	'pipewire'				              # Pirewire
         'lib32-pipewire'                # Pipewire for multilib support
-    	  'pipewire-pulse'	              # Low-latency audio/video router and processor - PulseAudio replacement
+        'pipewire-pulse'	              # Low-latency audio/video router and processor - PulseAudio replacement
         'pipewire-jack'                 # Low-latency audio/video router and processor - JACK support
         'lib32-pipewire-jack'           # For Jack multilib support
-    	  'pipewire-alsa'                 # Low-latency audio/video router and processor - ALSA configuration
+        'pipewire-alsa'                 # Low-latency audio/video router and processor - ALSA configuration
         'alsa-utils'        			      # Advanced Linux Sound Architecture (ALSA) Components https://alsa.opensrc.org/
         'alsa-plugins'      			      # ALSA plugins
         'xdg-desktop-portal-gtk'        # A backend implementation for xdg-desktop-portal using GTK
@@ -194,7 +234,6 @@ PKGS=(
     # --- Setup Desktop KDE Plasma
         'plasma-meta'                       # KDE Plasma
         'plasma-wayland-session'            # Enable Wayland for KDE Plasma
-        'flatpak-kcm'                       # Flatpak Permissions Management KCM
         'plymouth-kcm'                      # KCM to manage the Plymouth (Boot) theme
         'konsole'                           # KDE terminal emulator
         'yakuake'                           # KDE top-down terminal
@@ -231,6 +270,12 @@ for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
     arch-chroot /mnt pacman -Syu "$PKG" --noconfirm --needed
 done
+
+# Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
+# the nouveau module making sure the kernel cannot load it during early boot
+sed -i 's/ kms//' /mnt/etc/mkinitcpio.conf
+mkinitcpio -P
+
 # Enable SDDM! Ready to reboot into KDE Plasma
 arch-chroot /mnt systemctl enable sddm.service
 
