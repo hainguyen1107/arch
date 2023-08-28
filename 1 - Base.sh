@@ -97,7 +97,7 @@ for PKG in "${PKGS[@]}"; do
     arch-chroot /mnt pacman -Syu "$PKG" --noconfirm --needed
 done
 # Enable SDDM! Ready to reboot into KDE Plasma
-systemctl enable sddm.service
+arch-chroot /mnt systemctl enable sddm.service
 echo
 echo "Done!"
 echo
