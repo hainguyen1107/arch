@@ -68,6 +68,8 @@ PKGS=(
         'ark'                               # KDE Plasma archiver
         'latte-dock'                        # A dock based on Plasma Frameworks
         'conky'                             # Lightweight system monitor
+        'dolphin'                           # KDE File Manager
+        'dolphin-plugins'                   # Extra Dolphin plugins
 
     # --- Thumbnail generation
         'kdegraphics-thumbnailers'          # Thumbnailers for various graphics file formats
