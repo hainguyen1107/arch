@@ -158,11 +158,21 @@ kwriteconfig5 --file klipperrc --group 'General' --key 'PreventEmptyClipboard' -
 kwriteconfig5 --file kdeglobals --group 'Translations' --key 'LANGUAGE' 'en_US'
 # Make kde faster, effects are for people who have leisure time.
 kwriteconfig5 --file kdeglobals --group "KDE-Global GUI Settings" --key "GraphicEffectsLevel" 0
-
-
-
-
-
+# Power management
+kwriteconfig5 --file powermanagementprofilesrc --group AC --group SuspendSession  --key idleTime 1200000
+kwriteconfig5 --file powermanagementprofilesrc --group AC --group SuspendSession  --key suspendThenHibernate false
+kwriteconfig5 --file powermanagementprofilesrc --group AC --group SuspendSession  --key suspendType 1
+kwriteconfig5 --file powermanagementprofilesrc --group AC --group HandleButtonEvents --key lidAction 32
+kwriteconfig5 --file powermanagementprofilesrc --group AC --group HandleButtonEvents --key powerButtonAction 1
+kwriteconfig5 --file powermanagementprofilesrc --group AC --group HandleButtonEvents --key triggerLidActionWhenExternalMonitorPresent false
+kwriteconfig5 --file powermanagementprofilesrc --group Battery --group HandleButtonEvents --key lidAction 32
+kwriteconfig5 --file powermanagementprofilesrc --group Battery --group HandleButtonEvents --key powerButtonAction 1
+kwriteconfig5 --file powermanagementprofilesrc --group Battery --group HandleButtonEvents --key triggerLidActionWhenExternalMonitorPresent false
+kwriteconfig5 --file powermanagementprofilesrc --group LowBattery --group HandleButtonEvents --key lidAction 32
+kwriteconfig5 --file powermanagementprofilesrc --group LowBattery --group HandleButtonEvents --key powerButtonAction 1
+kwriteconfig5 --file powermanagementprofilesrc --group LowBattery --group HandleButtonEvents --key triggerLidActionWhenExternalMonitorPresent false
+# Change panel height
+qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "panels()[0].height = 50"
 
 
 echo
