@@ -84,21 +84,21 @@ for PKG in "${PKGS[@]}"; do
 done
 
 # Enable QEMU connection for virt-manager
-sudo systemctl enable libvirtd.service
+systemctl enable libvirtd.service
 
 # Add user into kvm and libvirt groups
 sudo usermod -aG kvm,libvirt $(whoami)
-sudo systemctl restart libvirtd.service
+systemctl restart libvirtd.service
 
 # Enable trim for improving SSD performance
-sudo systemctl enable fstrim.timer
+systemctl enable fstrim.timer
 
 # Set up alias for updating (less effort, less typo)
 echo "'alias up=yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.bashrc
 
 # Enable docker service and add user to docker group
-sudo systemctl enable docker.service
 sudo usermod -aG docker $(whoami)
+systemctl enable docker.service
 
 # Set up for Fcitx5
 echo "GTK_IM_MODULE=fcitx" >> ~/.bashrc
