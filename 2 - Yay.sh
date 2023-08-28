@@ -33,6 +33,7 @@ PKGS=(
     # DEVELOPMENT ---------------------------------------------------------
 
     'neovim'                       # Text editor
+    'sequoia-sq'                   # To check PGP key
 
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
