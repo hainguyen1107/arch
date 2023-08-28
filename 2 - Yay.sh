@@ -109,6 +109,66 @@ echo "XMODIFIERS=@im=fcitx" >> ~/.bashrc
 sudo systemctl --global enable pipewire.socket pipewire-pulse.socket
 sudo systemctl --global enable pipewire.service pipewire-pulse.service wireplumber.service
 
+echo "                    ========================="
+echo "                    Configuring KDE Plasma..."
+echo "                    ========================="
+
+# Disable recent file tracking
+kwriteconfig5 --file kdeglobals --group RecentDocuments --key UseRecent false
+# Use Google chrome browser for http and https URLs.
+kwriteconfig5 --file kdeglobals --group 'General' --key 'BrowserApplication' 'google-chrome.desktop'
+# Use fastest animation speed.
+kwriteconfig5 --file kwinrc --group Compositing --key 'AnimationSpeed' '0'
+# Turn off alert noise when AC adapter is unplugged.
+kwriteconfig5 --file powerdevil.notifyrc --group 'Event/unplugged' --key 'Action' ''
+# Turn off alert noise when trash is emptied.
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/Trash: emptied' --key 'Action' ''
+# Turn off alert noises for warnings and errors (popup instead).
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/catastrophe' --key 'Action' 'Popup'
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/fatalerror' --key 'Action' 'Popup'
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageCritical' --key 'Action' 'Popup'
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageInformation' --key 'Action' 'Popup'
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageWarning' --key 'Action' 'Popup'
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageboxQuestion' --key 'Action' 'Popup'
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/notification' --key 'Action' 'Popup'
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/printerror' --key 'Action' 'Popup'
+kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/warning' --key 'Action' 'Popup'
+# Turn off alerts for console bells.
+kwriteconfig5 --file  konsole.notifyrc --group 'Event/BellInvisible' --key 'Action' ''
+kwriteconfig5 --file  konsole.notifyrc --group 'Event/BellVisible' --key 'Action' ''
+# Automatically lock screen after .... 99999 minutes (=_=)
+kwriteconfig5 --file  kscreenlockerrc --group 'Daemon' --key 'Timeout' '99999'
+# Narrower window drop shadows.
+kwriteconfig5 --file breezerc --group 'Common' --key 'ShadowSize' 'ShadowSmall'
+# Turn off kwallet.
+kwriteconfig5 --file kwalletrc --group 'Wallet' --key 'Enabled' 'false'
+kwriteconfig5 --file kwalletrc --group 'Wallet' --key 'First Use' 'false'
+# Disable file indexing by baloofile.
+kwriteconfig5 --file kcmshell5rc --group 'Basic Settings' --key 'Indexing-Enabled' 'false'
+kwriteconfig5 --file baloofilerc --group 'Basic Settings' --key 'Indexing-Enabled' 'false'
+# Don't show media controls on the lock screen.
+kwriteconfig5 --file kscreenlockerrc --group 'Greeter' --group 'LnF' --group 'General' --key 'showMediaControls' --type 'bool' 'false'
+# Make sure desktop session starts empty
+kwriteconfig5 --file ksmserverrc --group 'General' --key 'loginMode' 'default'
+# Open new documents in tabs.
+kwriteconfig5 --file okularpartrc --group 'General' --key 'ShellOpenFileInTabs' --type 'bool' 'true'
+# Make yakuake full-width.
+kwriteconfig5 --file yakuakerc --group 'Window' --key 'Width' '100'
+# Make yakuake animation instant.
+kwriteconfig5 --file yakuakerc --group 'Animation' --key 'Frames' '0'
+# Allow empty clipboard.
+kwriteconfig5 --file klipperrc --group 'General' --key 'PreventEmptyClipboard' --type bool 'false'
+# Set language to "American English"
+kwriteconfig5 --file kdeglobals --group 'Translations' --key 'LANGUAGE' 'en_US'
+# Make kde faster, effects are for people who have leisure time.
+kwriteconfig5 --file kdeglobals --group "KDE-Global GUI Settings" --key "GraphicEffectsLevel" 0
+
+
+
+
+
+
+
 echo
 echo "Done!"
 echo
