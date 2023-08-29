@@ -230,7 +230,8 @@ kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github
 kwriteconfig5 --file kdeglobals --group KDE --key widgetStyle "Breeze"
 # Set timezone
 kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi_Minh"
-
+# Set SDDM theme
+kwriteconfig5 --file sddmthemeinstallerrc --group DownloadedThemes --key /tmp/Layan.tar.xz "/usr/share/sddm/themes/Layan"
 
 
 
