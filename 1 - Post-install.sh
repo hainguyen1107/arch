@@ -73,7 +73,9 @@ PKGS=(
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
     'ttf-jetbrains-mono'           # Typeface for developers, by JetBrains
     'papirus-icon-theme'           # Papirus icon theme
-    
+    'layan-cursor-theme-git'       # A x-cursor theme inspired by the Layan GTK Theme and based on Capitaine Cursors
+    'layan-gtk-theme-git'          # An Flat Gtk+ theme based on Material Design
+    'kvantum-theme-layan-git'      # Layan theme for KDE Plasma 5
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -179,48 +181,57 @@ qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "panel
 kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.krunner,/App,,toggleDisplay"
 qdbus org.kde.KWin /KWin reconfigure
 # Disable stupid touch screen edges and weird corners and thir animations
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key BorderActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key BorderActivateCylinder "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key BorderActivateSphere "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key TouchBorderActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key TouchBorderActivateCylinder "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key TouchBorderActivateSphere "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-DesktopGrid --key BorderActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-DesktopGrid --key TouchBorderActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key BorderActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key BorderActivateAll "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key BorderActivateClass "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key TouchBorderActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key TouchBorderActivateAll "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key TouchBorderActivateClass "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group TabBox --key BorderActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group TabBox --key BorderAlternativeActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group TabBox --key TouchBorderActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group TabBox --key TouchBorderAlternativeActivate "9"
-kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key Bottom "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key BottomLeft "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key BottomRight "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key Left "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key Right "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key Top "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key TopLeft "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key TopRight "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group TouchEdges --key Bottom "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group TouchEdges --key Left "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group TouchEdges --key Right "None"
-kwriteconfig5 --file $HOME/.config/kwinrc --group TouchEdges --key Top "None"
+kwriteconfig5 --file kwinrc --group Effect-Cube --key BorderActivate "9"
+kwriteconfig5 --file kwinrc --group Effect-Cube --key BorderActivateCylinder "9"
+kwriteconfig5 --file kwinrc --group Effect-Cube --key BorderActivateSphere "9"
+kwriteconfig5 --file kwinrc --group Effect-Cube --key TouchBorderActivate "9"
+kwriteconfig5 --file kwinrc --group Effect-Cube --key TouchBorderActivateCylinder "9"
+kwriteconfig5 --file kwinrc --group Effect-Cube --key TouchBorderActivateSphere "9"
+kwriteconfig5 --file kwinrc --group Effect-DesktopGrid --key BorderActivate "9"
+kwriteconfig5 --file kwinrc --group Effect-DesktopGrid --key TouchBorderActivate "9"
+kwriteconfig5 --file kwinrc --group Effect-PresentWindows --key BorderActivate "9"
+kwriteconfig5 --file kwinrc --group Effect-PresentWindows --key BorderActivateAll "9"
+kwriteconfig5 --file kwinrc --group Effect-PresentWindows --key BorderActivateClass "9"
+kwriteconfig5 --file kwinrc --group Effect-PresentWindows --key TouchBorderActivate "9"
+kwriteconfig5 --file kwinrc --group Effect-PresentWindows --key TouchBorderActivateAll "9"
+kwriteconfig5 --file kwinrc --group Effect-PresentWindows --key TouchBorderActivateClass "9"
+kwriteconfig5 --file kwinrc --group TabBox --key BorderActivate "9"
+kwriteconfig5 --file kwinrc --group TabBox --key BorderAlternativeActivate "9"
+kwriteconfig5 --file kwinrc --group TabBox --key TouchBorderActivate "9"
+kwriteconfig5 --file kwinrc --group TabBox --key TouchBorderAlternativeActivate "9"
+kwriteconfig5 --file kwinrc --group ElectricBorders --key Bottom "None"
+kwriteconfig5 --file kwinrc --group ElectricBorders --key BottomLeft "None"
+kwriteconfig5 --file kwinrc --group ElectricBorders --key BottomRight "None"
+kwriteconfig5 --file kwinrc --group ElectricBorders --key Left "None"
+kwriteconfig5 --file kwinrc --group ElectricBorders --key Right "None"
+kwriteconfig5 --file kwinrc --group ElectricBorders --key Top "None"
+kwriteconfig5 --file kwinrc --group ElectricBorders --key TopLeft "None"
+kwriteconfig5 --file kwinrc --group ElectricBorders --key TopRight "None"
+kwriteconfig5 --file kwinrc --group TouchEdges --key Bottom "None"
+kwriteconfig5 --file kwinrc --group TouchEdges --key Left "None"
+kwriteconfig5 --file kwinrc --group TouchEdges --key Right "None"
+kwriteconfig5 --file kwinrc --group TouchEdges --key Top "None"
 # Set titlebar buttons
-kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key BorderSize "Normal"
-kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft "MF"
-kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight "IAX"
-kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key CloseOnDoubleClickOnMenu "false"
-kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ShowToolTips "false"
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSize "Normal"
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft "MF"
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight "IAX"
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key CloseOnDoubleClickOnMenu "false"
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ShowToolTips "false"
 # Set night color instant = 5500K
 kwriteconfig5 --file kwinrc --group NightColor --key Active "true"
 kwriteconfig5 --file kwinrc --group NightColor --key Mode "Constant"
 kwriteconfig5 --file kwinrc --group NightColor --key NightTemperature "5500"
 # Set icon theme to ePapirus-dark
 kwriteconfig5 --file kdeglobals --group Icons --key Theme "ePapirus-Dark"
+# Set mouse cursor to Layan-cursor
+kwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme "Layan-cursors"
+# Set KDE Look and Feel package and widgetStyle to Layan
+kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github.vinceliuice.Layan"
+kwriteconfig5 --file kdeglobals --group KDE --key widgetStyle "Breeze"
+# Set timezone
+kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi_Minh"
+
+
 
 
 
