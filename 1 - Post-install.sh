@@ -213,6 +213,10 @@ kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key But
 kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight "IAX"
 kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key CloseOnDoubleClickOnMenu "false"
 kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ShowToolTips "false"
+# Set night color instant = 5500K
+kwriteconfig5 --file kwinrc --group NightColor --key Active "true"
+kwriteconfig5 --file kwinrc --group NightColor --key Mode "Constant"
+kwriteconfig5 --file kwinrc --group NightColor --key NightTemperature "5500"
 
 
 echo
