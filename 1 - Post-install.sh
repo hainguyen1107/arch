@@ -176,8 +176,43 @@ qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "panel
 # Set the Meta key as a shortcut to open KRunner
 kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.krunner,/App,,toggleDisplay"
 qdbus org.kde.KWin /KWin reconfigure
-
-
+# Disable stupid touch screen edges and weird corners and thir animations
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key BorderActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key BorderActivateCylinder "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key BorderActivateSphere "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key TouchBorderActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key TouchBorderActivateCylinder "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-Cube --key TouchBorderActivateSphere "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-DesktopGrid --key BorderActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-DesktopGrid --key TouchBorderActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key BorderActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key BorderActivateAll "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key BorderActivateClass "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key TouchBorderActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key TouchBorderActivateAll "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Effect-PresentWindows --key TouchBorderActivateClass "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group TabBox --key BorderActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group TabBox --key BorderAlternativeActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group TabBox --key TouchBorderActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group TabBox --key TouchBorderAlternativeActivate "9"
+kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key Bottom "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key BottomLeft "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key BottomRight "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key Left "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key Right "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key Top "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key TopLeft "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group ElectricBorders --key TopRight "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group TouchEdges --key Bottom "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group TouchEdges --key Left "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group TouchEdges --key Right "None"
+kwriteconfig5 --file $HOME/.config/kwinrc --group TouchEdges --key Top "None"
+# Set titlebar buttons
+kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key BorderSize "Normal"
+kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft "MF"
+kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight "IAX"
+kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key CloseOnDoubleClickOnMenu "false"
+kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ShowToolTips "false"
 
 
 echo
