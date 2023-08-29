@@ -173,6 +173,11 @@ kwriteconfig5 --file powermanagementprofilesrc --group LowBattery --group Handle
 kwriteconfig5 --file powermanagementprofilesrc --group LowBattery --group HandleButtonEvents --key triggerLidActionWhenExternalMonitorPresent false
 # Change panel height
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "panels()[0].height = 50"
+# Set the Meta key as a shortcut to open KRunner
+kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.krunner,/App,,toggleDisplay"
+qdbus org.kde.KWin /KWin reconfigure
+
+
 
 
 echo
