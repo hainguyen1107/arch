@@ -72,6 +72,8 @@ PKGS=(
     'noto-fonts'                   # Google Noto TTF fonts
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
     'ttf-jetbrains-mono'           # Typeface for developers, by JetBrains
+    'papirus-icon-theme'           # Papirus icon theme
+    
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -217,6 +219,9 @@ kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key Sho
 kwriteconfig5 --file kwinrc --group NightColor --key Active "true"
 kwriteconfig5 --file kwinrc --group NightColor --key Mode "Constant"
 kwriteconfig5 --file kwinrc --group NightColor --key NightTemperature "5500"
+# Set icon theme to ePapirus-dark
+kwriteconfig5 --file kdeglobals --group Icons --key Theme "ePapirus-Dark"
+
 
 
 echo
