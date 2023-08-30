@@ -234,8 +234,8 @@ kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi
 # Set SDDM theme
 kwriteconfig5 --file sddmthemeinstallerrc --group DownloadedThemes --key /tmp/Layan.tar.xz "/usr/share/sddm/themes/Layan"
 
-
-
+# Fix Chrome bug not start every time logging in
+sudo rm ${HOME}/.config/google-chrome/SingletonLock
 
 echo
 echo "Done!"
