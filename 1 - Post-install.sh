@@ -35,6 +35,7 @@ PKGS=(
     'neovim'                       # Text editor
     'sequoia-sq'                   # To check PGP key
     'docker'                       # Pack, ship and run any application as a lightweight container
+    'python-pip'                   # The PyPA recommended tool for installing Python packages
 
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
