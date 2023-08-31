@@ -36,41 +36,41 @@ read X
 echo $X > variables/password
 
 # disk preparation
-sgdisk -Z ${DISK} # zap all on disk
-sgdisk -a 4096 -o ${DISK} # new gpt disk 4096 alignment
+sgdisk -Z $(cat "variables/disk") # zap all on disk
+sgdisk -a 4096 -o $(cat "variables/disk") # new gpt disk 4096 alignment
 
 # create partitions
-sgdisk -n 1:0:+512M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
-sgdisk -n 2:0:+20G  ${DISK} # partition 2 (Swap), 20G
-sgdisk -n 3:0:0     ${DISK} # partition 3 (Root), default start, remaining
+sgdisk -n 1:0:+512M $(cat "variables/disk") # partition 1 (UEFI SYS), default start block, 512MB
+sgdisk -n 2:0:+20G  $(cat "variables/disk") # partition 2 (Swap), 20G
+sgdisk -n 3:0:0     $(cat "variables/disk") # partition 3 (Root), default start, remaining
 
 # set partition types
-sgdisk -t 1:ef00 ${DISK}
-sgdisk -t 2:8200 ${DISK}
-sgdisk -t 3:8304 ${DISK}
+sgdisk -t 1:ef00 $(cat "variables/disk")
+sgdisk -t 2:8200 $(cat "variables/disk")
+sgdisk -t 3:8304 $(cat "variables/disk")
 
 # label partitions
-sgdisk -c 1:"ESP" ${DISK}
-sgdisk -c 2:"SWAP" ${DISK}
-sgdisk -c 3:"ROOT" ${DISK}
+sgdisk -c 1:"ESP" $(cat "variables/disk")
+sgdisk -c 2:"SWAP" $(cat "variables/disk")
+sgdisk -c 3:"ROOT" $(cat "variables/disk")
 
 # Wipe all partitions
-wipefs -a "${DISK}1"
-wipefs -a "${DISK}2"
-wipefs -a "${DISK}3"
+wipefs -a "$(cat "variables/disk")p1"
+wipefs -a "$(cat "variables/disk")p2"
+wipefs -a "$(cat "variables/disk")p3"
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
-mkfs.vfat -F32 -n "ESP" "${DISK}1"
-mkswap -L "SWAP" "${DISK}2"
-swapon "${DISK}2"
-mkfs.ext4 -L "ROOT" "${DISK}3"
+mkfs.vfat -F32 -n "ESP" "$(cat "variables/disk")p1"
+mkswap -L "SWAP" "$(cat "variables/disk")p2"
+swapon "$(cat "variables/disk")p2"
+mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p3"
 
 # mount target
-mount -t ext4 "${DISK}3" /mnt
+mount -t ext4 "$(cat "variables/disk")p3" /mnt
 mkdir -p /mnt/boot/efi
-mount -t vfat "${DISK}1" /mnt/boot/
+mount -t vfat "$(cat "variables/disk")p1" /mnt/boot/
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
@@ -98,12 +98,12 @@ cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options root=${DISK}3 rw
+options root=$(cat "variables/disk")p3 rw
 EOF
 
 cat <<EOF > /mnt/boot/loader/loader.conf
 default arch
-timeout 5
+timeout 3
 console-mode keep
 editor no
 EOF
@@ -124,28 +124,18 @@ arch-chroot /mnt locale-gen
 printf "LANG=en_US.UTF-8\n" > /mnt/etc/locale.conf
 
 #Set hostname
-echo "Please enter hostname:"
-read hostname
-hostnamectl --no-ask-password set-hostname $hostname
+hostnamectl --no-ask-password set-hostname $(cat "variables/hostname")
 printf "127.0.0.1\tlocalhost\n" >> /mnt/etc/hosts
 printf "::1\tlocalhost\n" >> /mnt/etc/hosts
-printf "127.0.0.1\t$hostname.localdomain\t$hostname\n" >> /mnt/etc/hosts
+printf "127.0.0.1\t$(cat "variables/hostname").localdomain\t$(cat "variables/hostname")\n" >> /mnt/etc/hosts
 arch-chroot /mnt systemctl enable NetworkManager
 
 # Set new user
-echo -e "\nEnter username to be created:\n"
-read user
-echo -e "\nEnter nickname to be created:\n"
-read nickname
-echo -e "\nEnter new password for $user:\n"
-read uspw
-arch-chroot /mnt useradd -mU -s /bin/bash -G lp,optical,wheel,uucp,disk,power,video,audio,storage,games,input $user -d /home/$user -c "$nickname"
-echo "$user:$uspw" | chpasswd --root /mnt
+arch-chroot /mnt useradd -mU -s /bin/bash -G lp,optical,wheel,uucp,disk,power,video,audio,storage,games,input $user -d /home/$(cat "variables/username") -c "$(cat "variables/nickname")"
+echo "$(cat "variables/username"):$(cat "variables/password")" | chpasswd --root /mnt
 
 # Set password for root
-echo -e "\nEnter new password for root:\n"
-read rtpw
-echo "root:$rtpw" | chpasswd --root /mnt
+echo "root:$(cat "variables/password")" | chpasswd --root /mnt
 
 # Add sudo right for user and remove password timeout
 sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /mnt/etc/sudoers
