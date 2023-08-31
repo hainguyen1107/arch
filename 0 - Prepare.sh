@@ -16,15 +16,24 @@ curl -s "https://archlinux.org/mirrorlist/?country=KH&country=CN&country=HK&coun
 echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm --needed gptfdisk
 
-echo "-------------------------------------------------"
-echo "-------select your disk to format----------------"
-echo "-------------------------------------------------"
+echo "Prepare some important variables"
+mkdir variables
 lsblk
 echo "Please enter disk: (example /dev/sda)"
-read DISK
-echo "--------------------------------------"
-echo -e "\nFormatting disk...\n"
-echo "--------------------------------------"
+read X
+echo $X > variables/disk
+echo "Please enter your hostname: (example dopamine)"
+read X
+echo $X > variables/hostname
+echo "Please enter your username: (example serotonin)"
+read X
+echo $X > variables/username
+echo "Please enter your nickname: (example acetylcholine)"
+read X
+echo $X > variables/nickname
+echo "Please enter your temporary password:"
+read X
+echo $X > variables/password
 
 # disk preparation
 sgdisk -Z ${DISK} # zap all on disk
