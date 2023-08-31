@@ -287,6 +287,9 @@ mkinitcpio -P
 # Enable SDDM! Ready to reboot into KDE Plasma
 arch-chroot /mnt systemctl enable sddm.service
 
+chmod +x 1\ -\ Post-install.sh
+mv 1\ -\ Post-install.sh /mnt/home/$(cat "variables/username")
+
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
 echo "--------------------------------------"
