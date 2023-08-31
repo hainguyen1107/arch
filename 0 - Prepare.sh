@@ -228,7 +228,8 @@ PKGS=(
         'conky'                             # Lightweight system monitor
         'dolphin'                           # KDE File Manager
         'dolphin-plugins'                   # Extra Dolphin plugins
-        'bluedevil'                         # KDE bluetooth stack  
+        'bluedevil'                         # KDE bluetooth stack
+        'spectacle'                         # Screenshoot
 
     # --- Thumbnail generation
         'kdegraphics-thumbnailers'          # Thumbnailers for various graphics file formats
