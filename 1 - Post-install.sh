@@ -73,10 +73,6 @@ PKGS=(
     'noto-fonts'                   # Google Noto TTF fonts
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
     'ttf-jetbrains-mono'           # Typeface for developers, by JetBrains
-    'papirus-icon-theme'           # Papirus icon theme
-    'layan-cursor-theme-git'       # A x-cursor theme inspired by the Layan GTK Theme and based on Capitaine Cursors
-    'layan-gtk-theme-git'          # An Flat Gtk+ theme based on Material Design
-    'kvantum-theme-layan-git'      # Layan theme for KDE Plasma 5
 )
 
 for PKG in "${PKGS[@]}"; do
