@@ -125,15 +125,15 @@ kwriteconfig5 --file powerdevil.notifyrc --group 'Event/unplugged' --key 'Action
 # Turn off alert noise when trash is emptied.
 kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/Trash: emptied' --key 'Action' ''
 # Turn off alert noises for warnings and errors (popup instead).
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/catastrophe' --key 'Action' 'Popup'
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/fatalerror' --key 'Action' 'Popup'
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageCritical' --key 'Action' 'Popup'
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageInformation' --key 'Action' 'Popup'
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageWarning' --key 'Action' 'Popup'
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageboxQuestion' --key 'Action' 'Popup'
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/notification' --key 'Action' 'Popup'
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/printerror' --key 'Action' 'Popup'
-kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/warning' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/catastrophe' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/fatalerror' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageCritical' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageInformation' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageWarning' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/messageboxQuestion' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/notification' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/printerror' --key 'Action' 'Popup'
+#kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/warning' --key 'Action' 'Popup'
 # Turn off alerts for console bells.
 kwriteconfig5 --file  konsole.notifyrc --group 'Event/BellInvisible' --key 'Action' ''
 kwriteconfig5 --file  konsole.notifyrc --group 'Event/BellVisible' --key 'Action' ''
@@ -224,15 +224,9 @@ kwriteconfig5 --file kwinrc --group NightColor --key Mode "Constant"
 kwriteconfig5 --file kwinrc --group NightColor --key NightTemperature "5500"
 # Set icon theme to ePapirus-dark
 kwriteconfig5 --file kdeglobals --group Icons --key Theme "ePapirus-Dark"
-# Set mouse cursor to Layan-cursor
-kwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme "Layan-cursors"
-# Set KDE Look and Feel package and widgetStyle to Layan
-kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github.vinceliuice.Layan"
-kwriteconfig5 --file kdeglobals --group KDE --key widgetStyle "Breeze"
 # Set timezone
 kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi_Minh"
-# Set SDDM theme
-kwriteconfig5 --file sddmthemeinstallerrc --group DownloadedThemes --key /tmp/Layan.tar.xz "/usr/share/sddm/themes/Layan"
+
 
 # Fix Chrome bug not start every time logging in
 sudo rm ${HOME}/.config/google-chrome/SingletonLock
