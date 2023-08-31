@@ -36,6 +36,7 @@ PKGS=(
     'sequoia-sq'                   # To check PGP key
     'docker'                       # Pack, ship and run any application as a lightweight container
     'python-pip'                   # The PyPA recommended tool for installing Python packages
+    'wget'                         # Network utility to retrieve files from the Web
 
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
@@ -223,6 +224,13 @@ kwriteconfig5 --file kdeglobals --group Icons --key Theme "ePapirus-Dark"
 # Set timezone
 kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi_Minh"
 
+# Configure KDE Plasma to Psion theme (steampunk style)
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget \
+--quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate \
+'https://docs.google.com/uc?export=download&id=1kAD8JhXnsOLMpQRlFHKBaJeY3mRcf8rR' -O- | sed -rn \
+'s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1kAD8JhXnsOLMpQRlFHKBaJeY3mRcf8rR" -O konsave-psion.knsv \
+&& rm -rf /tmp/cookies.txt
+konsave -f -i konsave-psion.knsv
 
 # Fix Chrome bug not start every time logging in
 sudo rm ${HOME}/.config/google-chrome/SingletonLock
