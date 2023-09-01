@@ -265,7 +265,7 @@ sed -i 's/ kms//' /mnt/etc/mkinitcpio.conf
 arch-chroot /mnt mkinitcpio -P
 
 # Create a hook for NVIDIA Drivers
-mkdir /etc/pacman.d/hooks
+mkdir -p /mnt/etc/pacman.d/hooks
 cat > /mnt/etc/pacman.d/hooks/nvidia.hook << EOF
 [Trigger]
 Operation=Install
@@ -281,7 +281,7 @@ Description=Update NVIDIA module in initcpio
 Depends=mkinitcpio
 When=PostTransaction
 NeedsTargets
-Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
+Exec=/bin/sh -c 'while read -r trg; do case trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
 EOF
 
 # Regenerate mkinitcpio
