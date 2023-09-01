@@ -95,16 +95,16 @@ sudo systemctl restart libvirtd.service
 sudo systemctl enable fstrim.timer
 
 # Set up alias for updating (less effort, less typo)
-echo "'alias up=yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.bashrc
+echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.bashrc
 
 # Enable docker service and add user to docker group
 sudo usermod -aG docker $(whoami)
 sudo systemctl enable docker.service
 
 # Set up for Fcitx5
-echo "GTK_IM_MODULE=fcitx" >> ~/.bashrc
-echo "QT_IM_MODULE=fcitx" >> ~/.bashrc
-echo "XMODIFIERS=@im=fcitx" >> ~/.bashrc
+echo "export GTK_IM_MODULE=fcitx" >> ~/.bashrc
+echo "export QT_IM_MODULE=fcitx" >> ~/.bashrc
+echo "export XMODIFIERS=@im=fcitx" >> ~/.bashrc
 
 # Enable pipewire, pipewire-pulse and wireplumber globally
 sudo systemctl --global enable pipewire.socket pipewire-pulse.socket
