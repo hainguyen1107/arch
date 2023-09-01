@@ -56,7 +56,8 @@ PKGS=(
 
     'mpv'                          # MPV player
     'smplayer'                     # Frontend GUI for mpv player
-    'goldendict-ng-git'	           # Golden dictionary	
+    'goldendict-ng-git'	           # Golden dictionary
+    'video-downloader'             # Application for downloading video
     'okular'                       # PDF viewer
     'libreoffice-fresh'            # Office
     'google-chrome'	               # Web browser
