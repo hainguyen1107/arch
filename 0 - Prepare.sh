@@ -214,7 +214,6 @@ PKGS=(
     #    'gnome-bluetooth-3.0'	             # Gnome bluetooth
 
     # --- Disk utilities
-         'exfat-utils'                      # Mount exFat drives
          'gparted'                          # Disk utility
          'ntfs-3g'                          # Open source implementation of NTFS file system
          'parted'                           # Disk utility
