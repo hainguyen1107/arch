@@ -137,8 +137,8 @@ kwriteconfig5 --file  plasma_workspace.notifyrc --group 'Event/Trash: emptied' -
 # Turn off alerts for console bells.
 kwriteconfig5 --file  konsole.notifyrc --group 'Event/BellInvisible' --key 'Action' ''
 kwriteconfig5 --file  konsole.notifyrc --group 'Event/BellVisible' --key 'Action' ''
-# Automatically lock screen after .... 99999 minutes (=_=)
-kwriteconfig5 --file  kscreenlockerrc --group 'Daemon' --key 'Timeout' '99999'
+# Disable annoying automatically screen locking
+kwriteconfig5 --file  kscreenlockerrc --group 'Daemon' --key 'Autolock' 'false'
 # Narrower window drop shadows.
 kwriteconfig5 --file breezerc --group 'Common' --key 'ShadowSize' 'ShadowSmall'
 # Turn off kwallet.
@@ -235,6 +235,9 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 && rm -rf /tmp/cookies.txt
 konsave -f -i konsave-psion.knsv
 konsave -a konsave-psion
+
+# Disable any kind of suspension
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 echo
 echo "Done!"
