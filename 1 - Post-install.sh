@@ -81,22 +81,25 @@ for PKG in "${PKGS[@]}"; do
     yay -Syu "$PKG" --noconfirm --needed
 done
 
+# Force to use ffmpeg as qt6-multimedia backend
+echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.bashrc
+
 # Enable QEMU connection for virt-manager
-systemctl enable libvirtd.service
+sudo systemctl enable libvirtd.service
 
 # Add user into kvm and libvirt groups
 sudo usermod -aG kvm,libvirt $(whoami)
 sudo systemctl restart libvirtd.service
 
 # Enable trim for improving SSD performance
-systemctl enable fstrim.timer
+sudo systemctl enable fstrim.timer
 
 # Set up alias for updating (less effort, less typo)
 echo "'alias up=yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.bashrc
 
 # Enable docker service and add user to docker group
 sudo usermod -aG docker $(whoami)
-systemctl enable docker.service
+sudo systemctl enable docker.service
 
 # Set up for Fcitx5
 echo "GTK_IM_MODULE=fcitx" >> ~/.bashrc
@@ -231,9 +234,6 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1kAD8JhXnsOLMpQRlFHKBaJeY3mRcf8rR" -O konsave-psion.knsv \
 && rm -rf /tmp/cookies.txt
 konsave -f -i konsave-psion.knsv
-
-# Fix Chrome bug not start every time logging in
-sudo rm ${HOME}/.config/google-chrome/SingletonLock
 
 echo
 echo "Done!"
