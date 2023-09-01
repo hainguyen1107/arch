@@ -262,7 +262,7 @@ done
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
 # the nouveau module making sure the kernel cannot load it during early boot
 sed -i 's/ kms//' /mnt/etc/mkinitcpio.conf
-mkinitcpio -P
+arch-chroot /mnt mkinitcpio -P
 
 # Create a hook for NVIDIA Drivers
 mkdir /etc/pacman.d/hooks
@@ -285,7 +285,7 @@ Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /
 EOF
 
 # Regenerate mkinitcpio
-mkinitcpio -P
+arch-chroot /mnt mkinitcpio -P
 
 # Enable SDDM! Ready to reboot into KDE Plasma
 arch-chroot /mnt systemctl enable sddm.service
