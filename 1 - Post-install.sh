@@ -234,7 +234,10 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1kAD8JhXnsOLMpQRlFHKBaJeY3mRcf8rR" -O konsave-psion.knsv \
 && rm -rf /tmp/cookies.txt
 konsave -f -i konsave-psion.knsv
+konsave -a konsave-psion
 
 echo
 echo "Done!"
-echo
+echo "Reboot in 5s"
+sleep 5
+reboot
