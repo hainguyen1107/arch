@@ -134,7 +134,7 @@ printf "127.0.0.1\t$(cat "variables/hostname").localdomain\t$(cat "variables/hos
 arch-chroot /mnt systemctl enable NetworkManager
 
 # Set new user
-arch-chroot /mnt useradd -mU -s /bin/bash -G lp,optical,wheel,uucp,disk,power,video,audio,storage,games,input $user -d /home/$(cat "variables/username") -c "$(cat "variables/nickname")"
+arch-chroot /mnt useradd -mU -s /bin/bash -G lp,optical,wheel,uucp,disk,power,video,audio,storage,games,input $$(cat "variables/username") -d /home/$(cat "variables/username") -c "$(cat "variables/nickname")"
 echo "$(cat "variables/username"):$(cat "variables/password")" | chpasswd --root /mnt
 
 # Set password for root
