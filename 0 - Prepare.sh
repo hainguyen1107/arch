@@ -82,7 +82,7 @@ echo "--------------------------------------"
 # Set up pacman.conf for faster downloading and more colorful
 sed -i 's/#Parallel/Parallel/' /etc/pacman.conf
 sudo sed -i 's/#Color/Color/' /etc/pacman.conf
-echo 'ILoveCandy' >> /etc/pacman.conf
+sed -i '/Color/a ILoveCandy' /etc/pacman.conf
 
 # Install base packages
 pacstrap /mnt base base-devel linux linux-headers linux-firmware man-pages man-db iptables-nft networkmanager --noconfirm --needed
@@ -150,7 +150,7 @@ sed -i "/\[multilib\]/,/Include/"'s/#//' /mnt/etc/pacman.conf
 # Set up pacman.conf for faster downloading for new system
 sed -i 's/#Parallel/Parallel/' /mnt/etc/pacman.conf
 sed -i 's/#Color/Color/' /mnt/etc/pacman.conf
-echo 'ILoveCandy' >> /mnt/etc/pacman.conf
+sed -i '/Color/a ILoveCandy' /mnt/etc/pacman.conf
 
 # Install essential packages
 PKGS=(
