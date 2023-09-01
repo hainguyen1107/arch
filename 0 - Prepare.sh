@@ -22,6 +22,9 @@ lsblk
 echo "Please enter disk: (example /dev/sda)"
 read X
 echo $X > variables/disk
+echo "How large your swap partition is (Gigabyte):"
+read X
+echo $X > variables/swap
 echo "Please enter your hostname: (example dopamine)"
 read X
 echo $X > variables/hostname
@@ -41,7 +44,7 @@ sgdisk -a 4096 -o $(cat "variables/disk") # new gpt disk 4096 alignment
 
 # create partitions
 sgdisk -n 1:0:+512M $(cat "variables/disk") # partition 1 (UEFI SYS), default start block, 512MB
-sgdisk -n 2:0:+20G  $(cat "variables/disk") # partition 2 (Swap), 20G
+sgdisk -n 2:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap), 20G
 sgdisk -n 3:0:0     $(cat "variables/disk") # partition 3 (Root), default start, remaining
 
 # set partition types
