@@ -223,10 +223,10 @@ kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ShowToolTips "fal
 kwriteconfig5 --file kwinrc --group NightColor --key Active "true"
 kwriteconfig5 --file kwinrc --group NightColor --key Mode "Constant"
 kwriteconfig5 --file kwinrc --group NightColor --key NightTemperature "5500"
-# Set icon theme to ePapirus-dark
-kwriteconfig5 --file kdeglobals --group Icons --key Theme "ePapirus-Dark"
 # Set timezone
 kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi_Minh"
+# Set single click = select
+kwriteconfig5 --file kdeglobals --group "KDE" --key "SingleClick" "false"
 
 # Configure KDE Plasma to Psion theme (steampunk style)
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget \
