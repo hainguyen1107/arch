@@ -99,6 +99,10 @@ sudo systemctl enable libvirtd.service
 sudo usermod -aG kvm,libvirt $(whoami)
 sudo systemctl restart libvirtd.service
 
+# Enable virtual network and set it to autostart
+sudo virsh net-start default
+sudo virsh net-autostart default
+
 # Enable trim for improving SSD performance
 sudo systemctl enable fstrim.timer
 
