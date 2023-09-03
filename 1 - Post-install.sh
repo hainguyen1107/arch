@@ -52,6 +52,15 @@ PKGS=(
     'openbsd-netcat'               # TCP/IP swiss army knife. OpenBSD variant.
     'libguestfs'                   # Access and modify virtual machine disk images
 
+    # Vietnamese input ----------------------------------------------
+    'fcitx5-bamboo'                # Bamboo (Vietnamese Input Method) engine support for Fcitx
+    'fcitx5-gtk'                   # Fcitx5 gtk im module and glib based dbus client library
+    'fcitx5-qt'                    # Fcitx5 Qt Library
+    'fcitx5-configtool'            # Configuration Tool for Fcitx5
+
+    # OTHERS --------------------------------------------------------
+    'protonvpn-cli-community'      # A Community Linux CLI for ProtonVPN
+
     # OTHERS --------------------------------------------------------
 
     'mpv'                          # MPV player
@@ -64,23 +73,21 @@ PKGS=(
     'ferdium-bin'	               # Messenger, discord... manager
     #'ibus-bamboo'	               # Vietnamese IME for Ibus
     'nomacs'                       # Image viewer
-    'kimageformats'                # Image format plugins for Qt5
-    'fcitx5-bamboo'                # Bamboo (Vietnamese Input Method) engine support for Fcitx
-    'fcitx5-gtk'                   # Fcitx5 gtk im module and glib based dbus client library
-    'fcitx5-qt'                    # Fcitx5 Qt Library
-    'fcitx5-configtool'            # Configuration Tool for Fcitx5
+    'kimageformats'                # Image format plugins for Qt5 
     'konsave'                      # Import, export, extract KDE Plasma configuration profile
     'ttf-ms-fonts'                 # Core TTF Fonts from Microsoft
     'ttf-dejavu'                   # Font family based on the Bitstream Vera Fonts with a wider range of characters
     'noto-fonts'                   # Google Noto TTF fonts
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
-    'ttf-open-sans'                # Sans-serif typeface commissioned by Google
 )
 
 for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
     yay -Syu "$PKG" --noconfirm --needed
 done
+
+# Set up profile for ProtonVPN
+echo "8fQZZV0gSjzQHIMU:Yzeoo5mMgxKYvEZoouXgBhjDxYdjLeiJ:Yzeoo5mMgxKYvEZoouXgBhjDxYdjLeiJ" | sudo protonvpn init
 
 # Force to use ffmpeg as qt6-multimedia backend
 echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.bashrc
