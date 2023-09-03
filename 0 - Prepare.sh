@@ -238,7 +238,6 @@ PKGS=(
         
     # --- Networking Setup
         'dialog'                    		    # Enables shell scripts to trigger dialog boxex
-        'openvpn'                   		    # Open VPN support
         'networkmanager-openvpn'    		    # Open VPN plugin for NM
         'network-manager-applet'    		    # System tray icon/utility for network connectivity
         'dhclient'                  		    # DHCP client
