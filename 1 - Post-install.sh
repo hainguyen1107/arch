@@ -74,7 +74,7 @@ PKGS=(
     'ttf-dejavu'                   # Font family based on the Bitstream Vera Fonts with a wider range of characters
     'noto-fonts'                   # Google Noto TTF fonts
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
-    'ttf-jetbrains-mono'           # Typeface for developers, by JetBrains
+    'ttf-open-sans'                # Sans-serif typeface commissioned by Google
 )
 
 for PKG in "${PKGS[@]}"; do
