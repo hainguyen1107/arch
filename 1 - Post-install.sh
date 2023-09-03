@@ -86,9 +86,6 @@ for PKG in "${PKGS[@]}"; do
     yay -Syu "$PKG" --noconfirm --needed
 done
 
-# Set up profile for ProtonVPN
-echo "8fQZZV0gSjzQHIMU:Yzeoo5mMgxKYvEZoouXgBhjDxYdjLeiJ:Yzeoo5mMgxKYvEZoouXgBhjDxYdjLeiJ" | sudo protonvpn init
-
 # Force to use ffmpeg as qt6-multimedia backend
 echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.bashrc
 
