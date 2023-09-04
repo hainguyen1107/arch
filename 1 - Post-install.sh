@@ -79,6 +79,9 @@ PKGS=(
     'ttf-dejavu'                   # Font family based on the Bitstream Vera Fonts with a wider range of characters
     'noto-fonts'                   # Google Noto TTF fonts
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
+    'otf-atkinson-hyperlegible'    # A typeface focusing on leterform distinction for legibility for low vision readers
+    'nerd-fonts-inter'             # Inter Font, patched with the Nerd Fonts Patcher
+
 )
 
 for PKG in "${PKGS[@]}"; do
