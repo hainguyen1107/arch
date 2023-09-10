@@ -258,6 +258,10 @@ konsave -a konsave-psion
 # Disable any kind of suspension
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
+# Set dolphin to show hidden files
+sed -i '/Hidden/d' ~/.local/share/dolphin/view_properties/global/.directory
+echo "HiddenFilesShown=true" >> ~/.local/share/dolphin/view_properties/global/.directory
+
 echo
 echo "Done!"
 echo "Reboot in 5s"
