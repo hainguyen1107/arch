@@ -37,6 +37,8 @@ PKGS=(
     'docker'                       # Pack, ship and run any application as a lightweight container
     'python-pip'                   # The PyPA recommended tool for installing Python packages
     'wget'                         # Network utility to retrieve files from the Web
+    'dropbox'                      # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
+    'python-gpgme'                 # Python bindings for GPGme
 
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
