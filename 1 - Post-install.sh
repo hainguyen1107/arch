@@ -267,7 +267,7 @@ echo "HiddenFilesShown=true" >> ~/.local/share/dolphin/view_properties/global/.d
 
 # Create translator for translating English audio files into text
 echo "#! /bin/bash" > ${HOME}/Downloads/translator.sh
-echo "whisper {*.mp3,*.m4a,*.mp4} --model tiny.en --output_format txt --fp16 False --language en" >> ${HOME}/Downloads/translator.sh
+echo "whisper *.m* --model tiny.en --output_format txt --fp16 False --language en" >> ${HOME}/Downloads/translator.sh
 sudo chmod +x ${HOME}/Downloads/translator.sh
 
 echo
