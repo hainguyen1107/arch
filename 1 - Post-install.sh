@@ -39,6 +39,7 @@ PKGS=(
     'wget'                         # Network utility to retrieve files from the Web
     'dropbox'                      # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
     'python-gpgme'                 # Python bindings for GPGme
+    'whisper-git'                  # General-purpose speech recognition model by OpenAI
 
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
@@ -263,6 +264,11 @@ sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.ta
 # Set dolphin to show hidden files
 sed -i '/Hidden/d' ~/.local/share/dolphin/view_properties/global/.directory
 echo "HiddenFilesShown=true" >> ~/.local/share/dolphin/view_properties/global/.directory
+
+# Create translator for translating English audio files into text
+echo "#! /bin/bash" > ${HOME}/Downloads/translator.sh
+echo "whisper {*.mp3,*.m4a,*.mp4} --model tiny.en --output_format txt --fp16 False --language en" >> ${HOME}/Downloads/translator.sh
+sudo chmod +x ${HOME}/Downloads/translator.sh
 
 echo
 echo "Done!"
