@@ -41,9 +41,10 @@ PKGS=(
     'python-gpgme'                 # Python bindings for GPGme
     'whisper-git'                  # General-purpose speech recognition model by OpenAI
 
-    # KVM/QEMU
+    # Image editor
     'gimp'                         # GNU Image Manipulation Program
     'gimp-plugin-gmic'             # Gimp plugin for the G'MIC image processing framework
+    'poppler-glib'                 # GIMP library to open pdf files
     
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
