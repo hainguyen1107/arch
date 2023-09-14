@@ -42,6 +42,10 @@ PKGS=(
     'whisper-git'                  # General-purpose speech recognition model by OpenAI
 
     # KVM/QEMU
+    'gimp'                         # GNU Image Manipulation Program
+    'gimp-plugin-gmic'             # Gimp plugin for the G'MIC image processing framework
+    
+    # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
     'qemu-full'                    # A full QEMU setup
     'edk2-ovmf'                    # TianoCore project to enable UEFI support for Virtual Machines
