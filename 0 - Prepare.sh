@@ -231,6 +231,7 @@ PKGS=(
         'dolphin-plugins'                   # Extra Dolphin plugins
         'bluedevil'                         # KDE bluetooth stack
         'spectacle'                         # Screenshoot
+        'kcalc'                             # KDE calculator
 
     # --- Thumbnail generation
         'kdegraphics-thumbnailers'          # Thumbnailers for various graphics file formats
