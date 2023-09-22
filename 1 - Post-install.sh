@@ -40,6 +40,7 @@ PKGS=(
     'dropbox'                      # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
     'python-gpgme'                 # Python bindings for GPGme
     'whisper-git'                  # General-purpose speech recognition model by OpenAI
+    'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
 
     # Image editor
     'gimp'                         # GNU Image Manipulation Program
