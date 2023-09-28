@@ -41,6 +41,8 @@ PKGS=(
     'python-gpgme'                 # Python bindings for GPGme
     'whisper-git'                  # General-purpose speech recognition model by OpenAI
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
+    'oh-my-bash-git'               # A delightful community-driven framework for managing your bash configuration
+
 
     # Image editor
     'gimp'                         # GNU Image Manipulation Program
@@ -114,6 +116,16 @@ sudo virsh net-autostart default
 
 # Enable trim for improving SSD performance
 sudo systemctl enable fstrim.timer
+
+# Oh-my-bash theme configuration
+cd ~
+cp ~/.bashrc ~/.bashrc.orig
+cp /usr/share/oh-my-bash/bashrc ~/.bashrc
+sed -i 's/OSH_THEME="font"/OSH_THEME="agnoster"/' .bashrc
+cd ~
+git clone https://github.com/powerline/fonts.git fonts
+cd fonts
+sh install.sh
 
 # Set up alias for updating (less effort, less typo)
 echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.bashrc
@@ -275,6 +287,8 @@ echo "HiddenFilesShown=true" >> ~/.local/share/dolphin/view_properties/global/.d
 echo "#! /bin/bash" > ${HOME}/Downloads/translator.sh
 echo "whisper *.m* --model tiny.en --output_format txt --fp16 False --language en" >> ${HOME}/Downloads/translator.sh
 sudo chmod +x ${HOME}/Downloads/translator.sh
+
+
 
 echo
 echo "Done!"
