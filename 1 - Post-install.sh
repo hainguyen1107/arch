@@ -154,6 +154,12 @@ echo "                    ========================="
 echo "                    Configuring KDE Plasma..."
 echo "                    ========================="
 
+#Set atkinson hyperlegible to be system fonts
+kwriteconfig5 --file kdeglobals --group General --key fixed 'Atkinson Hyperlegible,10,-1,5,50,0,0,0,0,0'
+kwriteconfig5 --file kdeglobals --group General --key font 'Atkinson Hyperlegible,10,-1,5,50,0,0,0,0,0'
+kwriteconfig5 --file kdeglobals --group General --key menuFont 'Atkinson Hyperlegible,10,-1,5,50,0,0,0,0,0'
+kwriteconfig5 --file kdeglobals --group General --key smallestReadableFont 'Atkinson Hyperlegible,8,-1,5,50,0,0,0,0,0'
+kwriteconfig5 --file kdeglobals --group General --key toolBarFont 'Atkinson Hyperlegible,10,-1,5,50,0,0,0,0,0'
 # Disable recent file tracking
 kwriteconfig5 --file kdeglobals --group RecentDocuments --key UseRecent false
 # Use Google chrome browser for http and https URLs.
@@ -180,27 +186,27 @@ kwriteconfig5 --file  konsole.notifyrc --group 'Event/BellVisible' --key 'Action
 # Disable annoying automatically screen locking
 kwriteconfig5 --file  kscreenlockerrc --group 'Daemon' --key 'Autolock' 'false'
 # Narrower window drop shadows.
-kwriteconfig5 --file breezerc --group 'Common' --key 'ShadowSize' 'ShadowSmall'
+kwriteconfig5 --file breezerc --group Common --key 'ShadowSize' 'ShadowSmall'
 # Turn off kwallet.
-kwriteconfig5 --file kwalletrc --group 'Wallet' --key 'Enabled' 'false'
-kwriteconfig5 --file kwalletrc --group 'Wallet' --key 'First Use' 'false'
+kwriteconfig5 --file kwalletrc --group Wallet --key 'Enabled' 'false'
+kwriteconfig5 --file kwalletrc --group Wallet --key 'First Use' 'false'
 # Disable file indexing by baloofile.
-kwriteconfig5 --file kcmshell5rc --group 'Basic Settings' --key 'Indexing-Enabled' 'false'
-kwriteconfig5 --file baloofilerc --group 'Basic Settings' --key 'Indexing-Enabled' 'false'
+kwriteconfig5 --file kcmshell5rc --group Basic Settings --key 'Indexing-Enabled' 'false'
+kwriteconfig5 --file baloofilerc --group Basic Settings --key 'Indexing-Enabled' 'false'
 # Don't show media controls on the lock screen.
-kwriteconfig5 --file kscreenlockerrc --group 'Greeter' --group 'LnF' --group 'General' --key 'showMediaControls' --type 'bool' 'false'
+kwriteconfig5 --file kscreenlockerrc --group Greeter --group 'LnF' --group 'General' --key 'showMediaControls' --type 'bool' 'false'
 # Make sure desktop session starts empty
-kwriteconfig5 --file ksmserverrc --group 'General' --key 'loginMode' 'default'
+kwriteconfig5 --file ksmserverrc --group General --key 'loginMode' 'default'
 # Open new documents in tabs.
-kwriteconfig5 --file okularpartrc --group 'General' --key 'ShellOpenFileInTabs' --type 'bool' 'true'
+kwriteconfig5 --file okularpartrc --group General --key 'ShellOpenFileInTabs' --type 'bool' 'true'
 # Make yakuake full-width.
-kwriteconfig5 --file yakuakerc --group 'Window' --key 'Width' '100'
+kwriteconfig5 --file yakuakerc --group Window --key 'Width' '100'
 # Make yakuake animation instant.
-kwriteconfig5 --file yakuakerc --group 'Animation' --key 'Frames' '0'
+kwriteconfig5 --file yakuakerc --group Animation --key 'Frames' '0'
 # Allow empty clipboard.
-kwriteconfig5 --file klipperrc --group 'General' --key 'PreventEmptyClipboard' --type bool 'false'
+kwriteconfig5 --file klipperrc --group General --key 'PreventEmptyClipboard' --type bool 'false'
 # Set language to "American English"
-kwriteconfig5 --file kdeglobals --group 'Translations' --key 'LANGUAGE' 'en_US'
+kwriteconfig5 --file kdeglobals --group Translations --key 'LANGUAGE' 'en_US'
 # Make kde faster, effects are for people who have leisure time.
 kwriteconfig5 --file kdeglobals --group "KDE-Global GUI Settings" --key "GraphicEffectsLevel" 0
 # Power management
