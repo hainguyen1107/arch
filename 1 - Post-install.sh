@@ -48,6 +48,7 @@ PKGS=(
     'gimp'                         # GNU Image Manipulation Program
     'gimp-plugin-gmic'             # Gimp plugin for the G'MIC image processing framework
     'poppler-glib'                 # GIMP library to open pdf files
+    'rawtherapee'                  # A powerful cross-platform raw image processing program
     
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
