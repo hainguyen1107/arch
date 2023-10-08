@@ -42,7 +42,10 @@ PKGS=(
     'whisper-git'                  # General-purpose speech recognition model by OpenAI
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
     'oh-my-bash-git'               # A delightful community-driven framework for managing your bash configuration
-
+    'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
+    'wine-gecko'                   # Wine's built-in replacement for Microsoft's Internet Explorer
+    'wine-mono'                    # Wine's built-in replacement for Microsoft's .NET Framework
+    
 
     # Image editor
     'gimp'                         # GNU Image Manipulation Program
