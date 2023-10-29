@@ -107,11 +107,12 @@ bootctl --esp-path=/efi --boot-path=/boot install
 cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
+initrd /intel-ucode.img
 initrd /initramfs-linux.img
 options root=$(cat "variables/disk")p4 rw
 EOF
 
-cat <<EOF > /mnt/boot/loader/loader.conf
+cat <<EOF > /mnt/efi/loader/loader.conf
 default arch
 timeout 3
 console-mode keep
@@ -295,6 +296,9 @@ arch-chroot /mnt mkinitcpio -P
 
 # Enable SDDM! Ready to reboot into KDE Plasma
 arch-chroot /mnt systemctl enable sddm.service
+
+# Enable systemd-boot-update-service
+arch-chroot /mnt systemctl enable systemd-boot-update.service
 
 chmod +x 1\ -\ Post-install.sh
 mv 1\ -\ Post-install.sh /mnt/home/$(cat "variables/username")
