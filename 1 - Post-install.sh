@@ -46,12 +46,6 @@ PKGS=(
     'wine-gecko'                   # Wine's built-in replacement for Microsoft's Internet Explorer
     'wine-mono'                    # Wine's built-in replacement for Microsoft's .NET Framework
     
-
-    # Image editor
-    'gimp'                         # GNU Image Manipulation Program
-    'gimp-plugin-gmic'             # Gimp plugin for the G'MIC image processing framework
-    'poppler-glib'                 # GIMP library to open pdf files
-    'rawtherapee'                  # A powerful cross-platform raw image processing program
     
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
@@ -84,7 +78,7 @@ PKGS=(
     'video-downloader'             # Application for downloading video
     'okular'                       # PDF viewer
     'libreoffice-fresh'            # Office
-    'google-chrome'	               # Web browser
+    'firefox'	               # Web browser
     'ferdium-bin'	               # Messenger, discord... manager
     #'ibus-bamboo'	               # Vietnamese IME for Ibus
     'nomacs'                       # Image viewer
