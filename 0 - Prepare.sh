@@ -44,36 +44,43 @@ sgdisk -a 4096 -o $(cat "variables/disk") # new gpt disk 4096 alignment
 
 # create partitions
 sgdisk -n 1:0:+512M $(cat "variables/disk") # partition 1 (UEFI SYS), default start block, 512MB
-sgdisk -n 2:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap), 20G
-sgdisk -n 3:0:0     $(cat "variables/disk") # partition 3 (Root), default start, remaining
+sgdisk -n 2:0:+550M $(cat "variables/disk") # Partition 2 (XBOOTLDR), A separate /boot partition to keep kernel and initframf separate from the ESP, 550MB
+sgdisk -n 3:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap), 20G
+sgdisk -n 4:0:0     $(cat "variables/disk") # partition 3 (Root), default start, remaining
 
 # set partition types
 sgdisk -t 1:ef00 $(cat "variables/disk")
-sgdisk -t 2:8200 $(cat "variables/disk")
-sgdisk -t 3:8304 $(cat "variables/disk")
+sgdisk -t 2:ea00 $(cat "variables/disk")
+sgdisk -t 3:8200 $(cat "variables/disk")
+sgdisk -t 4:8304 $(cat "variables/disk")
 
 # label partitions
 sgdisk -c 1:"ESP" $(cat "variables/disk")
-sgdisk -c 2:"SWAP" $(cat "variables/disk")
-sgdisk -c 3:"ROOT" $(cat "variables/disk")
+sgdisk -c 2:"XBOOTLDR" $(cat "variables/disk")
+sgdisk -c 3:"SWAP" $(cat "variables/disk")
+sgdisk -c 4:"ROOT" $(cat "variables/disk")
 
 # Wipe all partitions
 wipefs -a "$(cat "variables/disk")p1"
 wipefs -a "$(cat "variables/disk")p2"
 wipefs -a "$(cat "variables/disk")p3"
+wipefs -a "$(cat "variables/disk")p4"
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
 mkfs.vfat -F32 -n "ESP" "$(cat "variables/disk")p1"
-mkswap -L "SWAP" "$(cat "variables/disk")p2"
-swapon "$(cat "variables/disk")p2"
-mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p3"
+mkfs.vfat -F32 -n "XBOOTLDR" "$(cat "variables/disk")p2"
+mkswap -L "SWAP" "$(cat "variables/disk")p3"
+swapon "$(cat "variables/disk")p3"
+mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p4"
 
 # mount target
-mount -t ext4 "$(cat "variables/disk")p3" /mnt
-mkdir -p /mnt/boot/efi
-mount -t vfat "$(cat "variables/disk")p1" /mnt/boot/
+mount -t ext4 "$(cat "variables/disk")p4" /mnt
+mkdir -p /mnt/efi
+mkdir -p /mnt/boot
+mount -t vfat "$(cat "variables/disk")p1" /mnt/efi
+mount -t vfat "$(cat "variables/disk")p2" /mnt/boot
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
@@ -101,7 +108,7 @@ cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options root=$(cat "variables/disk")p3 rw
+options root=$(cat "variables/disk")p4 rw
 EOF
 
 cat <<EOF > /mnt/boot/loader/loader.conf
