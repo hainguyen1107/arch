@@ -28,8 +28,6 @@ PKGS=(
     'unzip'                        # Zip compression program
     'wget'                         # Remote content retrieval
     'zip'                          # Zip compression program
-    'syntax-highlighting'          # Terminal Plugin
-
     # DEVELOPMENT ---------------------------------------------------------
 
     'neovim'                       # Text editor
