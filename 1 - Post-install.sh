@@ -74,6 +74,7 @@ PKGS=(
     'smplayer'                     # Frontend GUI for mpv player
     'goldendict-ng-git'	           # Golden dictionary
     'video-downloader'             # Application for downloading video
+    'deluge'                       # Full-featured BitTorrent application
     'okular'                       # PDF viewer
     'libreoffice-fresh'            # Office
     'firefox'	               # Web browser
