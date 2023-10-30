@@ -75,6 +75,7 @@ PKGS=(
     'goldendict-ng-git'	           # Golden dictionary
     'video-downloader'             # Application for downloading video
     'deluge'                       # Full-featured BitTorrent application
+    'deluge-gtk'                   # Deluge GUI
     'okular'                       # PDF viewer
     'libreoffice-fresh'            # Office
     'firefox'	               # Web browser
