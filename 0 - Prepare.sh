@@ -76,9 +76,9 @@ swapon "$(cat "variables/disk")p3"
 mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p4"
 
 # mount target
-mount -t ext4 "$(cat "variables/disk")p4" /mnt
 mkdir -p /mnt/efi
 mkdir -p /mnt/boot
+mount -t ext4 "$(cat "variables/disk")p4" /mnt
 mount -t vfat "$(cat "variables/disk")p1" /mnt/efi
 mount -t vfat "$(cat "variables/disk")p2" /mnt/boot
 
