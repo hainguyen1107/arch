@@ -72,7 +72,7 @@ PKGS=(
 
     'mpv'                          # MPV player
     'smplayer'                     # Frontend GUI for mpv player
-    'goldendict-ng-git'	           # Golden dictionary
+    'goldendict-ng'	           # Golden dictionary
     'video-downloader'             # Application for downloading video
     'deluge'                       # Full-featured BitTorrent application
     'deluge-gtk'                   # Deluge GUI
@@ -117,10 +117,6 @@ cd ~
 cp ~/.bashrc ~/.bashrc.orig
 cp /usr/share/oh-my-bash/bashrc ~/.bashrc
 sed -i 's/OSH_THEME="font"/OSH_THEME="agnoster"/' .bashrc
-cd ~
-git clone https://github.com/powerline/fonts.git fonts
-cd fonts
-sh install.sh
 
 # Force to use ffmpeg as qt6-multimedia backend
 echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.bashrc
