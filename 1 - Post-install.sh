@@ -98,9 +98,6 @@ for PKG in "${PKGS[@]}"; do
     yay -Syu "$PKG" --noconfirm --needed
 done
 
-# Force to use ffmpeg as qt6-multimedia backend
-echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.bashrc
-
 # Enable QEMU connection for virt-manager
 sudo systemctl enable libvirtd.service
 
@@ -124,6 +121,9 @@ cd ~
 git clone https://github.com/powerline/fonts.git fonts
 cd fonts
 sh install.sh
+
+# Force to use ffmpeg as qt6-multimedia backend
+echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.bashrc
 
 # Set up alias for updating (less effort, less typo)
 echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.bashrc
