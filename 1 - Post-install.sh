@@ -90,7 +90,7 @@ PKGS=(
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
     'otf-atkinson-hyperlegible'    # A typeface focusing on leterform distinction for legibility for low vision readers
     'nerd-fonts-inter'             # Inter Font, patched with the Nerd Fonts Patcher
-
+    'powerline-fonts'              # Patched fonts for powerline
 )
 
 for PKG in "${PKGS[@]}"; do
