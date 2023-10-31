@@ -138,11 +138,11 @@ echo "export QT_IM_MODULE=fcitx" >> ~/.bashrc
 echo "export XMODIFIERS=@im=fcitx" >> ~/.bashrc
 echo "SDL_IM_MODULE=fcitx" >> ~/.bashrc
 echo "GLFW_IM_MODULE=ibus" >> ~/.bashrc
-echo "export GTK_IM_MODULE=fcitx" >> /etc/environment
-echo "export QT_IM_MODULE=fcitx" >> /etc/environment
-echo "export XMODIFIERS=@im=fcitx" >> /etc/environment
-echo "SDL_IM_MODULE=fcitx" >> /etc/environment
-echo "GLFW_IM_MODULE=ibus" >> /etc/environment
+echo "export GTK_IM_MODULE=fcitx" | sudo tee -a /etc/environment
+echo "export QT_IM_MODULE=fcitx" | sudo tee -a /etc/environment
+echo "export XMODIFIERS=@im=fcitx" | sudo tee -a /etc/environment
+echo "SDL_IM_MODULE=fcitx" | sudo tee -a /etc/environment
+echo "GLFW_IM_MODULE=ibus" | sudo tee -a /etc/environment
 
 # Enable pipewire, pipewire-pulse and wireplumber globally
 sudo systemctl --global enable pipewire.socket pipewire-pulse.socket
