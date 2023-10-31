@@ -217,11 +217,7 @@ kwriteconfig5 --file powermanagementprofilesrc --group Battery --group HandleBut
 kwriteconfig5 --file powermanagementprofilesrc --group LowBattery --group HandleButtonEvents --key lidAction 32
 kwriteconfig5 --file powermanagementprofilesrc --group LowBattery --group HandleButtonEvents --key powerButtonAction 1
 kwriteconfig5 --file powermanagementprofilesrc --group LowBattery --group HandleButtonEvents --key triggerLidActionWhenExternalMonitorPresent false
-# Change panel height
-qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "panels()[0].height = 50"
-# Set the Meta key as a shortcut to open KRunner
-kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.krunner,/App,,toggleDisplay"
-qdbus org.kde.KWin /KWin reconfigure
+
 # Disable stupid touch screen edges and weird corners and thir animations
 kwriteconfig5 --file kwinrc --group Effect-Cube --key BorderActivate "9"
 kwriteconfig5 --file kwinrc --group Effect-Cube --key BorderActivateCylinder "9"
@@ -268,15 +264,6 @@ kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi
 # Set single click = select
 kwriteconfig5 --file kdeglobals --group "KDE" --key "SingleClick" "false"
 
-# Configure KDE Plasma to Psion theme (steampunk style)
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget \
---quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate \
-'https://docs.google.com/uc?export=download&id=1kAD8JhXnsOLMpQRlFHKBaJeY3mRcf8rR' -O- | sed -rn \
-'s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1kAD8JhXnsOLMpQRlFHKBaJeY3mRcf8rR" -O konsave-psion.knsv \
-&& rm -rf /tmp/cookies.txt
-konsave -f -i konsave-psion.knsv
-konsave -a konsave-psion
-
 # Disable any kind of suspension
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
@@ -293,6 +280,4 @@ sudo chmod +x ${HOME}/Downloads/translator.sh
 
 echo
 echo "Done!"
-echo "Reboot in 5s"
-sleep 5
-reboot
+
