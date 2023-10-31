@@ -191,6 +191,7 @@ PKGS=(
         'git'                           # The fast distributed version control system, git       
      
     # --- Audio
+        'sof-firmware'                  # Sound Open Firmware
         'wireplumber'                   # Session / policy manager implementation for PipeWire
     	'pipewire'				              # Pirewire
         'lib32-pipewire'                # Pipewire for multilib support
