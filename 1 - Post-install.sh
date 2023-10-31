@@ -30,6 +30,7 @@ PKGS=(
     'zip'                          # Zip compression program
     # DEVELOPMENT ---------------------------------------------------------
 
+    'extra-cmake-modules'          # Extra modules and scripts for CMake
     'neovim'                       # Text editor
     'sequoia-sq'                   # To check PGP key
     'docker'                       # Pack, ship and run any application as a lightweight container
