@@ -239,7 +239,7 @@ PKGS=(
         'dolphin'                           # KDE File Manager
         'dolphin-plugins'                   # Extra Dolphin plugins
         'bluedevil'                         # KDE bluetooth stack
-        'spectacle'                         # Screenshoot
+        'flameshot'                         # Screenshoot
         'kcalc'                             # KDE calculator
 
     # --- Thumbnail generation
