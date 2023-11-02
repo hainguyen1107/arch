@@ -102,7 +102,7 @@ echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
 
 arch-chroot /mnt pacman -Syu --needed --noconfirm efibootmgr intel-ucode
-bootctl --esp-path=/efi --boot-path=/boot install
+bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
 
 cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title Arch Linux
