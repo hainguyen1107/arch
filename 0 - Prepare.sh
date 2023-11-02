@@ -45,7 +45,7 @@ sgdisk -a 4096 -o $(cat "variables/disk") # new gpt disk 4096 alignment
 # create partitions
 sgdisk -n 1:0:+512M $(cat "variables/disk") # partition 1 (UEFI SYS), default start block, 512MB
 sgdisk -n 2:0:+550M $(cat "variables/disk") # Partition 2 (XBOOTLDR), A separate /boot partition to keep kernel and initframf separate from the ESP, 550MB
-sgdisk -n 3:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap), 20G
+sgdisk -n 3:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap)
 sgdisk -n 4:0:0     $(cat "variables/disk") # partition 3 (Root), default start, remaining
 
 # set partition types
