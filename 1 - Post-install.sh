@@ -73,7 +73,6 @@ PKGS=(
 
     'mpv'                          # MPV player
     'smplayer'                     # Frontend GUI for mpv player
-    'goldendict-ng'	           # Golden dictionary
     'video-downloader'             # Application for downloading video
     'deluge'                       # Full-featured BitTorrent application
     'deluge-gtk'                   # Deluge GUI
@@ -81,7 +80,6 @@ PKGS=(
     'libreoffice-fresh'            # Office
     'firefox'	               # Web browser
     'ferdium-bin'	               # Messenger, discord... manager
-    #'ibus-bamboo'	               # Vietnamese IME for Ibus
     'nomacs'                       # Image viewer
     'kimageformats'                # Image format plugins for Qt5 
     'konsave'                      # Import, export, extract KDE Plasma configuration profile
@@ -130,13 +128,9 @@ sudo usermod -aG docker $(whoami)
 sudo systemctl enable docker.service
 
 # Set up for Fcitx5
-echo "export GTK_IM_MODULE=fcitx" >> ~/.bashrc
-echo "export QT_IM_MODULE=fcitx" >> ~/.bashrc
 echo "export XMODIFIERS=@im=fcitx" >> ~/.bashrc
 echo "SDL_IM_MODULE=fcitx" >> ~/.bashrc
 echo "GLFW_IM_MODULE=ibus" >> ~/.bashrc
-echo "export GTK_IM_MODULE=fcitx" | sudo tee -a /etc/environment
-echo "export QT_IM_MODULE=fcitx" | sudo tee -a /etc/environment
 echo "export XMODIFIERS=@im=fcitx" | sudo tee -a /etc/environment
 echo "SDL_IM_MODULE=fcitx" | sudo tee -a /etc/environment
 echo "GLFW_IM_MODULE=ibus" | sudo tee -a /etc/environment
