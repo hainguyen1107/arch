@@ -274,4 +274,4 @@ sudo chmod +x ${HOME}/Downloads/translator.sh
 
 echo
 echo "Done!"
-
+rm ${HOME}/1\ -\ Post-install.sh
