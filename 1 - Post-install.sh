@@ -28,6 +28,7 @@ PKGS=(
     'unzip'                        # Zip compression program
     'wget'                         # Remote content retrieval
     'zip'                          # Zip compression program
+    'wl-clipboard'                 # A simple copy/paste tool for Wayland compositors
     # DEVELOPMENT ---------------------------------------------------------
 
     'extra-cmake-modules'          # Extra modules and scripts for CMake
