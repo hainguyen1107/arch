@@ -29,8 +29,12 @@ PKGS=(
     'wget'                         # Remote content retrieval
     'zip'                          # Zip compression program
     'wl-clipboard'                 # A simple copy/paste tool for Wayland compositors
+    
+    
     # DEVELOPMENT ---------------------------------------------------------
 
+    'apparmor'                     # Mandatory Access Control (MAC) using Linux Security Module (LSM)
+    'snapd'                        # Service and tools for management of snap packages
     'extra-cmake-modules'          # Extra modules and scripts for CMake
     'neovim'                       # Text editor
     'sequoia-sq'                   # To check PGP key
@@ -100,6 +104,13 @@ done
 
 # Enable QEMU connection for virt-manager
 sudo systemctl enable libvirtd.service
+
+# Enable Apparmor and Snap.Apparmor
+sudo systemctl enable apparmor.service
+sudo systemctl enable snapd.apparmor.service
+
+# Enable Snapd socket
+sudo systemctl enable snapd.socket
 
 # Add user into kvm and libvirt groups
 sudo usermod -aG kvm,libvirt $(whoami)
