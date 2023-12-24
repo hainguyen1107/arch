@@ -109,7 +109,7 @@ title Arch Linux
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
-options root=$(cat "variables/disk")p4 rw
+options root=$(cat "variables/disk")p4 rw lsm=landlock,lockdown,yama,integrity,apparmor,bpf
 EOF
 
 cat <<EOF > /mnt/efi/loader/loader.conf
