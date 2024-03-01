@@ -304,7 +304,6 @@ arch-chroot /mnt systemctl enable systemd-boot-update.service
 chmod +x 1\ -\ Post-install.sh
 mv 1\ -\ Post-install.sh /mnt/home/$(cat "variables/username")
 
-timedatectl set-ntp true
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
