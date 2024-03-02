@@ -25,6 +25,9 @@ echo $X > variables/disk
 echo "How large your swap partition is (Gigabyte):"
 read X
 echo $X > variables/swap
+echo "How large your windows partition is (Gigabyte):"
+read X
+echo $X > variables/windows
 echo "Please enter your hostname: (example dopamine)"
 read X
 echo $X > variables/hostname
@@ -43,21 +46,21 @@ sgdisk -Z $(cat "variables/disk") # zap all on disk
 sgdisk -a 4096 -o $(cat "variables/disk") # new gpt disk 4096 alignment
 
 # create partitions
-sgdisk -n 1:0:+512M $(cat "variables/disk") # partition 1 (UEFI SYS), default start block, 512MB
-sgdisk -n 2:0:+550M $(cat "variables/disk") # Partition 2 (XBOOTLDR), A separate /boot partition to keep kernel and initframf separate from the ESP, 550MB
-sgdisk -n 3:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap)
-sgdisk -n 4:0:0     $(cat "variables/disk") # partition 3 (Root), default start, remaining
+sgdisk -n 1:0:+550M $(cat "variables/disk") # partition 1 (UEFI SYS), default start block, 550MB
+sgdisk -n 2:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap)
+sgdisk -n 3:0:+$(cat "variables/windows")G  $(cat "variables/disk") # partition 3 (Windows)
+sgdisk -n 4:0:0  $(cat "variables/disk") # partition 4 (Root)
 
 # set partition types
 sgdisk -t 1:ef00 $(cat "variables/disk")
-sgdisk -t 2:ea00 $(cat "variables/disk")
-sgdisk -t 3:8200 $(cat "variables/disk")
-sgdisk -t 4:8304 $(cat "variables/disk")
+sgdisk -t 2:8200 $(cat "variables/disk")
+sgdisk -t 3:0700 $(cat "variables/disk")
+sgdisk -t 4:8300 $(cat "variables/disk")
 
 # label partitions
 sgdisk -c 1:"ESP" $(cat "variables/disk")
-sgdisk -c 2:"XBOOTLDR" $(cat "variables/disk")
-sgdisk -c 3:"SWAP" $(cat "variables/disk")
+sgdisk -c 2:"SWAP" $(cat "variables/disk")
+sgdisk -c 3:"WINDOWS" $(cat "variables/disk")
 sgdisk -c 4:"ROOT" $(cat "variables/disk")
 
 # Wipe all partitions
@@ -70,17 +73,15 @@ wipefs -a "$(cat "variables/disk")p4"
 echo -e "\nCreating Filesystems...\n"
 
 mkfs.vfat -F32 -n "ESP" "$(cat "variables/disk")p1"
-mkfs.vfat -F32 -n "XBOOTLDR" "$(cat "variables/disk")p2"
-mkswap -L "SWAP" "$(cat "variables/disk")p3"
-swapon "$(cat "variables/disk")p3"
+mkswap -L "SWAP" "$(cat "variables/disk")p2"
+swapon "$(cat "variables/disk")p2"
+mkfs.ntfs -L "WINDOWS" "$(cat "variables/disk")p3"
 mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p4"
 
 # mount target
 mount -t ext4 "$(cat "variables/disk")p4" /mnt
-mkdir -p /mnt/efi
 mkdir -p /mnt/boot
-mount -t vfat "$(cat "variables/disk")p1" /mnt/efi
-mount -t vfat "$(cat "variables/disk")p2" /mnt/boot
+mount -t vfat "$(cat "variables/disk")p1" /mnt/boot
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
@@ -102,29 +103,13 @@ echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
 
 arch-chroot /mnt pacman -Syu --needed --noconfirm efibootmgr intel-ucode
-bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
-
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /intel-ucode.img
-initrd /initramfs-linux.img
-options root=$(cat "variables/disk")p4 rw lsm=landlock,lockdown,yama,integrity,apparmor,bpf
-EOF
-
-cat <<EOF > /mnt/efi/loader/loader.conf
-default arch
-timeout 3
-console-mode keep
-editor no
-EOF
 
 # Set timezone
-timedatectl --no-ask-password set-timezone Asia/Ho_Chi_Minh
-# Enable Network Time Sync
-timedatectl --no-ask-password set-ntp true
+timedatectl --no-ask-password set-timezone Asia/Saigon
 # Sync local time with hardware clock
 timedatectl set-local-rtc true
+# Enable Network Time Sync
+timedatectl --no-ask-password set-ntp true
 
 # Set keymaps
 localectl --no-ask-password set-keymap us
@@ -234,7 +219,7 @@ PKGS=(
         'konsole'                           # KDE terminal emulator
         'yakuake'                           # KDE top-down terminal
         'ark'                               # KDE Plasma archiver
-        'latte-dock'                        # A dock based on Plasma Frameworks
+#       'latte-dock'                        # A dock based on Plasma Frameworks
         'conky'                             # Lightweight system monitor
         'dolphin'                           # KDE File Manager
         'dolphin-plugins'                   # Extra Dolphin plugins
@@ -266,6 +251,11 @@ for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
     arch-chroot /mnt pacman -Syu "$PKG" --noconfirm --needed
 done
+
+# Install Refind bootloader
+arch-chroot /mnt pacman -Sy refind
+arch-chroot /mnt refind-install --usedefault --alldrivers
+echo '"Boot with minimal options" "rw root="$(cat "variables/disk")p4""' >  /mnt/boot/refind_linux.conf
 
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
 # the nouveau module making sure the kernel cannot load it during early boot
@@ -309,9 +299,6 @@ arch-chroot /mnt mkinitcpio -P
 
 # Enable SDDM! Ready to reboot into KDE Plasma
 arch-chroot /mnt systemctl enable sddm.service
-
-# Enable systemd-boot-update-service
-arch-chroot /mnt systemctl enable systemd-boot-update.service
 
 chmod +x 1\ -\ Post-install.sh
 mv 1\ -\ Post-install.sh /mnt/home/$(cat "variables/username")
