@@ -120,7 +120,7 @@ arch-chroot /mnt locale-gen
 printf "LANG=en_US.UTF-8\n" > /mnt/etc/locale.conf
 
 #Set hostname
-hostnamectl --no-ask-password set-hostname $(cat "variables/hostname")
+echo $(cat "variables/hostname") > /mnt/etc/hostname
 printf "127.0.0.1\tlocalhost\n" >> /mnt/etc/hosts
 printf "::1\tlocalhost\n" >> /mnt/etc/hosts
 printf "127.0.0.1\t$(cat "variables/hostname").localdomain\t$(cat "variables/hostname")\n" >> /mnt/etc/hosts
@@ -254,8 +254,11 @@ done
 
 # Install Refind bootloader
 arch-chroot /mnt pacman -Sy refind
-arch-chroot /mnt refind-install --usedefault --alldrivers
-echo '"Boot with minimal options" "rw root="$(cat "variables/disk")p4""' >  /mnt/boot/refind_linux.conf
+arch-chroot /mnt refind-install
+truncate -s 0 /mnt/boot/refind_linux.conf
+cat > /mnt/boot/refind_linux.conf << EOF
+"Boot with minimal options" "rw root=$(cat "variables/disk")p4"
+EOF
 
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
 # the nouveau module making sure the kernel cannot load it during early boot
