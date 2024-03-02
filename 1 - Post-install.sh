@@ -268,6 +268,8 @@ kwriteconfig5 --file kwinrc --group NightColor --key NightTemperature "5500"
 kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi_Minh"
 # Set single click = select
 kwriteconfig5 --file kdeglobals --group "KDE" --key "SingleClick" "false"
+# Set Meta key to open/close Krunner
+kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.kglobalaccel,/component/org_kde_krunner_desktop,,invokeShortcut,_launch" && qdbus org.kde.KWin /KWin reconfigure
 
 # Disable any kind of suspension
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
