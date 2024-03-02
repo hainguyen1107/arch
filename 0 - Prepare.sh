@@ -31,6 +31,9 @@ echo $X > variables/windows
 echo "Please enter your hostname: (example dopamine)"
 read X
 echo $X > variables/hostname
+echo "How large your Linux partition is (Gigabyte):"
+read X
+echo $X > variables/linux
 echo "Please enter your username: (example serotonin)"
 read X
 echo $X > variables/username
@@ -49,25 +52,29 @@ sgdisk -a 4096 -o $(cat "variables/disk") # new gpt disk 4096 alignment
 sgdisk -n 1:0:+550M $(cat "variables/disk") # partition 1 (UEFI SYS), default start block, 550MB
 sgdisk -n 2:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap)
 sgdisk -n 3:0:+$(cat "variables/windows")G  $(cat "variables/disk") # partition 3 (Windows)
-sgdisk -n 4:0:0  $(cat "variables/disk") # partition 4 (Root)
+sgdisk -n 4:0:+$(cat "variables/linux")G  $(cat "variables/disk") # partition 4 (Root)
+sgdisk -n 5:0:0  $(cat "variables/disk") # partition 5 (DATA)
 
 # set partition types
 sgdisk -t 1:ef00 $(cat "variables/disk")
 sgdisk -t 2:8200 $(cat "variables/disk")
 sgdisk -t 3:0700 $(cat "variables/disk")
 sgdisk -t 4:8300 $(cat "variables/disk")
+sgdisk -5 4:0700 $(cat "variables/disk")
 
 # label partitions
 sgdisk -c 1:"ESP" $(cat "variables/disk")
 sgdisk -c 2:"SWAP" $(cat "variables/disk")
 sgdisk -c 3:"WINDOWS" $(cat "variables/disk")
 sgdisk -c 4:"ROOT" $(cat "variables/disk")
+sgdisk -c 5:"DATA" $(cat "variables/disk")
 
 # Wipe all partitions
 wipefs -a "$(cat "variables/disk")p1"
 wipefs -a "$(cat "variables/disk")p2"
 wipefs -a "$(cat "variables/disk")p3"
 wipefs -a "$(cat "variables/disk")p4"
+wipefs -a "$(cat "variables/disk")p5"
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
@@ -75,7 +82,6 @@ echo -e "\nCreating Filesystems...\n"
 mkfs.vfat -F32 -n "ESP" "$(cat "variables/disk")p1"
 mkswap -L "SWAP" "$(cat "variables/disk")p2"
 swapon "$(cat "variables/disk")p2"
-mkfs.ntfs -L "WINDOWS" "$(cat "variables/disk")p3"
 mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p4"
 
 # mount target
@@ -219,7 +225,6 @@ PKGS=(
         'konsole'                           # KDE terminal emulator
         'yakuake'                           # KDE top-down terminal
         'ark'                               # KDE Plasma archiver
-#       'latte-dock'                        # A dock based on Plasma Frameworks
         'conky'                             # Lightweight system monitor
         'dolphin'                           # KDE File Manager
         'dolphin-plugins'                   # Extra Dolphin plugins
