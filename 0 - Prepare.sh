@@ -82,12 +82,16 @@ echo -e "\nCreating Filesystems...\n"
 mkfs.vfat -F32 -n "ESP" "$(cat "variables/disk")p1"
 mkswap -L "SWAP" "$(cat "variables/disk")p2"
 swapon "$(cat "variables/disk")p2"
+mkfs.ntfs -L "WINDOWS" -f "$(cat "variables/disk")p3"
 mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p4"
+mkfs.ntfs -L "DATA" -f "$(cat "variables/disk")p5"
 
 # mount target
 mount -t ext4 "$(cat "variables/disk")p4" /mnt
 mkdir -p /mnt/boot
 mount -t vfat "$(cat "variables/disk")p1" /mnt/boot
+mkdir -p /mnt/DATA
+mount -t ntfs "$(cat "variables/disk")p5" /mnt/DATA
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
