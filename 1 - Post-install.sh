@@ -89,7 +89,6 @@ PKGS=(
     'kimageformats'                # Image format plugins for Qt5 
     'konsave'                      # Import, export, extract KDE Plasma configuration profile
     'ttf-ms-fonts'                 # Core TTF Fonts from Microsoft
-    'ttf-dejavu'                   # Font family based on the Bitstream Vera Fonts with a wider range of characters
     'noto-fonts'                   # Google Noto TTF fonts
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
     'otf-atkinson-hyperlegible'    # A typeface focusing on leterform distinction for legibility for low vision readers
