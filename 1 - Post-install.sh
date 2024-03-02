@@ -270,6 +270,12 @@ kwriteconfig5 --file ktimezonedrc --group TimeZones --key LocalZone "Asia/Ho_Chi
 kwriteconfig5 --file kdeglobals --group "KDE" --key "SingleClick" "false"
 # Set Meta key to open/close Krunner
 kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.kglobalaccel,/component/org_kde_krunner_desktop,,invokeShortcut,_launch" && qdbus org.kde.KWin /KWin reconfigure
+# Show Alt+Tab popup as fast as possible
+kwriteconfig5 --file ~/.config/kwinrc --group TabBox --key DelayTime 0
+qdbus org.kde.KWin /KWin reconfigure
+# Hide titlebars when maximized (like Ubuntu)
+kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
+qdbus org.kde.KWin /KWin reconfigure
 
 # Disable any kind of suspension
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
