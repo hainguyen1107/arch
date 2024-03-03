@@ -163,7 +163,7 @@ kwriteconfig5 --file kdeglobals --group General --key toolBarFont 'Atkinson Hype
 # Disable recent file tracking
 kwriteconfig5 --file kdeglobals --group RecentDocuments --key UseRecent false
 # Use Google chrome browser for http and https URLs.
-kwriteconfig5 --file kdeglobals --group 'General' --key 'BrowserApplication' 'google-chrome.desktop'
+kwriteconfig5 --file kdeglobals --group 'General' --key 'BrowserApplication' 'firefox.desktop'
 # Use fastest animation speed.
 kwriteconfig5 --file kwinrc --group Compositing --key 'AnimationSpeed' '0'
 # Turn off alert noise when AC adapter is unplugged.
@@ -272,9 +272,6 @@ kwriteconfig5 --file kdeglobals --group "KDE" --key "SingleClick" "false"
 kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.kglobalaccel,/component/org_kde_krunner_desktop,,invokeShortcut,_launch" && qdbus org.kde.KWin /KWin reconfigure
 # Show Alt+Tab popup as fast as possible
 kwriteconfig5 --file ~/.config/kwinrc --group TabBox --key DelayTime 0
-qdbus org.kde.KWin /KWin reconfigure
-# Hide titlebars when maximized (like Ubuntu)
-kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
 qdbus org.kde.KWin /KWin reconfigure
 
 # Disable any kind of suspension
