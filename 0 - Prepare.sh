@@ -266,7 +266,9 @@ arch-chroot /mnt pacman -Sy refind
 arch-chroot /mnt refind-install
 truncate -s 0 /mnt/boot/refind_linux.conf
 cat > /mnt/boot/refind_linux.conf << EOF
-"Boot with minimal options" "rw root=$(cat "variables/disk")p4"
+"Boot with standard options"      "rw root=$(cat "variables/disk")p4"
+"Boot to single-user mode"        "rw root=$(cat "variables/disk")p4 single"
+"Boot with minimal options"       "rw root=$(cat "variables/disk")p4"
 EOF
 
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
@@ -283,7 +285,6 @@ Operation=Upgrade
 Operation=Remove
 Type=Package
 Target=nvidia
-Target=nvidia-dkms
 Target=linux
 
 [Action]
