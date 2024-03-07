@@ -86,7 +86,8 @@ PKGS=(
     'firefox'	               # Web browser
     'ferdium-bin'	               # Messenger, discord... manager
     'nomacs'                       # Image viewer
-    'kimageformats'                # Image format plugins for Qt5 
+    'kimageformats'                # Image format plugins for Qt5
+    'libheif'                      # An HEIF and AVIF file format decoder and encoder
     'konsave'                      # Import, export, extract KDE Plasma configuration profile
     'ttf-ms-fonts'                 # Core TTF Fonts from Microsoft
     'noto-fonts'                   # Google Noto TTF fonts
