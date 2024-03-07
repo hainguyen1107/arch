@@ -98,8 +98,8 @@ mount -t vfat "$(cat "variables/disk")p1" /mnt/efi
 mkdir -p /mnt/boot
 mount -t vfat "$(cat "variables/disk)p2" /mnt/boot
 mkdir -p /mnt/DATA
-mount -t ntfs "$(cat "variables/disk")p6" /mnt/DATA
 blkid "$(cat "variables/disk")p5" | grep -Po ' UUID="\K[^"]*' > variables/uuid
+blkid "$(cat "variables/disk")p6" | grep -Po ' UUID="\K[^"]*' > variables/uuid_data
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
@@ -339,6 +339,12 @@ arch-chroot /mnt mkinitcpio -P
 
 # Enable SDDM! Ready to reboot into KDE Plasma
 arch-chroot /mnt systemctl enable sddm.service
+
+# Mount /DATA
+cat > /mnt/etc/fstab << EOF
+# $(cat "variables/disk")p6 LABEL=DATA
+UUID=$(cat "variables/uuid_data") /DATA ntfs-3g rw,defaults 0 2
+EOF
 
 chmod +x 1\ -\ Post-install.sh
 mv 1\ -\ Post-install.sh /mnt/home/$(cat "variables/username")
