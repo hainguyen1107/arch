@@ -283,6 +283,32 @@ When = PostTransaction
 Exec = /usr/bin/systemctl restart systemd-boot-update.service
 EOF
 
+# Loader configuration
+cat > /mnt/efi/loader/loader.conf << EOF
+default  arch.conf
+timeout  4
+console-mode auto
+editor   no
+EOF
+
+# Adding loader
+cat > /mnt/boot/loader/entries/arch.conf << EOF
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /intel-ucode.img
+initrd  /initramfs-linux.img
+options root="$(cat "variables/disk")p5" rw
+EOF
+
+# Fallback kernel
+cat > /mnt/boot/loader/entries/arch-fallback.conf << EOF
+title   Arch Linux (fallback initramfs)
+linux   /vmlinuz-linux
+initrd  /intel-ucode.img
+initrd  /initramfs-linux-fallback.img
+options root="$(cat "variables/disk")p5" rw
+EOF
+
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
 # the nouveau module making sure the kernel cannot load it during early boot
 sed -i 's/ kms//' /mnt/etc/mkinitcpio.conf
