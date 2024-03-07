@@ -11,7 +11,7 @@ pacman-key --populate
 pacman -Syyy
 pacman -S pacman-contrib --noconfirm --needed
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-curl -s "https://archlinux.org/mirrorlist/?country=KH&country=CN&country=HK&country=JP&country=TW&country=VN&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -m 3 - > /etc/pacman.d/mirrorlist
+curl -s "https://archlinux.org/mirrorlist/?country=SG&country=VN&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -m 3 - > /etc/pacman.d/mirrorlist
 
 echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm --needed gptfdisk
@@ -99,6 +99,7 @@ mkdir -p /mnt/boot
 mount -t vfat "$(cat "variables/disk)p2" /mnt/boot
 mkdir -p /mnt/DATA
 mount -t ntfs "$(cat "variables/disk")p6" /mnt/DATA
+blkid "$(cat "variables/disk")p5" | grep -Po ' UUID="\K[^"]*' > variables/uuid
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
@@ -297,7 +298,7 @@ title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options root="$(cat "variables/disk")p5" rw
+options root=UUID="$(cat "variables/uuid")" rw
 EOF
 
 # Fallback kernel
@@ -306,7 +307,7 @@ title   Arch Linux (fallback initramfs)
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux-fallback.img
-options root="$(cat "variables/disk")p5" rw
+options root=UUID="$(cat "variables/uuid")" rw
 EOF
 
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
