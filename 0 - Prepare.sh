@@ -50,24 +50,27 @@ sgdisk -a 4096 -o $(cat "variables/disk") # new gpt disk 4096 alignment
 
 # create partitions
 sgdisk -n 1:0:+550M $(cat "variables/disk") # partition 1 (UEFI SYS), default start block, 550MB
-sgdisk -n 2:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap)
-sgdisk -n 3:0:+$(cat "variables/windows")G  $(cat "variables/disk") # partition 3 (Windows)
-sgdisk -n 4:0:+$(cat "variables/linux")G  $(cat "variables/disk") # partition 4 (Root)
-sgdisk -n 5:0:0  $(cat "variables/disk") # partition 5 (DATA)
+sgdisk -n 2:0:+550M $(cat "variables/disk") # partition 2 (XBOOTLDR), default start block, 550MB
+sgdisk -n 3:0:+$(cat "variables/swap")G  $(cat "variables/disk") # partition 2 (Swap)
+sgdisk -n 4:0:+$(cat "variables/windows")G  $(cat "variables/disk") # partition 3 (Windows)
+sgdisk -n 5:0:+$(cat "variables/linux")G  $(cat "variables/disk") # partition 4 (Root)
+sgdisk -n 6:0:0  $(cat "variables/disk") # partition 6 (DATA)
 
 # set partition types
 sgdisk -t 1:ef00 $(cat "variables/disk")
-sgdisk -t 2:8200 $(cat "variables/disk")
-sgdisk -t 3:0700 $(cat "variables/disk")
-sgdisk -t 4:8300 $(cat "variables/disk")
-sgdisk -5 4:0700 $(cat "variables/disk")
+sgdisk -t 2:ea00 $(cat "variables/disk")
+sgdisk -t 3:8200 $(cat "variables/disk")
+sgdisk -t 4:0700 $(cat "variables/disk")
+sgdisk -t 5:8300 $(cat "variables/disk")
+sgdisk -5 6:0700 $(cat "variables/disk")
 
 # label partitions
 sgdisk -c 1:"ESP" $(cat "variables/disk")
-sgdisk -c 2:"SWAP" $(cat "variables/disk")
-sgdisk -c 3:"WINDOWS" $(cat "variables/disk")
-sgdisk -c 4:"ROOT" $(cat "variables/disk")
-sgdisk -c 5:"DATA" $(cat "variables/disk")
+sgdisk -c 2:"XBOOTLDR" $(cat "variables/disk")
+sgdisk -c 3:"SWAP" $(cat "variables/disk")
+sgdisk -c 4:"WINDOWS" $(cat "variables/disk")
+sgdisk -c 5:"ROOT" $(cat "variables/disk")
+sgdisk -c 6:"DATA" $(cat "variables/disk")
 
 # Wipe all partitions
 wipefs -a "$(cat "variables/disk")p1"
@@ -75,23 +78,27 @@ wipefs -a "$(cat "variables/disk")p2"
 wipefs -a "$(cat "variables/disk")p3"
 wipefs -a "$(cat "variables/disk")p4"
 wipefs -a "$(cat "variables/disk")p5"
+wipefs -a "$(cat "variables/disk")p6"
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
 mkfs.vfat -F32 -n "ESP" "$(cat "variables/disk")p1"
-mkswap -L "SWAP" "$(cat "variables/disk")p2"
-swapon "$(cat "variables/disk")p2"
-mkfs.ntfs -L "WINDOWS" -f "$(cat "variables/disk")p3"
-mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p4"
-mkfs.ntfs -L "DATA" -f "$(cat "variables/disk")p5"
+mkfs.vfat -F32 -n "XBOOTLDR" "$(cat "variables/disk")p2"
+mkswap -L "SWAP" "$(cat "variables/disk")p3"
+swapon "$(cat "variables/disk")p3"
+mkfs.ntfs -L "WINDOWS" -f "$(cat "variables/disk")p4"
+mkfs.ext4 -L "ROOT" "$(cat "variables/disk")p5"
+mkfs.ntfs -L "DATA" -f "$(cat "variables/disk")p6"
 
 # mount target
-mount -t ext4 "$(cat "variables/disk")p4" /mnt
+mount -t ext4 "$(cat "variables/disk")p5" /mnt
+mkdir -p /mnt/efi
+mount -t vfat "$(cat "variables/disk")p1" /mnt/efi
 mkdir -p /mnt/boot
-mount -t vfat "$(cat "variables/disk")p1" /mnt/boot
+mount -t vfat "$(cat "variables/disk)p2" /mnt/boot
 mkdir -p /mnt/DATA
-mount -t ntfs "$(cat "variables/disk")p5" /mnt/DATA
+mount -t ntfs "$(cat "variables/disk")p6" /mnt/DATA
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
@@ -107,6 +114,7 @@ pacstrap /mnt base base-devel linux linux-headers linux-firmware man-pages man-d
 
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
+sed -i 's/ntfs/ntfs-3g/' /mnt/etc/fstab
 
 echo "--------------------------------------"
 echo "-- Bootloader Systemd Installation  --"
@@ -115,9 +123,7 @@ echo "--------------------------------------"
 arch-chroot /mnt pacman -Syu --needed --noconfirm efibootmgr intel-ucode
 
 # Set timezone
-timedatectl --no-ask-password set-timezone Asia/Saigon
-# Sync local time with hardware clock
-timedatectl set-local-rtc true
+timedatectl --no-ask-password set-timezone Asia/Ho_Chi_Minh
 # Enable Network Time Sync
 timedatectl --no-ask-password set-ntp true
 
@@ -261,14 +267,20 @@ for PKG in "${PKGS[@]}"; do
     arch-chroot /mnt pacman -Syu "$PKG" --noconfirm --needed
 done
 
-# Install Refind bootloader
-arch-chroot /mnt pacman -Sy refind
-arch-chroot /mnt refind-install
-truncate -s 0 /mnt/boot/refind_linux.conf
-cat > /mnt/boot/refind_linux.conf << EOF
-"Boot with standard options"      "rw root=$(cat "variables/disk")p4"
-"Boot to single-user mode"        "rw root=$(cat "variables/disk")p4 single"
-"Boot with minimal options"       "rw root=$(cat "variables/disk")p4"
+# Install systemd-boot
+arch-chroot /mnt bootctl --esp-path=/efi --boot-path=/boot install
+
+# Set up pacman hook for systemd-boot upgrade
+cat > /etc/pacman.d/hooks/95-systemd-boot.hook << EOF
+[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Gracefully upgrading systemd-boot...
+When = PostTransaction
+Exec = /usr/bin/systemctl restart systemd-boot-update.service
 EOF
 
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
@@ -293,18 +305,6 @@ Depends=mkinitcpio
 When=PostTransaction
 NeedsTargets
 Exec=/bin/sh -c 'while read -r trg; do case \$trg in linux*) exit 0; esac; done; /usr/bin/mkinitcpio -P'
-EOF
-
-cat > /mnt/etc/pacman.d/hooks/refind.hook << EOF
-[Trigger]
-Operation=Upgrade
-Type=Package
-Target=refind
-
-[Action]
-Description = Updating rEFInd on ESP
-When=PostTransaction
-Exec=/usr/bin/refind-install
 EOF
 
 # Regenerate mkinitcpio
