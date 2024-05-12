@@ -301,7 +301,7 @@ $HOME/.venvs/MyEnv/bin/python -m pip install faster-whisper
 cat > $HOME/faster-whisper.py << EOF
 #! $HOME/.venvs/MyEnv/bin/python
 from faster_whisper import WhisperModel
-import sys
+import sys, glob, shutil
 
 model_size = "large-v3"
 # Run on GPU with FP16
@@ -311,6 +311,9 @@ model_size = "large-v3"
 model=WhisperModel(model_size,device="cuda",compute_type="int8_float16")
 # or run on CPU with INT8
 # model = WhisperModel(model_size, device="cpu", compute_type="int8")
+
+x = glob.glob(".m*")
+shutil.copyfile(x[0], 'audio.mp3')
 
 segments, info = model.transcribe("audio.mp3", beam_size=5)
 
