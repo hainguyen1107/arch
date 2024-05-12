@@ -43,13 +43,16 @@ PKGS=(
     'wget'                         # Network utility to retrieve files from the Web
     'dropbox'                      # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
     'python-gpgme'                 # Python bindings for GPGme
-    'whisper-git'                  # General-purpose speech recognition model by OpenAI
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
     'oh-my-bash-git'               # A delightful community-driven framework for managing your bash configuration
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
     'wine-gecko'                   # Wine's built-in replacement for Microsoft's Internet Explorer
     'wine-mono'                    # Wine's built-in replacement for Microsoft's .NET Framework
     
+    # Faster whisper
+    'cuda'                         # NVIDIA's GPU programming toolkit
+    'cudnn'                        # NVIDIA CUDA Deep Neural Network library
+
     
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
@@ -287,7 +290,39 @@ echo "#! /bin/bash" > ${HOME}/Downloads/translator.sh
 echo "whisper *.m* --model tiny.en --output_format txt --fp16 False --language en" >> ${HOME}/Downloads/translator.sh
 sudo chmod +x ${HOME}/Downloads/translator.sh
 
+# Set up Virtual Environment for external python packages (for using PIP):
+mkdir -p $HOME/.venvs  # create a folder for all virtual environments 
+python3 -m venv $HOME/.venvs/MyEnv  # create MyEnv
 
+# Install Faster whisper
+$HOME/.venvs/MyEnv/bin/python -m pip install faster-whisper
+
+# Prepare python sript for translating:
+cat > $HOME/faster-whisper.py << EOF
+#! $HOME/.venvs/MyEnv/bin/python
+from faster_whisper import WhisperModel
+import sys
+
+model_size = "large-v3"
+# Run on GPU with FP16
+# model = WhisperModel(model_size, device="cuda", compute_type="float16")
+
+# or run on GPU with INT8
+model=WhisperModel(model_size,device="cuda",compute_type="int8_float16")
+# or run on CPU with INT8
+# model = WhisperModel(model_size, device="cpu", compute_type="int8")
+
+segments, info = model.transcribe("audio.mp3", beam_size=5)
+
+print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
+
+origial_stdout = sys.stdout
+with open('output.txt', 'w') as f:
+    for segment in segments:
+        print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
+    sys.stdout = original_stdout
+print("Done")
+EOF
 
 echo
 echo "Done!"
