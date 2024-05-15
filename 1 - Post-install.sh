@@ -327,6 +327,8 @@ with open('output.txt', 'w') as f:
 print("Done")
 EOF
 
+chmod +x $HOME/faster-whisper.py
+
 echo
 echo "Done!"
 rm ${HOME}/1\ -\ Post-install.sh
