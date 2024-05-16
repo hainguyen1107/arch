@@ -301,7 +301,7 @@ $HOME/.venvs/MyEnv/bin/python -m pip install faster-whisper
 cat > $HOME/faster-whisper.py << EOF
 #! $HOME/.venvs/MyEnv/bin/python
 from faster_whisper import WhisperModel
-import sys, glob, shutil
+import sys, glob, shutil, os
 
 model_size = "large-v3"
 # Run on GPU with FP16
@@ -324,6 +324,7 @@ with open('output.txt', 'w') as f:
     for segment in segments:
         print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
     sys.stdout = original_stdout
+os.remove("audio.mp3")
 print("Done")
 EOF
 
