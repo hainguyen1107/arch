@@ -48,6 +48,7 @@ PKGS=(
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
     'wine-gecko'                   # Wine's built-in replacement for Microsoft's Internet Explorer
     'wine-mono'                    # Wine's built-in replacement for Microsoft's .NET Framework
+    'anki-bin'                     # Helps you remember facts (like words/phrases in a foreign language) efficiently
     
     # Faster whisper
     'cuda'                         # NVIDIA's GPU programming toolkit
