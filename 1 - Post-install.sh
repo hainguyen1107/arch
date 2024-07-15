@@ -75,6 +75,17 @@ PKGS=(
     'fcitx5-qt'                    # Fcitx5 Qt Library
     'fcitx5-configtool'            # Configuration Tool for Fcitx5
 
+    # Chinese input -------------------------------------------------
+    'fcitx5-chinese-addons'        # Addons related to Chinese
+    'adobe-source-han-sans-cn-fonts'
+    'adobe-source-han-serif-cn-fonts'
+    'noto-fonts-cjk wqy-microhei'
+    'wqy-microhei-lite' 
+    'wqy-bitmapfont'
+    'wqy-zenhei'
+    'ttf-arphic-ukai'
+    'ttf-arphic-uming'
+
     # OTHERS --------------------------------------------------------
     'protonvpn-cli-community'      # A Community Linux CLI for ProtonVPN
 
@@ -150,6 +161,8 @@ echo "GLFW_IM_MODULE=ibus" >> ~/.bashrc
 echo "export XMODIFIERS=@im=fcitx" | sudo tee -a /etc/environment
 echo "SDL_IM_MODULE=fcitx" | sudo tee -a /etc/environment
 echo "GLFW_IM_MODULE=ibus" | sudo tee -a /etc/environment
+echo "GTK_IM_MODULE=fcitx" | sudo tee -a /etc/environment
+echo "QT_IM_MODULE=fcitx"  | sudo tee -a /etc/environment
 
 # Enable pipewire, pipewire-pulse and wireplumber globally
 sudo systemctl --global enable pipewire.socket pipewire-pulse.socket
