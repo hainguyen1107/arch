@@ -49,6 +49,7 @@ PKGS=(
     'wine-gecko'                   # Wine's built-in replacement for Microsoft's Internet Explorer
     'wine-mono'                    # Wine's built-in replacement for Microsoft's .NET Framework
     'anki-bin'                     # Helps you remember facts (like words/phrases in a foreign language) efficiently
+    'ttf-kanjistrokeorders'        # Kanji stroke order font
     
     # Faster whisper
     'cuda'                         # NVIDIA's GPU programming toolkit
