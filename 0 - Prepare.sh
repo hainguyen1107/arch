@@ -62,7 +62,7 @@ sgdisk -t 2:ea00 $(cat "variables/disk")
 sgdisk -t 3:8200 $(cat "variables/disk")
 sgdisk -t 4:0700 $(cat "variables/disk")
 sgdisk -t 5:8300 $(cat "variables/disk")
-sgdisk -5 6:0700 $(cat "variables/disk")
+sgdisk -t 6:0700 $(cat "variables/disk")
 
 # label partitions
 sgdisk -c 1:"ESP" $(cat "variables/disk")
