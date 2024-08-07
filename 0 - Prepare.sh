@@ -206,6 +206,17 @@ PKGS=(
         'xdg-desktop-portal-gtk'        # A backend implementation for xdg-desktop-portal using GTK
         'gst-plugin-pipewire'           # Multimedia graph framework - pipewire plugin
     	
+    # --- Hyprland setup
+        'hyprland'                        
+        'polkit-kde-agent'              # Daemon providing a polkit authentication UI for KDE
+        'brightnessctl'                 # Lightweight brightness control tool
+        'xdg-desktop-portal-hyprland'   # xdg-desktop-portal backend for hyprland
+        'xdg-desktop-portal-gtk'        # A backend implementation for xdg-desktop-portal using GTK
+        'greetd'                        # Generic greeter daemon
+        'greetd-tuigreet'               # A console UI greeter for greetd
+        
+    
+    
     # --- Setup Desktop GNOME
     #    'gnome'                 		         # Gnome Desktop
     #    'gnome-tweaks'          		         # Graphical tools for gnome
@@ -338,7 +349,10 @@ EOF
 arch-chroot /mnt mkinitcpio -P
 
 # Enable SDDM! Ready to reboot into KDE Plasma
-arch-chroot /mnt systemctl enable sddm.service
+# arch-chroot /mnt systemctl enable sddm.service
+
+# Enable Greetd-Tuigreet
+sudo systemctl enable greetd.service
 
 # Mount /DATA
 cat > /mnt/etc/fstab << EOF
