@@ -233,9 +233,7 @@ PKGS=(
         'kdesdk-thumbnailers'           # Plugins for the thumbnailing system
         'ffmpegthumbs'                  # FFmpeg-based thumbnail creator for video files
         'taglib'                        # A Library for reading and editing the meta-data of several popular audio formats
-        'udiskie'                       # Removable disk automounter using udisks
-        'network-manager-applet'        # Applet for managing network connections
-    
+        'udiskie'                       # Removable disk automounter using udisks  
     
     # --- Setup Desktop GNOME
     #    'gnome'                 		         # Gnome Desktop
@@ -261,22 +259,22 @@ PKGS=(
          'parted'                           # Disk utility
 
     # --- Setup Desktop KDE Plasma
-        'plasma-meta'                       # KDE Plasma
-        'plasma-wayland-session'            # Enable Wayland for KDE Plasma
-        'plymouth-kcm'                      # KCM to manage the Plymouth (Boot) theme
-        'konsole'                           # KDE terminal emulator
-        'yakuake'                           # KDE top-down terminal
-        'ark'                               # KDE Plasma archiver
-        'conky'                             # Lightweight system monitor
-        'dolphin'                           # KDE File Manager
-        'dolphin-plugins'                   # Extra Dolphin plugins
-        'bluedevil'                         # KDE bluetooth stack
-        'flameshot'                         # Screenshoot
-        'kcalc'                             # KDE calculator
+    #    'plasma-meta'                       # KDE Plasma
+    #    'plasma-wayland-session'            # Enable Wayland for KDE Plasma
+    #    'plymouth-kcm'                      # KCM to manage the Plymouth (Boot) theme
+    #    'konsole'                           # KDE terminal emulator
+    #    'yakuake'                           # KDE top-down terminal
+    #    'ark'                               # KDE Plasma archiver
+    #    'conky'                             # Lightweight system monitor
+    #    'dolphin'                           # KDE File Manager
+    #    'dolphin-plugins'                   # Extra Dolphin plugins
+    #    'bluedevil'                         # KDE bluetooth stack
+    #    'flameshot'                         # Screenshoot
+    #    'kcalc'                             # KDE calculator
 
     # --- Thumbnail generation
-        'kdegraphics-thumbnailers'          # Thumbnailers for various graphics file formats
-        'ffmpegthumbs'                      # FFmpeg-based thumbnail creator for video files
+    #    'kdegraphics-thumbnailers'          # Thumbnailers for various graphics file formats
+    #    'ffmpegthumbs'                      # FFmpeg-based thumbnail creator for video files
         
     # --- Networking Setup
         'dialog'                    		    # Enables shell scripts to trigger dialog boxex
