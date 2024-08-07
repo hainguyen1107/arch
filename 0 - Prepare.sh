@@ -214,7 +214,27 @@ PKGS=(
         'xdg-desktop-portal-gtk'        # A backend implementation for xdg-desktop-portal using GTK
         'greetd'                        # Generic greeter daemon
         'greetd-tuigreet'               # A console UI greeter for greetd
-        
+        'qt5-wayland'                   # Provides APIs for Wayland
+        'qt6-wayland'                   # Provides APIs for Wayland
+        'mako'                          # Lightweight notification daemon for Wayland
+        'rofi-wayland'                  # A window switcher, run dialog and dmenu replacement - fork with wayland support
+        'waybar'                        # Highly customizable Wayland bar for Sway and Wlroots based compositors
+        'hyprpaper'                     # a blazing fast wayland wallpaper utility with IPC controls
+        'kitty'                         # A modern, hackable, featureful, OpenGL-based terminal emulator
+        'hypridle'                      # hyprland’s idle daemon
+        'hyprlock'                      # hyprland’s GPU-accelerated screen locking utility
+        'hyprcursor'                    # The hyprland cursor format, library and utilities
+        'dolphin'                       # KDE File Manager
+        'dolphin-plugins'               # Extra Dolphin plugins
+        'kompare'                       # Graphical file differences tool
+        'kdegraphics-thumbnailers'      # Thumbnailers for various graphics file formats
+        'kimageformats'                 # Image format plugins for Qt 6
+        'qt6-imageformats'              # Plugins for additional image formats: TIFF, MNG, TGA, WBMP
+        'kdesdk-thumbnailers'           # Plugins for the thumbnailing system
+        'ffmpegthumbs'                  # FFmpeg-based thumbnail creator for video files
+        'taglib'                        # A Library for reading and editing the meta-data of several popular audio formats
+        'udiskie'                       # Removable disk automounter using udisks
+        'network-manager-applet'        # Applet for managing network connections
     
     
     # --- Setup Desktop GNOME
