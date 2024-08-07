@@ -190,7 +190,13 @@ PKGS=(
         'nvidia-settings'               # Tool for configuring the NVIDIA graphics driver
         
     # --- Git
-        'git'                           # The fast distributed version control system, git       
+        'git'                           # The fast distributed version control system, git 
+
+    # --- ZSH
+        'zsh'                           # A very advanced and programmable command interpreter (shell) for UNIX
+        'zsh-completions'               # Additional completion definitions for Zsh
+        'zsh-autosuggestions'           # Fish-like autosuggestions for zsh
+        'zsh-syntax-highlighting'       # Fish shell like syntax highlighting for Zsh
      
     # --- Audio
         'sof-firmware'                  # Sound Open Firmware
@@ -388,6 +394,7 @@ EOF
 
 # Enable Greetd-Tuigreet
 sudo systemctl enable greetd.service
+
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
