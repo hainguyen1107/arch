@@ -86,7 +86,12 @@ PKGS=(
     'ttf-arphic-ukai'
     'ttf-arphic-uming'
 
-    # OTHERS --------------------------------------------------------
+    # Extra fonts
+    'ttf-meslo-nerd-font-powerlevel10k'
+    'ttf-sourcecodepro-nerd'
+    'ttf-jetbrains-mono-nerd'
+
+    # VPN
     'protonvpn-cli-community'      # A Community Linux CLI for ProtonVPN
 
     # OTHERS --------------------------------------------------------
@@ -116,6 +121,16 @@ for PKG in "${PKGS[@]}"; do
     yay -Syu "$PKG" --noconfirm --needed
 done
 
+# Change default shell to zsh
+sudo chsh -s /usr/bin/zsh
+
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install powerlevel10k theme for zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+sed -i 's/ZSH_THEME="font"/ZSH_THEME="powerlevel10k/powerlevel10k"/' .zshrc
+
 # Enable QEMU connection for virt-manager
 sudo systemctl enable libvirtd.service
 
@@ -138,25 +153,25 @@ sudo virsh net-autostart default
 sudo systemctl enable fstrim.timer
 
 # Oh-my-bash theme configuration
-cd ~
-cp ~/.bashrc ~/.bashrc.orig
-cp /usr/share/oh-my-bash/bashrc ~/.bashrc
-sed -i 's/OSH_THEME="font"/OSH_THEME="agnoster"/' .bashrc
+# cd ~
+# cp ~/.bashrc ~/.bashrc.orig
+# cp /usr/share/oh-my-bash/bashrc ~/.bashrc
+# sed -i 's/OSH_THEME="font"/OSH_THEME="agnoster"/' .bashrc
 
 # Force to use ffmpeg as qt6-multimedia backend
-echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.bashrc
+echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.zshrc
 
 # Set up alias for updating (less effort, less typo)
-echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.bashrc
+echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.zshrc
 
 # Enable docker service and add user to docker group
 sudo usermod -aG docker $(whoami)
 sudo systemctl enable docker.service
 
 # Set up for Fcitx5
-echo "export XMODIFIERS=@im=fcitx" >> ~/.bashrc
-echo "export SDL_IM_MODULE=fcitx" >> ~/.bashrc
-echo "export GLFW_IM_MODULE=ibus" >> ~/.bashrc
+echo "export XMODIFIERS=@im=fcitx" >> ~/.zshrc
+echo "export SDL_IM_MODULE=fcitx" >> ~/.zshrc
+echo "export GLFW_IM_MODULE=ibus" >> ~/.zshrc
 
 # Enable pipewire, pipewire-pulse and wireplumber globally
 sudo systemctl --global enable pipewire.socket pipewire-pulse.socket
