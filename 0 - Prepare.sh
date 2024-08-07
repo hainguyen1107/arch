@@ -371,9 +371,6 @@ arch-chroot /mnt mkinitcpio -P
 # Enable SDDM! Ready to reboot into KDE Plasma
 # arch-chroot /mnt systemctl enable sddm.service
 
-# Enable Greetd-Tuigreet
-sudo systemctl enable greetd.service
-
 # Mount /DATA
 cat > /mnt/etc/fstab << EOF
 # $(cat "variables/disk")p6 LABEL=DATA
@@ -383,6 +380,16 @@ EOF
 chmod +x 1\ -\ Post-install.sh
 mv 1\ -\ Post-install.sh /mnt/home/$(cat "variables/username")
 
+# Set up Greetd/Tuigreet
+cat > /mnt/etc/greetd/config.toml << EOF
+[default_session]
+command = "tuigreet --time --remember --remember-user-session --user-menu --asterisks --theme\ 
+border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red\
+--cmd hyprland --power-shutdown 'shutdown -h now' --power-reboot 'shutdown -r now'"
+EOF
+
+# Enable Greetd-Tuigreet
+sudo systemctl enable greetd.service
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
