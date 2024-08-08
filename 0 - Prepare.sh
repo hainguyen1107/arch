@@ -123,11 +123,6 @@ echo "--------------------------------------"
 
 arch-chroot /mnt pacman -Syu --needed --noconfirm efibootmgr intel-ucode
 
-# Set timezone
-timedatectl --no-ask-password set-timezone Asia/Ho_Chi_Minh
-# Enable Network Time Sync
-timedatectl --no-ask-password set-ntp true
-
 # Set keymaps
 localectl --no-ask-password set-keymap us
 
@@ -396,6 +391,10 @@ EOF
 # Enable Greetd-Tuigreet
 sudo systemctl enable greetd.service
 
+# Set timezone
+timedatectl set-timezone Asia/Ho_Chi_Minh
+# Enable Network Time Sync
+timedatectl set-ntp true
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
