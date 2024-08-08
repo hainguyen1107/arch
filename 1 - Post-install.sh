@@ -137,11 +137,9 @@ sed -i 's/ZSH_THEME="font"/ZSH_THEME="powerlevel10k/powerlevel10k"/' .zshrc
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
 sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-autocomplete)/g' $HOME/.zshrc
-sed -i '/ZSH_THEME/d' $HOME/.zshrc
-echo "ZSH_THEME=\"spaceship\"" >> $HOME/.zshrc
+sed -i 's/ZSH_THEME=".*"/ZSH_THEME="power10k\/powerlevel10k"/g' ~/.zshrc; 
 
 # Enable QEMU connection for virt-manager
 sudo systemctl enable libvirtd.service
@@ -163,12 +161,6 @@ sudo virsh net-autostart default
 
 # Enable trim for improving SSD performance
 sudo systemctl enable fstrim.timer
-
-# Oh-my-bash theme configuration
-# cd ~
-# cp ~/.bashrc ~/.bashrc.orig
-# cp /usr/share/oh-my-bash/bashrc ~/.bashrc
-# sed -i 's/OSH_THEME="font"/OSH_THEME="agnoster"/' .bashrc
 
 # Force to use ffmpeg as qt6-multimedia backend
 echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.zshrc
@@ -233,49 +225,6 @@ python3 -m venv $HOME/.venvs/MyEnv  # create MyEnv
 # os.remove("audio.mp3")
 # print("Done")
 # EOF
-
-# Spaceship zsh configuration
-cat > $HOME/.config/spaceship.zsh << EOF
-# Display time
-SPACESHIP_TIME_SHOW=true
-
-# Display username always
-SPACESHIP_USER_SHOW=always
-
-# Do not truncate path in repos
-SPACESHIP_DIR_TRUNC_REPO=false
-
-# Make packages colorful
-SPACESHIP_PACKAGE_PREFIX="via·"
-SPACESHIP_PACKAGE_SUFFIX=" "
-SPACESHIP_PACKAGE_COLOR="green"
-
-SPACESHIP_PROMPT_SEPARATE_LINE=false
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_SYMBOL="λ"
-SPACESHIP_CHAR_SUFFIX=" "
-SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  package       # Package version
-  node          # Node.js section
-  bun           # Bun section
-  elixir        # Elixir section
-  erlang        # Erlang section
-  rust          # Rust section
-  docker        # Docker section
-  docker_compose # Docker Compose section
-  terraform     # Terraform section
-  exec_time     # Execution time
-  line_sep      # Line break
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-EOF
-echo "source $HOME/.config/spaceship.zsh" >> ~/.zshrc
 
 # chmod +x $HOME/faster-whisper.py
 
