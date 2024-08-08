@@ -139,7 +139,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/p
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
 
 sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-autocomplete)/g' $HOME/.zshrc
-sed -i 's/ZSH_THEME=".*"/ZSH_THEME="power10k\/powerlevel10k"/g' ~/.zshrc; 
+sed -i 's/ZSH_THEME=".*"/ZSH_THEME="power10k\/powerlevel10k"/g' $HOME/.zshrc; 
 
 # Enable QEMU connection for virt-manager
 sudo systemctl enable libvirtd.service
