@@ -234,6 +234,49 @@ python3 -m venv $HOME/.venvs/MyEnv  # create MyEnv
 # print("Done")
 # EOF
 
+# Spaceship zsh configuration
+cat > $HOME/.config/spaceship.zsh << EOF
+# Display time
+SPACESHIP_TIME_SHOW=true
+
+# Display username always
+SPACESHIP_USER_SHOW=always
+
+# Do not truncate path in repos
+SPACESHIP_DIR_TRUNC_REPO=false
+
+# Make packages colorful
+SPACESHIP_PACKAGE_PREFIX="via·"
+SPACESHIP_PACKAGE_SUFFIX=" "
+SPACESHIP_PACKAGE_COLOR="green"
+
+SPACESHIP_PROMPT_SEPARATE_LINE=false
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SYMBOL="λ"
+SPACESHIP_CHAR_SUFFIX=" "
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  package       # Package version
+  node          # Node.js section
+  bun           # Bun section
+  elixir        # Elixir section
+  erlang        # Erlang section
+  rust          # Rust section
+  docker        # Docker section
+  docker_compose # Docker Compose section
+  terraform     # Terraform section
+  exec_time     # Execution time
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+EOF
+echo "source $HOME/.config/spaceship.zsh" >> ~/.zshrc
+
 # chmod +x $HOME/faster-whisper.py
 
 # Change default shell to zsh
