@@ -236,7 +236,7 @@ PKGS=(
         'taglib'                        # A Library for reading and editing the meta-data of several popular audio formats
         'udiskie'                       # Removable disk automounter using udisks  
         'archlinux-xdg-menu'            # automatic generate WM menu from xdg files
-        'grim'                          # Screenshot utility for Wayland
+        'wl-clipboard'                  # Command-line copy/paste utilities for Wayland
     
     # --- Setup Desktop GNOME
     #    'gnome'                 		         # Gnome Desktop
