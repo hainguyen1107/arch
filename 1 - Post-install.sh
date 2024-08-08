@@ -188,6 +188,10 @@ sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.ta
 sed -i '/Hidden/d' ~/.local/share/dolphin/view_properties/global/.directory
 echo "HiddenFilesShown=true" >> ~/.local/share/dolphin/view_properties/global/.directory
 
+# Fix Dolphin bug of not showing default apps
+sudo echo "XDG_MENU_PREFIX=arch-" >> /etc/environment
+sudo kbuildsycoca6
+
 # Set up Virtual Environment for external python packages (for using PIP):
 mkdir -p $HOME/.venvs  # create a folder for all virtual environments 
 python3 -m venv $HOME/.venvs/MyEnv  # create MyEnv
