@@ -96,7 +96,7 @@ mount -t ext4 "$(cat "variables/disk")p5" /mnt
 mkdir -p /mnt/efi
 mount -t vfat "$(cat "variables/disk")p1" /mnt/efi
 mkdir -p /mnt/boot
-mount -t vfat "$(cat "variables/disk)p2" /mnt/boot
+mount -t vfat "$(cat "variables/disk")p2" /mnt/boot
 mkdir -p /mnt/DATA
 blkid "$(cat "variables/disk")p5" | grep -Po ' UUID="\K[^"]*' > variables/uuid
 blkid "$(cat "variables/disk")p6" | grep -Po ' UUID="\K[^"]*' > variables/uuid_data
