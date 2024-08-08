@@ -236,6 +236,7 @@ PKGS=(
         'taglib'                        # A Library for reading and editing the meta-data of several popular audio formats
         'udiskie'                       # Removable disk automounter using udisks  
         'archlinux-xdg-menu'            # automatic generate WM menu from xdg files
+        'grim'                          # Screenshot utility for Wayland
     
     # --- Setup Desktop GNOME
     #    'gnome'                 		         # Gnome Desktop
@@ -380,16 +381,16 @@ EOF
 chmod +x 1\ -\ Post-install.sh
 mv 1\ -\ Post-install.sh /mnt/home/$(cat "variables/username")
 
+# Enable Greetd-Tuigreet
+sudo systemctl enable greetd.service
+
 # Set up Greetd/Tuigreet
 cat > /mnt/etc/greetd/config.toml << EOF
 [default_session]
 command = "tuigreet --time --remember --remember-user-session --user-menu --asterisks --theme\ 
-border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red\
---cmd hyprland --power-shutdown 'shutdown -h now' --power-reboot 'shutdown -r now'"
+'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'\
+--cmd Hyprland"
 EOF
-
-# Enable Greetd-Tuigreet
-sudo systemctl enable greetd.service
 
 # Set timezone
 timedatectl set-timezone Asia/Ho_Chi_Minh
