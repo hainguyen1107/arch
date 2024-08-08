@@ -240,6 +240,7 @@ PKGS=(
         'ffmpegthumbs'                  # FFmpeg-based thumbnail creator for video files
         'taglib'                        # A Library for reading and editing the meta-data of several popular audio formats
         'udiskie'                       # Removable disk automounter using udisks  
+        'archlinux-xdg-menu'            # automatic generate WM menu from xdg files
     
     # --- Setup Desktop GNOME
     #    'gnome'                 		         # Gnome Desktop
