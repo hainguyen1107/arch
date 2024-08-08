@@ -11,6 +11,11 @@ cd yay
 makepkg -si --noconfirm --needed
 cd ~
 
+# Set timezone
+timedatectl set-timezone Asia/Ho_Chi_Minh
+# Enable Network Time Sync
+timedatectl set-ntp true
+
 # Configure audio
 cp -r /usr/share/pipewire /home/$(whoami)/.config/
 sed -i '/resample.quality/s/#//; /resample.quality/s/4/15/' /home/$(whoami)/.config/pipewire/{client.conf,pipewire-pulse.conf}
