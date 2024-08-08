@@ -103,7 +103,6 @@ PKGS=(
 
     'mpv'                          # MPV player
     'smplayer'                     # Frontend GUI for mpv player
-    'video-downloader'             # Application for downloading video
     'deluge'                       # Full-featured BitTorrent application
     'deluge-gtk'                   # Deluge GUI
     'okular'                       # PDF viewer
@@ -118,7 +117,7 @@ PKGS=(
     'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
     'otf-atkinson-hyperlegible'    # A typeface focusing on leterform distinction for legibility for low vision readers
     'nerd-fonts-inter'             # Inter Font, patched with the Nerd Fonts Patcher
-    'powerline-fonts'              # Patched fonts for powerline
+    'grimshot'                     # A helper for screenshots within sway
 )
 
 for PKG in "${PKGS[@]}"; do
