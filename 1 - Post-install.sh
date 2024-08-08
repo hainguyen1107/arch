@@ -46,7 +46,6 @@ PKGS=(
     'docker'                       # Pack, ship and run any application as a lightweight container
     'python-pip'                   # The PyPA recommended tool for installing Python packages
     'wget'                         # Network utility to retrieve files from the Web
-    'dropbox'                      # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
     'python-gpgme'                 # Python bindings for GPGme
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
@@ -54,6 +53,10 @@ PKGS=(
     'wine-mono'                    # Wine's built-in replacement for Microsoft's .NET Framework
     'anki-bin'                     # Helps you remember facts (like words/phrases in a foreign language) efficiently
     'ttf-kanjistrokeorders'        # Kanji stroke order font
+
+    # Cloud storage
+    'megasync-bin'                 # Easy automated syncing between your computers and your MEGA cloud drive
+    'maestral'                     # A light-weight and open-source Dropbox client
     
     # Faster whisper
     'cuda'                         # NVIDIA's GPU programming toolkit
