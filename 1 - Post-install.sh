@@ -237,6 +237,9 @@ python3 -m venv $HOME/.venvs/MyEnv  # create MyEnv
 
 # chmod +x $HOME/faster-whisper.py
 
+# Remove archived journal files until the disk space they use falls below 100M
+sudo journalctl --vacuum-size=100M
+
 # Change default shell to zsh
 sudo chsh -s /usr/bin/zsh
 source $HOME/.zshrc
