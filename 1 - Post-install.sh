@@ -237,6 +237,10 @@ python3 -m venv $HOME/.venvs/MyEnv  # create MyEnv
 
 # chmod +x $HOME/faster-whisper.py
 
+# Add SSH private key to the ssh-agent
+mkdir -p $HOME/.ssh
+ssh-add $HOME/.ssh/id_ed25519
+
 # Remove archived journal files until the disk space they use falls below 100M
 sudo journalctl --vacuum-size=100M
 
