@@ -339,7 +339,7 @@ title   Arch Linux (fallback initramfs)
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux-fallback.img
-options root=UUID="$(cat "variables/uuid")" rw
+options root=UUID="$(cat "variables/uuid")" rw quiet splash
 EOF
 
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf to prevent the initramfs from containing 
