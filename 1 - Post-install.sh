@@ -241,6 +241,11 @@ python3 -m venv $HOME/.venvs/MyEnv  # create MyEnv
 mkdir -p $HOME/.ssh
 ssh-add $HOME/.ssh/id_ed25519
 
+# Git configuration
+git config --global user.name "hainguyen1107"
+git config --global user.email "tamtunhubui@gmail.com"
+
+
 # Remove archived journal files until the disk space they use falls below 100M
 sudo journalctl --vacuum-size=100M
 
