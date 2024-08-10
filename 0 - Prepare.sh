@@ -368,6 +368,7 @@ EOF
 
 # Add Nvidia parameters for kernel (for hyprland)
 sed -i 's/MODULES=(/MODULES=(\ nvidia\ nvidia-drm\ vidia_modeset\ nvidia_uvm\ /g' /mnt/etc/mkinitcpio.conf 
+echo "options nvidia_drm modeset=1 fbdev=1" >> /mnt/etc/modprobe.d/nvidia.conf 
 
 # Regenerate mkinitcpio
 arch-chroot /mnt mkinitcpio -P
