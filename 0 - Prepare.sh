@@ -366,6 +366,9 @@ NeedsTargets
 Exec=/bin/sh -c 'while read -r trg; do case \$trg in linux*) exit 0; esac; done; /usr/bin/mkinitcpio -P'
 EOF
 
+# Add Nvidia parameters for kernel (for hyprland)
+sed -i 's/MODULES=(/MODULES=(\ nvidia\ nvidia-drm\ vidia_modeset\ nvidia_uvm\ /g' /mnt/etc/mkinitcpio.conf 
+
 # Regenerate mkinitcpio
 arch-chroot /mnt mkinitcpio -P
 
