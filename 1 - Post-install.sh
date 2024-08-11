@@ -27,8 +27,13 @@ PKGS=(
 
     'fastfetch'                    # Like Neofetch, but much faster because written in C
     'ntp'                          # Network Time Protocol to set time via network.
-    'p7zip'                        # 7z compression program
     'terminus-font'                # Font package with some bigger fonts for login terminal
+    'neovim'                       # Text editor
+
+    # Compression and decompression
+
+    'p7zip'                        # 7z compression program
+    'ark'                          # Dolphin default app for compressing and decompressing
     'unrar'                        # RAR compression program
     'unzip'                        # Zip compression program
     'wget'                         # Remote content retrieval
@@ -41,18 +46,21 @@ PKGS=(
     'apparmor'                     # Mandatory Access Control (MAC) using Linux Security Module (LSM)
     'snapd'                        # Service and tools for management of snap packages
     'extra-cmake-modules'          # Extra modules and scripts for CMake
-    'neovim'                       # Text editor
     'sequoia-sq'                   # To check PGP key
     'docker'                       # Pack, ship and run any application as a lightweight container
     'python-pip'                   # The PyPA recommended tool for installing Python packages
     'wget'                         # Network utility to retrieve files from the Web
     'python-gpgme'                 # Python bindings for GPGme
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
+    
+    # Wine - software to run some windows apps on Linux
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
     'wine-gecko'                   # Wine's built-in replacement for Microsoft's Internet Explorer
     'wine-mono'                    # Wine's built-in replacement for Microsoft's .NET Framework
+
+    # Study
     'anki-bin'                     # Helps you remember facts (like words/phrases in a foreign language) efficiently
-    'ttf-kanjistrokeorders'        # Kanji stroke order font
+    'logseq-desktop-bin'           # Privacy-first, open-source platform for knowledge sharing and management
 
     # Cloud storage
     'megasync-bin'                 # Easy automated syncing between your computers and your MEGA cloud drive
@@ -93,15 +101,25 @@ PKGS=(
     'wqy-zenhei'
     'ttf-arphic-ukai'
     'ttf-arphic-uming'
+    'ttf-kanjistrokeorders'        # Kanji stroke order font
 
     # Extra fonts
     'ttf-meslo-nerd-font-powerlevel10k'
     'ttf-sourcecodepro-nerd'
     'ttf-jetbrains-mono-nerd'
+    'ttf-ms-fonts'                 # Core TTF Fonts from Microsoft
+    'noto-fonts'                   # Google Noto TTF fonts
+    'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
+    'otf-atkinson-hyperlegible'    # A typeface focusing on leterform distinction for legibility for low vision readers
+    'nerd-fonts-inter'             # Inter Font, patched with the Nerd Fonts Patcher
 
     # VPN
     'protonvpn-cli-community'      # A Community Linux CLI for ProtonVPN
 
+    # Theme and customization
+    'konsave'                      # Import, export, extract KDE Plasma configuration profile
+    'nwg-look'                     # GTK3 settings editor adapted to work on wlroots-based compositors
+    
     # OTHERS --------------------------------------------------------
 
     'mpv'                          # MPV player
@@ -110,16 +128,10 @@ PKGS=(
     'deluge-gtk'                   # Deluge GUI
     'okular'                       # PDF viewer
     'libreoffice-fresh'            # Office
-    'firefox'	               # Web browser
+    'firefox'	                   # Web browser
     'ferdium-bin'	               # Messenger, discord... manager
     'nomacs'                       # Image viewer
     'libheif'                      # An HEIF and AVIF file format decoder and encoder
-    'konsave'                      # Import, export, extract KDE Plasma configuration profile
-    'ttf-ms-fonts'                 # Core TTF Fonts from Microsoft
-    'noto-fonts'                   # Google Noto TTF fonts
-    'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
-    'otf-atkinson-hyperlegible'    # A typeface focusing on leterform distinction for legibility for low vision readers
-    'nerd-fonts-inter'             # Inter Font, patched with the Nerd Fonts Patcher
     'grimshot'                     # A helper for screenshots within sway
 )
 
