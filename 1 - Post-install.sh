@@ -29,6 +29,7 @@ PKGS=(
     'ntp'                          # Network Time Protocol to set time via network.
     'terminus-font'                # Font package with some bigger fonts for login terminal
     'neovim'                       # Text editor
+    'wlogout'                      # Logout menu for wayland
 
     # Compression and decompression
 
