@@ -30,6 +30,7 @@ PKGS=(
     'terminus-font'                # Font package with some bigger fonts for login terminal
     'neovim'                       # Text editor
     'wlogout'                      # Logout menu for wayland
+    'pacseek'                      # A terminal user interface for searching and installing Arch Linux packages
 
     # Compression and decompression
 
