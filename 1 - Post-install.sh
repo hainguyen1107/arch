@@ -309,7 +309,7 @@ cat > $HOME/.config/systemd/user/change_wallpaper.timer << EOF
 Description=Timer to change wallpapers every 5 minutes
 
 [Timer]
-OnCalendar=5min
+OnCalendar=*:0/15
 Persistent=true
 
 [Install]
