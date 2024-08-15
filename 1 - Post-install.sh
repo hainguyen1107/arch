@@ -45,8 +45,8 @@ PKGS=(
     
     # DEVELOPMENT ---------------------------------------------------------
 
-    'apparmor'                     # Mandatory Access Control (MAC) using Linux Security Module (LSM)
-    'snapd'                        # Service and tools for management of snap packages
+ #   'apparmor'                     # Mandatory Access Control (MAC) using Linux Security Module (LSM)
+ #   'snapd'                        # Service and tools for management of snap packages
     'extra-cmake-modules'          # Extra modules and scripts for CMake
     'sequoia-sq'                   # To check PGP key
     'docker'                       # Pack, ship and run any application as a lightweight container
@@ -121,6 +121,7 @@ PKGS=(
     # Theme and customization
     'konsave'                      # Import, export, extract KDE Plasma configuration profile
     'nwg-look'                     # GTK3 settings editor adapted to work on wlroots-based compositors
+    'swww'                         # A Solution to your Wayland Wallpaper Woes
     
     # OTHERS --------------------------------------------------------
 
@@ -262,6 +263,65 @@ git config --global  pull.ff true
 
 # Remove archived journal files until the disk space they use falls below 100M
 sudo journalctl --vacuum-size=100M
+
+# Set up wallpaper switcher throuh SWWW for Hyprland
+mkdir -p $HOME/.config/swww
+mkdir -p $HOME/Picture/Wallpapers
+
+cat > $HOME/.config/swww/swww.sh << EOF
+#start swww
+WALLPAPERS_DIR=$HOME/Pictures/Wallpapers
+WALLPAPER=$(find "$WALLPAPERS_DIR" -type f | shuf -n 1)
+swww img "$WALLPAPER"
+EOF
+sudo chmod +x $HOME/.config/swww/swww.sh
+
+mkdir $HOME/.config/systemd/user
+cat > $HOME/.config/systemd/user/swww.service << EOF
+[Unit]
+Description=Start SWWW for Hyprland
+After=hyprland.service
+
+[Service]
+Environment=RUST_BACKTRACE=1
+ExecStart=/usr/bin/swww-daemon -f xrgb
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+EOF
+
+cat > $HOME/.config/systemd/user/change_wallpaper.service << EOF
+[Unit]
+Description=Change wallpaper using SWWW
+After=swww.service
+
+[Service]
+ExecStart=/bin/bash $HOME/.config/swww/swww.sh
+
+[Install]
+WantedBy=default.target
+EOF
+
+cat > $HOME/.config/systemd/user/change_wallpaper.timer << EOF
+[Unit]
+Description=Timer to change wallpapers every 5 minutes
+
+[Timer]
+OnCalendar=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+systemctl --user enable swww.service
+systemctl --user start swww.service
+systemctl --user enable change_wallpaper.service
+systemctl --user start change_wallpaper.service
+systemctl --user enable change_wallpaper.timer
+systemctl --user start change_wallpaper.timer
 
 # Change default shell to zsh
 sudo chsh -s /usr/bin/zsh
