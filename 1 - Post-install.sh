@@ -269,6 +269,7 @@ mkdir -p $HOME/.config/swww
 mkdir -p $HOME/Picture/Wallpapers
 
 cat > $HOME/.config/swww/swww.sh << EOF
+#!/usr/bin/bash
 #start swww
 WALLPAPERS_DIR=$HOME/Pictures/Wallpapers
 WALLPAPER=$(find "$WALLPAPERS_DIR" -type f | shuf -n 1)
@@ -298,7 +299,7 @@ Description=Change wallpaper using SWWW
 After=swww.service
 
 [Service]
-ExecStart=/bin/bash $HOME/.config/swww/swww.sh
+ExecStart=/usr/bin/bash $HOME/.config/swww/swww.sh
 
 [Install]
 WantedBy=default.target
