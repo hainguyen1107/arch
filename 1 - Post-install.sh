@@ -27,8 +27,15 @@ PKGS=(
 
     'fastfetch'                    # Like Neofetch, but much faster because written in C
     'ntp'                          # Network Time Protocol to set time via network.
-    'p7zip'                        # 7z compression program
     'terminus-font'                # Font package with some bigger fonts for login terminal
+    'neovim'                       # Text editor
+    'wlogout'                      # Logout menu for wayland
+    'pacseek'                      # A terminal user interface for searching and installing Arch Linux packages
+
+    # Compression and decompression
+
+    'p7zip'                        # 7z compression program
+    'ark'                          # Dolphin default app for compressing and decompressing
     'unrar'                        # RAR compression program
     'unzip'                        # Zip compression program
     'wget'                         # Remote content retrieval
@@ -38,21 +45,25 @@ PKGS=(
     
     # DEVELOPMENT ---------------------------------------------------------
 
-    'apparmor'                     # Mandatory Access Control (MAC) using Linux Security Module (LSM)
-    'snapd'                        # Service and tools for management of snap packages
+ #   'apparmor'                     # Mandatory Access Control (MAC) using Linux Security Module (LSM)
+ #   'snapd'                        # Service and tools for management of snap packages
     'extra-cmake-modules'          # Extra modules and scripts for CMake
-    'neovim'                       # Text editor
     'sequoia-sq'                   # To check PGP key
     'docker'                       # Pack, ship and run any application as a lightweight container
     'python-pip'                   # The PyPA recommended tool for installing Python packages
     'wget'                         # Network utility to retrieve files from the Web
     'python-gpgme'                 # Python bindings for GPGme
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
+    'auto-cpufreq'                 # Automatic CPU speed & power optimizer
+    
+    # Wine - software to run some windows apps on Linux
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
     'wine-gecko'                   # Wine's built-in replacement for Microsoft's Internet Explorer
     'wine-mono'                    # Wine's built-in replacement for Microsoft's .NET Framework
+
+    # Study
     'anki-bin'                     # Helps you remember facts (like words/phrases in a foreign language) efficiently
-    'ttf-kanjistrokeorders'        # Kanji stroke order font
+    'logseq-desktop-bin'           # Privacy-first, open-source platform for knowledge sharing and management
 
     # Cloud storage
     'megasync-bin'                 # Easy automated syncing between your computers and your MEGA cloud drive
@@ -93,15 +104,28 @@ PKGS=(
     'wqy-zenhei'
     'ttf-arphic-ukai'
     'ttf-arphic-uming'
+    'ttf-kanjistrokeorders'        # Kanji stroke order font
 
     # Extra fonts
     'ttf-meslo-nerd-font-powerlevel10k'
     'ttf-sourcecodepro-nerd'
     'ttf-jetbrains-mono-nerd'
+    'ttf-ms-fonts'                 # Core TTF Fonts from Microsoft
+    'noto-fonts'                   # Google Noto TTF fonts
+    'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
+    'otf-atkinson-hyperlegible'    # A typeface focusing on leterform distinction for legibility for low vision readers
+    'nerd-fonts-inter'             # Inter Font, patched with the Nerd Fonts Patcher
+    'otf-font-awesome'             # Important to show icons in Waybar
+    'ttf-font-awesome'             # Iconic font designed for Bootstrap
 
     # VPN
     'protonvpn-cli-community'      # A Community Linux CLI for ProtonVPN
 
+    # Theme and customization
+    'konsave'                      # Import, export, extract KDE Plasma configuration profile
+    'nwg-look'                     # GTK3 settings editor adapted to work on wlroots-based compositors
+    'swww'                         # A Solution to your Wayland Wallpaper Woes
+    
     # OTHERS --------------------------------------------------------
 
     'mpv'                          # MPV player
@@ -110,16 +134,10 @@ PKGS=(
     'deluge-gtk'                   # Deluge GUI
     'okular'                       # PDF viewer
     'libreoffice-fresh'            # Office
-    'firefox'	               # Web browser
+    'firefox'	                   # Web browser
     'ferdium-bin'	               # Messenger, discord... manager
     'nomacs'                       # Image viewer
     'libheif'                      # An HEIF and AVIF file format decoder and encoder
-    'konsave'                      # Import, export, extract KDE Plasma configuration profile
-    'ttf-ms-fonts'                 # Core TTF Fonts from Microsoft
-    'noto-fonts'                   # Google Noto TTF fonts
-    'ttf-liberation'               # Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New
-    'otf-atkinson-hyperlegible'    # A typeface focusing on leterform distinction for legibility for low vision readers
-    'nerd-fonts-inter'             # Inter Font, patched with the Nerd Fonts Patcher
     'grimshot'                     # A helper for screenshots within sway
 )
 
@@ -171,7 +189,9 @@ sudo systemctl enable fstrim.timer
 echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.zshrc
 
 # Set up alias for updating (less effort, less typo)
-echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.zshrc
+echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> $HOME/.zshrc
+echo "alias ferdium='ferdium --use-gl=desktop + --waylandFlags'" >> $HOME/.zshrc
+echo "alias logseq='logseq --use-gl=desktop + --waylandFlags'" >> $HOME/.zshrc
 
 # Enable docker service and add user to docker group
 sudo usermod -aG docker $(whoami)
@@ -248,6 +268,69 @@ git config --global  pull.ff true
 
 # Remove archived journal files until the disk space they use falls below 100M
 sudo journalctl --vacuum-size=100M
+
+# Set up wallpaper switcher throuh SWWW for Hyprland
+mkdir -p $HOME/.config/swww
+mkdir -p $HOME/Picture/Wallpapers
+
+cat > $HOME/.config/swww/swww.sh << EOF
+#!/usr/bin/bash
+#start swww
+WALLPAPERS_DIR=$HOME/Pictures/Wallpapers
+WALLPAPER=$(find "$WALLPAPERS_DIR" -type f | shuf -n 1)
+swww img "$WALLPAPER"
+EOF
+sudo chmod +x $HOME/.config/swww/swww.sh
+
+mkdir $HOME/.config/systemd/user
+cat > $HOME/.config/systemd/user/swww.service << EOF
+[Unit]
+Description=Start SWWW for Hyprland
+After=hyprland.service
+
+[Service]
+Environment=RUST_BACKTRACE=1
+ExecStart=/usr/bin/swww-daemon -f xrgb
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+EOF
+
+cat > $HOME/.config/systemd/user/change_wallpaper.service << EOF
+[Unit]
+Description=Change wallpaper using SWWW
+After=swww.service
+
+[Service]
+ExecStart=/usr/bin/bash $HOME/.config/swww/swww.sh
+
+[Install]
+WantedBy=default.target
+EOF
+
+cat > $HOME/.config/systemd/user/change_wallpaper.timer << EOF
+[Unit]
+Description=Timer to change wallpapers every 5 minutes
+
+[Timer]
+OnCalendar=*:0/15
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+systemctl --user enable swww.service
+systemctl --user start swww.service
+systemctl --user enable change_wallpaper.service
+systemctl --user start change_wallpaper.service
+systemctl --user enable change_wallpaper.timer
+systemctl --user start change_wallpaper.timer
+
+# Enable auto-cpufreq
+sudo systemctl enable --now auto-cpufreq.service
 
 # Change default shell to zsh
 sudo chsh -s /usr/bin/zsh
