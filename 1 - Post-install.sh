@@ -188,7 +188,9 @@ sudo systemctl enable fstrim.timer
 echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.zshrc
 
 # Set up alias for updating (less effort, less typo)
-echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> ~/.zshrc
+echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> $HOME/.zshrc
+echo "alias ferdium='ferdium --use-gl=desktop + --waylandFlags'" >> $HOME/.zshrc
+echo "alias logseq='logseq --use-gl=desktop + --waylandFlags'" >> $HOME/.zshrc
 
 # Enable docker service and add user to docker group
 sudo usermod -aG docker $(whoami)
