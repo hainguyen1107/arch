@@ -54,6 +54,7 @@ PKGS=(
     'wget'                         # Network utility to retrieve files from the Web
     'python-gpgme'                 # Python bindings for GPGme
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
+    'auto-cpufreq'                 # Automatic CPU speed & power optimizer
     
     # Wine - software to run some windows apps on Linux
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
@@ -327,6 +328,9 @@ systemctl --user enable change_wallpaper.service
 systemctl --user start change_wallpaper.service
 systemctl --user enable change_wallpaper.timer
 systemctl --user start change_wallpaper.timer
+
+# Enable auto-cpufreq
+sudo systemctl enable --now auto-cpufreq.service
 
 # Change default shell to zsh
 sudo chsh -s /usr/bin/zsh
