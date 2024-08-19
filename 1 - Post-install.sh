@@ -55,6 +55,7 @@ PKGS=(
     'python-gpgme'                 # Python bindings for GPGme
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
     'auto-cpufreq'                 # Automatic CPU speed & power optimizer
+    'clipboard-sync'
     
     # Wine - software to run some windows apps on Linux
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
