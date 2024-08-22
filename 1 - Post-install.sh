@@ -74,6 +74,10 @@ PKGS=(
     'cuda'                         # NVIDIA's GPU programming toolkit
     'cudnn'                        # NVIDIA CUDA Deep Neural Network library
 
+    # Network
+    'nm-connection-editor'         # NetworkManager GUI connection editor and widgets
+    'networkmanager-openvpn'       # NetworkManager VPN plugin for OpenVPN
+    
     
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
