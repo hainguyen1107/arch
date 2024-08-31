@@ -187,6 +187,18 @@ sudo systemctl restart libvirtd.service
 sudo virsh net-start default
 sudo virsh net-autostart default
 
+# Configure and enable DNS
+sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+sudo mkdir -p /etc/systemd/resolved.conf.d
+sudo cat > /etc/systemd/resolved.conf.d/dns_servers.conf << EOF
+[Resolve]
+DNS=8.8.8.8 2001:4860:4860::8888
+DNS=8.8.4.4 2001:4860:4860::8844
+Domains=~.
+FallbackDNS=127.0.0.1 ::1
+EOF
+sudo systemctl enable --now systemd-resolved.service
+
 # Enable trim for improving SSD performance
 sudo systemctl enable fstrim.timer
 
