@@ -31,6 +31,7 @@ PKGS=(
     'neovim'                       # Text editor
     'wlogout'                      # Logout menu for wayland
     'pacseek'                      # A terminal user interface for searching and installing Arch Linux packages
+    'fzf'                          # Command-line fuzzy finder
 
     # Compression and decompression
 
@@ -352,6 +353,9 @@ sudo systemctl enable --now auto-cpufreq.service
 # Change default shell to zsh
 sudo chsh -s /usr/bin/zsh
 source $HOME/.zshrc
+
+# Enable fzf for zsh
+echo 'source <(fzf --zsh)' >> ${USER}/.zshrc
 
 echo
 echo "Done!"
