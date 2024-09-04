@@ -31,6 +31,7 @@ PKGS=(
     'neovim'                       # Text editor
     'wlogout'                      # Logout menu for wayland
     'pacseek'                      # A terminal user interface for searching and installing Arch Linux packages
+    'fzf'                          # Command-line fuzzy finder
 
     # Compression and decompression
 
@@ -55,6 +56,7 @@ PKGS=(
     'python-gpgme'                 # Python bindings for GPGme
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
     'auto-cpufreq'                 # Automatic CPU speed & power optimizer
+    'clipboard-sync'
     
     # Wine - software to run some windows apps on Linux
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
@@ -73,6 +75,10 @@ PKGS=(
     'cuda'                         # NVIDIA's GPU programming toolkit
     'cudnn'                        # NVIDIA CUDA Deep Neural Network library
 
+    # Network
+    'nm-connection-editor'         # NetworkManager GUI connection editor and widgets
+    'networkmanager-openvpn'       # NetworkManager VPN plugin for OpenVPN
+    
     
     # KVM/QEMU
     'virt-manager'                 # Desktop user interface for managing virtual machines
@@ -181,6 +187,18 @@ sudo systemctl restart libvirtd.service
 # Enable virtual network and set it to autostart
 sudo virsh net-start default
 sudo virsh net-autostart default
+
+# Configure and enable DNS
+sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+sudo mkdir -p /etc/systemd/resolved.conf.d
+sudo cat > /etc/systemd/resolved.conf.d/dns_servers.conf << EOF
+[Resolve]
+DNS=8.8.8.8 2001:4860:4860::8888
+DNS=8.8.4.4 2001:4860:4860::8844
+Domains=~.
+FallbackDNS=127.0.0.1 ::1
+EOF
+sudo systemctl enable --now systemd-resolved.service
 
 # Enable trim for improving SSD performance
 sudo systemctl enable fstrim.timer
@@ -335,6 +353,9 @@ sudo systemctl enable --now auto-cpufreq.service
 # Change default shell to zsh
 sudo chsh -s /usr/bin/zsh
 source $HOME/.zshrc
+
+# Enable fzf for zsh
+echo 'source <(fzf --zsh)' >> ${USER}/.zshrc
 
 echo
 echo "Done!"
