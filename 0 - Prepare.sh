@@ -383,7 +383,7 @@ UUID=$(cat "variables/uuid_data") /DATA ntfs-3g rw,defaults 0 2
 EOF
 
 chmod +x 1\ -\ Post-install.sh
-mv 1\ -\ Post-install.sh /mnt/home/$(cat "variables/username")
+mv -r ../arch  /mnt/home/$(cat "variables/username")
 
 # Enable Greetd-Tuigreet
 sudo systemctl enable greetd.service

@@ -1,1 +1,9 @@
-/home/serotonin/.config/systemd/user/change_wallpaper.timer
+Unit]
+Description=Timer to change wallpapers every hour
+
+[Timer]
+OnCalendar=*:0/15
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,1 +1,9 @@
-/home/serotonin/.config/systemd/user/change_wallpaper.service
+[Unit]
+Description=Change wallpaper using SWWW
+After=swww.service
+
+[Service]
+ExecStart=/usr/bin/bash ${HOME}/.config/swww/swww.sh
+
+[Install]
+WantedBy=default.target

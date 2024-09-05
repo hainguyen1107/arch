@@ -155,23 +155,20 @@ for PKG in "${PKGS[@]}"; do
     yay -Syu "$PKG" --noconfirm --needed
 done
 
+# Move .zshrc to its location
+ln -s dotfiles/.zshrc ${HOME}/.zshrc
+
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install powerlevel10k theme for zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-sed -i 's/ZSH_THEME="font"/ZSH_THEME="powerlevel10k/powerlevel10k"/' .zshrc
 
-# Install plugins and spaceship for zsh
+# Install plugins for zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
 
-sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-autocomplete)/g' $HOME/.zshrc
-sed -i 's/ZSH_THEME=".*"/ZSH_THEME="power10k\/powerlevel10k"/g' $HOME/.zshrc 
-
-# Disable autocorrection of zsh
-echo "#Disable auto correct\nunsetopt correct_all" >> $HOME/.zshrc
 
 # Enable QEMU connection for virt-manager
 sudo systemctl enable libvirtd.service
@@ -206,22 +203,9 @@ sudo systemctl enable --now systemd-resolved.service
 # Enable trim for improving SSD performance
 sudo systemctl enable fstrim.timer
 
-# Force to use ffmpeg as qt6-multimedia backend
-echo 'export QT_MEDIA_BACKEND=ffmpeg' >> ${HOME}/.zshrc
-
-# Set up alias for updating (less effort, less typo)
-echo "alias up='yay -Syu --noconfirm --needed; yay -Sc --noconfirm'" >> $HOME/.zshrc
-echo "alias ferdium='ferdium --use-gl=desktop + --waylandFlags'" >> $HOME/.zshrc
-echo "alias logseq='logseq --use-gl=desktop + --waylandFlags'" >> $HOME/.zshrc
-
 # Enable docker service and add user to docker group
 sudo usermod -aG docker $(whoami)
 sudo systemctl enable docker.service
-
-# Set up for Fcitx5
-echo "export XMODIFIERS=@im=fcitx" >> ~/.zshrc
-echo "export SDL_IM_MODULE=fcitx" >> ~/.zshrc
-echo "export GLFW_IM_MODULE=ibus" >> ~/.zshrc
 
 # Enable pipewire, pipewire-pulse and wireplumber globally
 sudo systemctl --global enable pipewire.socket pipewire-pulse.socket
@@ -293,55 +277,10 @@ sudo journalctl --vacuum-size=100M
 # Set up wallpaper switcher throuh SWWW for Hyprland
 mkdir -p $HOME/.config/swww
 mkdir -p $HOME/Picture/Wallpapers
-
-cat > $HOME/.config/swww/swww.sh << EOF
-#!/usr/bin/bash
-#start swww
-WALLPAPERS_DIR=$HOME/Pictures/Wallpapers
-WALLPAPER=$(find "$WALLPAPERS_DIR" -type f | shuf -n 1)
-swww img "$WALLPAPER"
-EOF
-sudo chmod +x $HOME/.config/swww/swww.sh
+cp dotfiles/swww/swww.sh ${HOME}/.config/swww
 
 mkdir $HOME/.config/systemd/user
-cat > $HOME/.config/systemd/user/swww.service << EOF
-[Unit]
-Description=Start SWWW for Hyprland
-After=hyprland.service
-
-[Service]
-Environment=RUST_BACKTRACE=1
-ExecStart=/usr/bin/swww-daemon -f xrgb
-Restart=on-failure
-RestartSec=5
-
-[Install]
-WantedBy=default.target
-EOF
-
-cat > $HOME/.config/systemd/user/change_wallpaper.service << EOF
-[Unit]
-Description=Change wallpaper using SWWW
-After=swww.service
-
-[Service]
-ExecStart=/usr/bin/bash $HOME/.config/swww/swww.sh
-
-[Install]
-WantedBy=default.target
-EOF
-
-cat > $HOME/.config/systemd/user/change_wallpaper.timer << EOF
-[Unit]
-Description=Timer to change wallpapers every 5 minutes
-
-[Timer]
-OnCalendar=*:0/15
-Persistent=true
-
-[Install]
-WantedBy=timers.target
-EOF
+cp -r dotfiles/systemd/user/* ${HOME}/.config/systemd/user
 
 systemctl --user enable swww.service
 systemctl --user start swww.service
@@ -357,9 +296,7 @@ sudo systemctl enable --now auto-cpufreq.service
 sudo chsh -s /usr/bin/zsh
 source $HOME/.zshrc
 
-# Enable fzf for zsh
-echo 'source <(fzf --zsh)' >> ${USER}/.zshrc
 
 echo
 echo "Done!"
-# rm ${HOME}/1\ -\ Post-install.sh
+rm -r ${HOME}/arch
