@@ -155,8 +155,19 @@ for PKG in "${PKGS[@]}"; do
     yay -Syu "$PKG" --noconfirm --needed
 done
 
+# Move dotfiles folder to home
+mv -r dotfiles ${HOME}
+
 # Move .zshrc to its location
-ln -s dotfiles/.zshrc ${HOME}/.zshrc
+ln ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
+
+# Move wlogout
+mkdir -p ${HOME}/.config/wlogout
+ln ${HOME}/dotfiles/wlogout/* ${HOME}/.config/wlogout/
+
+# Move waybar
+mkdir -p ${HOME}/.config/waybar
+ln ${HOME}/dotfiles/waybar/* ${HOME}/.config/waybar/
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -277,10 +288,11 @@ sudo journalctl --vacuum-size=100M
 # Set up wallpaper switcher throuh SWWW for Hyprland
 mkdir -p $HOME/.config/swww
 mkdir -p $HOME/Picture/Wallpapers
-cp dotfiles/swww/swww.sh ${HOME}/.config/swww
+cp ${HOME}/dotfiles/swww/swww.sh ${HOME}/.config/swww
+sudo chmod +x ${HOME}/.config/swww/swww.sh
 
 mkdir $HOME/.config/systemd/user
-cp -r dotfiles/systemd/user/* ${HOME}/.config/systemd/user
+cp -r ${HOME}/dotfiles/systemd/user/* ${HOME}/.config/systemd/user
 
 systemctl --user enable swww.service
 systemctl --user start swww.service
