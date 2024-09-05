@@ -32,6 +32,8 @@ PKGS=(
     'wlogout'                      # Logout menu for wayland
     'pacseek'                      # A terminal user interface for searching and installing Arch Linux packages
     'fzf'                          # Command-line fuzzy finder
+    'fd'			   # Simple, fast and user-friendly alternative to find
+    'ripgrep'			   # A search tool that combines the usability of ag with the raw speed of grep
 
     # Compression and decompression
 
@@ -57,6 +59,7 @@ PKGS=(
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
     'auto-cpufreq'                 # Automatic CPU speed & power optimizer
     'clipboard-sync'
+    'luarocks'			   # Deployment and management system for Lua modules	
     
     # Wine - software to run some windows apps on Linux
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
