@@ -151,6 +151,7 @@ PKGS=(
     'nomacs'                       # Image viewer
     'libheif'                      # An HEIF and AVIF file format decoder and encoder
     'grimshot'                     # A helper for screenshots within sway
+    'ulauncher'                    # Application launcher like rofi
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -251,6 +252,13 @@ sudo systemctl enable --now auto-cpufreq.service
 sudo chsh -s /usr/bin/zsh
 source $HOME/.zshrc
 
+# Activate ulauncher service
+systemctl --user enable --now ulauncher.service
+
+echo 'Install the extension "Super key"'
+echo "Open Ulauncher Preferences and set hotkey to something you'll never use"
+echo 'Open Settings > Keyboard (may be named "Keyboard Shortcuts"), then scroll down to Customize Shortcuts > Custom Shortcuts > +'
+echo 'In Command enter ulauncher-toggle, set name and shortcut, then click Add'
 
 echo
 echo "Done!"
