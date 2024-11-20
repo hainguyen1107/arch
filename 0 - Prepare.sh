@@ -207,36 +207,6 @@ PKGS=(
         'xdg-desktop-portal-gtk'        # A backend implementation for xdg-desktop-portal using GTK
         'gst-plugin-pipewire'           # Multimedia graph framework - pipewire plugin
     	
-    # --- Hyprland setup
-    #    'hyprland'                        
-    #    'polkit-kde-agent'              # Daemon providing a polkit authentication UI for KDE
-    #    'brightnessctl'                 # Lightweight brightness control tool
-    #    'xdg-desktop-portal-hyprland'   # xdg-desktop-portal backend for hyprland
-    #    'xdg-desktop-portal-gtk'        # A backend implementation for xdg-desktop-portal using GTK
-    #    'greetd'                        # Generic greeter daemon
-    #    'greetd-tuigreet'               # A console UI greeter for greetd
-    #    'qt5-wayland'                   # Provides APIs for Wayland
-    #    'qt6-wayland'                   # Provides APIs for Wayland
-    #    'mako'                          # Lightweight notification daemon for Wayland
-    #    'rofi-wayland'                  # A window switcher, run dialog and dmenu replacement - fork with wayland support
-    #    'waybar'                        # Highly customizable Wayland bar for Sway and Wlroots based compositors
-    #    'hyprpaper'                     # a blazing fast wayland wallpaper utility with IPC controls
-    #    'kitty'                         # A modern, hackable, featureful, OpenGL-based terminal emulator
-    #    'hypridle'                      # hyprland’s idle daemon
-    #    'hyprlock'                      # hyprland’s GPU-accelerated screen locking utility
-    #    'hyprcursor'                    # The hyprland cursor format, library and utilities
-    #    'dolphin'                       # KDE File Manager
-    #    'dolphin-plugins'               # Extra Dolphin plugins
-    #    'kompare'                       # Graphical file differences tool
-    #    'kdegraphics-thumbnailers'      # Thumbnailers for various graphics file formats
-    #    'kimageformats'                 # Image format plugins for Qt 6
-    #    'qt6-imageformats'              # Plugins for additional image formats: TIFF, MNG, TGA, WBMP
-    #    'kdesdk-thumbnailers'           # Plugins for the thumbnailing system
-    #    'ffmpegthumbs'                  # FFmpeg-based thumbnail creator for video files
-    #    'taglib'                        # A Library for reading and editing the meta-data of several popular audio formats
-    #    'udiskie'                       # Removable disk automounter using udisks  
-    #    'archlinux-xdg-menu'            # automatic generate WM menu from xdg files
-    #    'wl-clipboard'                  # Command-line copy/paste utilities for Wayland
     
     # --- Setup Desktop GNOME
         'gnome'                 		         # Gnome Desktop
@@ -376,6 +346,10 @@ arch-chroot /mnt mkinitcpio -P
 # Enable SDDM! Ready to reboot into KDE Plasma
 # arch-chroot /mnt systemctl enable sddm.service
 
+# Enable GDM
+arch-chroot /mnt systemctl enable gdm.service
+
+
 # Mount /DATA
 cat > /mnt/etc/fstab << EOF
 # $(cat "variables/disk")p6 LABEL=DATA
@@ -385,16 +359,6 @@ EOF
 chmod +x 1\ -\ Post-install.sh
 mv -r ../arch  /mnt/home/$(cat "variables/username")
 
-# Enable Greetd-Tuigreet
-sudo systemctl enable greetd.service
-
-# Set up Greetd/Tuigreet
-cat > /mnt/etc/greetd/config.toml << EOF
-[default_session]
-command = "tuigreet --time --remember --remember-user-session --user-menu --asterisks --theme\ 
-'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'\
---cmd Hyprland"
-EOF
 
 # Set timezone
 timedatectl set-timezone Asia/Ho_Chi_Minh
