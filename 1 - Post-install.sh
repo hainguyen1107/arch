@@ -60,7 +60,8 @@ PKGS=(
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
     'auto-cpufreq'                 # Automatic CPU speed & power optimizer
     'clipboard-sync'
-    'luarocks'			   # Deployment and management system for Lua modules
+    'luarocks'			           # Deployment and management system for Lua modules
+    'extension-manager'            # A manager for Gnome extensions
     
     
     # Wine - software to run some windows apps on Linux
