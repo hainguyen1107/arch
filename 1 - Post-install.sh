@@ -32,8 +32,8 @@ PKGS=(
     'wlogout'                      # Logout menu for wayland
     'pacseek'                      # A terminal user interface for searching and installing Arch Linux packages
     'fzf'                          # Command-line fuzzy finder
-    'fd'			               # Simple, fast and user-friendly alternative to find
-    'ripgrep'			           # A search tool that combines the usability of ag with the raw speed of grep
+    'fd'			   # Simple, fast and user-friendly alternative to find
+    'ripgrep'			   # A search tool that combines the usability of ag with the raw speed of grep
     'yazi'                         # Terminal file manager
 
     # Compression and decompression
@@ -60,10 +60,8 @@ PKGS=(
     'downgrade'                    # Bash script for downgrading one or more packages to a version in your cache or the A.L.A
     'auto-cpufreq'                 # Automatic CPU speed & power optimizer
     'clipboard-sync'
-    'luarocks'			   		   # Deployment and management system for Lua modules
-	'pyright'					   # Type checker for the Python language
-	'lua-language-server'		   # Lua Language Server coded by Lua
-	'npm'						   # JavaScript package manager
+    'luarocks'			   # Deployment and management system for Lua modules
+    
     
     # Wine - software to run some windows apps on Linux
     'wine-staging'                 # A compatibility layer for running Windows programs - Staging branch
@@ -108,16 +106,16 @@ PKGS=(
     'fcitx5-configtool'            # Configuration Tool for Fcitx5
 
     # Chinese input -------------------------------------------------
-    'fcitx5-chinese-addons'        # Addons related to Chinese
-    'adobe-source-han-sans-cn-fonts'
-    'adobe-source-han-serif-cn-fonts'
-    'noto-fonts-cjk wqy-microhei'
-    'wqy-microhei-lite' 
-    'wqy-bitmapfont'
-    'wqy-zenhei'
-    'ttf-arphic-ukai'
-    'ttf-arphic-uming'
-    'ttf-kanjistrokeorders'        # Kanji stroke order font
+    #'fcitx5-chinese-addons'        # Addons related to Chinese
+    #'adobe-source-han-sans-cn-fonts'
+    #'adobe-source-han-serif-cn-fonts'
+    #'noto-fonts-cjk wqy-microhei'
+    #'wqy-microhei-lite' 
+    #'wqy-bitmapfont'
+    #'wqy-zenhei'
+    #'ttf-arphic-ukai'
+    #'ttf-arphic-uming'
+    #'ttf-kanjistrokeorders'        # Kanji stroke order font
 
     # Extra fonts
     'ttf-meslo-nerd-font-powerlevel10k'
@@ -165,14 +163,6 @@ mv -r dotfiles ${HOME}
 # Move .zshrc to its location
 ln ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 
-# Move wlogout
-mkdir -p ${HOME}/.config/wlogout
-ln ${HOME}/dotfiles/wlogout/* ${HOME}/.config/wlogout/
-
-# Move waybar
-mkdir -p ${HOME}/.config/waybar
-ln ${HOME}/dotfiles/waybar/* ${HOME}/.config/waybar/
-
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -189,11 +179,11 @@ git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZS
 sudo systemctl enable libvirtd.service
 
 # Enable Apparmor and Snap.Apparmor
-sudo systemctl enable apparmor.service
-sudo systemctl enable snapd.apparmor.service
+#sudo systemctl enable apparmor.service
+#sudo systemctl enable snapd.apparmor.service
 
 # Enable Snapd socket
-sudo systemctl enable snapd.socket
+#sudo systemctl enable snapd.socket
 
 # Add user into kvm and libvirt groups
 sudo usermod -aG kvm,libvirt $(whoami)
@@ -230,52 +220,13 @@ sudo systemctl --global enable pipewire.service pipewire-pulse.service wireplumb
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # Set dolphin to show hidden files
-sed -i '/Hidden/d' ~/.local/share/dolphin/view_properties/global/.directory
-echo "HiddenFilesShown=true" >> ~/.local/share/dolphin/view_properties/global/.directory
-
-# Fix Dolphin bug of not showing default apps
-sudo echo "XDG_MENU_PREFIX=arch-" >> /etc/environment
-sudo kbuildsycoca6
+#sed -i '/Hidden/d' ~/.local/share/dolphin/view_properties/global/.directory
+#echo "HiddenFilesShown=true" >> ~/.local/share/dolphin/view_properties/global/.directory
 
 # Set up Virtual Environment for external python packages (for using PIP):
 mkdir -p $HOME/.venvs  # create a folder for all virtual environments 
 python3 -m venv $HOME/.venvs/MyEnv  # create MyEnv
 
-# Install Faster whisper
-# $HOME/.venvs/MyEnv/bin/python -m pip install faster-whisper
-
-# Prepare python sript for translating:
-# cat > $HOME/faster-whisper.py << EOF
-#! $HOME/.venvs/MyEnv/bin/python
-# from faster_whisper import WhisperModel
-# import sys, glob, shutil, os
-
-# model_size = "large-v3"
-# Run on GPU with FP16
-# model = WhisperModel(model_size, device="cuda", compute_type="float16")
-
-# or run on GPU with INT8
- #model=WhisperModel(model_size,device="cuda",compute_type="int8_float16")
-# or run on CPU with INT8
-# model = WhisperModel(model_size, device="cpu", compute_type="int8")
-
-# x = glob.glob(".m*")
-# shutil.copyfile(x[0], 'audio.mp3')
-
-# segments, info = model.transcribe("audio.mp3", beam_size=5)
-
-# print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
-
-# origial_stdout = sys.stdout
-# with open('output.txt', 'w') as f:
-#     for segment in segments:
- #        print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
-#    sys.stdout = original_stdout
-# os.remove("audio.mp3")
-# print("Done")
-# EOF
-
-# chmod +x $HOME/faster-whisper.py
 
 # Add SSH private key to the ssh-agent
 mkdir -p $HOME/.ssh
@@ -289,21 +240,8 @@ git config --global  pull.ff true
 # Remove archived journal files until the disk space they use falls below 100M
 sudo journalctl --vacuum-size=100M
 
-# Set up wallpaper switcher throuh SWWW for Hyprland
-mkdir -p $HOME/.config/swww
-mkdir -p $HOME/Picture/Wallpapers
-cp ${HOME}/dotfiles/swww/swww.sh ${HOME}/.config/swww
-sudo chmod +x ${HOME}/.config/swww/swww.sh
-
 mkdir $HOME/.config/systemd/user
 cp -r ${HOME}/dotfiles/systemd/user/* ${HOME}/.config/systemd/user
-
-systemctl --user enable swww.service
-systemctl --user start swww.service
-systemctl --user enable change_wallpaper.service
-systemctl --user start change_wallpaper.service
-systemctl --user enable change_wallpaper.timer
-systemctl --user start change_wallpaper.timer
 
 # Enable auto-cpufreq
 sudo systemctl enable --now auto-cpufreq.service
